@@ -416,16 +416,10 @@ if __name__ == "__main__":
     # Create the OUTPUT FOLDERS if they do not exist
     if not PathlibPath(OUTPUT_FOLDER_NAME).exists():
         PathlibPath(OUTPUT_FOLDER_NAME).mkdir(parents=True, exist_ok=True)
-        PathlibPath(OUTPUT_FOLDER_NAME) / 'paths'.mkdir(parents=True, exist_ok=True)
-        PathlibPath(OUTPUT_FOLDER_NAME) / 'courses'.mkdir(parents=True, exist_ok=True)
-        PathlibPath(OUTPUT_FOLDER_NAME) / 'labs'.mkdir(parents=True, exist_ok=True)
     
     # Create the DATA FOLDERS if they do not exist
     if not PathlibPath(DATA_FOLDER_NAME).exists():
         PathlibPath(OUTPUT_FOLDER_NAME).mkdir(parents=True, exist_ok=True)
-        PathlibPath(DATA_FOLDER_NAME) / 'paths'.mkdir(parents=True, exist_ok=True)
-        PathlibPath(DATA_FOLDER_NAME) / 'courses'.mkdir(parents=True, exist_ok=True)
-        PathlibPath(DATA_FOLDER_NAME) / 'labs'.mkdir(parents=True, exist_ok=True)
 
     # STARTING THE PROGRAM
     # https://talyian.github.io/ansicolors/
