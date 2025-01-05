@@ -443,6 +443,7 @@ class Course(BaseEntity):
                         this_video['title'] = activity_title
 
                         # Prompt for the video in a simple format
+                        # topic: {course.title}, {module.title}; title: {activity.title}; transcript: {activity.transcript}
                         video_prompt = []
                         video_prompt.append(f"topic: {self.name}, {module_title}")
                         video_prompt.append(f"title: {activity['title'].strip()}")
