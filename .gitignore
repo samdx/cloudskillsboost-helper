@@ -1,0 +1,5 @@
+
+/.webdriver_profiles
+*.pyc
+/data/
+.env
