@@ -29,6 +29,10 @@ class Lab(BaseEntity):
         # Generate the markdown content
         path_md = md_helper.md_helper_lab(self.to_dict())
 
+        # Create the folder if it doesn't exist
+        if not self._md_path.parent.exists():
+            self._md_path.parent.mkdir(parents=True, exist_ok=True)
+
         # Write the markdown content to a file, overwrite if exists
         with open(self._md_path, "w", encoding="utf-8", newline='\n') as md_file:
             md_file.write(path_md)
