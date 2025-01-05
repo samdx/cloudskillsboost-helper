@@ -60,6 +60,10 @@ class Collection(Serialize):
         Load the collection from a JSON file.
         """
 
+        # Create the folder if it doesn't exist
+        if not self._json_path.parent.exists():
+            self._json_path.parent.mkdir(parents=True, exist_ok=True)
+
         # Create the JSON file if it doesn't exist
         if not self._json_path.exists():
             with open(self._json_path, 'w', encoding='utf-8', newline='\n') as json_file:
