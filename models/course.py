@@ -407,6 +407,57 @@ class Course(BaseEntity):
         with open(self._md_path, "w", encoding="utf-8", newline='\n') as md_file:
             md_file.write(path_md)
 
+    # Generate the prompts for videos from their transcripts
+    def generate_prompt(self):
+
+        # Proceed only if the course's json file does exist.
+        if not self._json_path.exists:
+            print("Sorry, the course json not found. Please fetch the course first.")
+            return
+
+        # Load the course data from the JSON file
+        self.load_json()
+
+        # The data structure will be simplied from the original course's json.
+        course = {
+            "id": self.id,
+            "title": f'{self.name}'
+            }
+
+        modules = {}
+        for module in self.modules:
+            module_title = module["title"].strip()
+            steps = {}
+            for step in module['steps']:
+                step_id = step['id']
+                activities = {}
+                for activity in step['activities']:
+                    activity_title = activity['title']
+                    activity_id = activity['id']
+                    if activity['type'] == 'video':
+                        this_video = {}
+                        this_video['title'] = activity_title
+
+                        # Prompt for the video in a simple format
+                        video_prompt = []
+                        video_prompt.append(f"topic: {self.name}, {module_title}")
+                        video_prompt.append(f"title: {activity['title'].strip()}")
+                        video_prompt.append(f"prompt: {activity.get('transcript', '(No transcript available)')}")
+                        this_video['transcript'] = '; '.join(video_prompt)
+
+                        activities[activity_id] = this_video
+                steps[step_id] = activities
+            modules[module_title] = steps
+
+        course['modules'] = modules
+
+        # JSON file name for the prompt data, a bit different from the course's json file
+        json_name = f'{self.id}-prompt.json'
+        json_path = PathlibPath(self._json_path.parent / json_name)
+
+        # Save the prompt data to a JSON file, overwrite if exists
+        with open(json_path, 'w', encoding='utf-8', newline='\n') as jsonfile:
+            json.dump(course, jsonfile, ensure_ascii=False, indent=2)
 
 
 # END OF COURSE CLASS
