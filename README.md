@@ -199,3 +199,7 @@ File View.
 Graph View.
 
 ![Obsidian File View](docs/assets/obsidian-graph.png)
+
+The script in action.
+
+![The script in action](docs/assets/script-in-action.png)
