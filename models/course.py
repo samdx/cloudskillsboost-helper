@@ -289,6 +289,106 @@ class Course(BaseEntity):
         # Inform the user that the course transcript extraction is completed
         print(f"(extract_transcript) \033[34m•-• COMPLETED: {self.id} - {self.name.upper()}\033[0m\n")
 
+    # Complete the videos in the course
+    def complete_videos(self):
+        f"""
+        Mark the videos to be completed in the course.\n
+        PLEASE USE THIS AFTER YOU LOGGED IN TO CLOUDSKILLSBOOST.GOOGLE.COM\n
+        Turn off the headless mode to use a graphic browser and login to your account.
+        """
+
+        # TODO: Check for the course's json file, if it doesn't exist, no need to fetch the course, just complete the videos.
+
+        # We need a browser to complete the videos
+        a_webdriver = launch_browser(None, True)
+
+        # Browse the course url
+        try:
+            a_webdriver.get(self.url)
+        except Exception as get_course_url_error:
+            print(f"(complete_videos) Error: Unable to load the course page. {get_course_url_error}")
+            input("Press Enter to exit the script.")
+            sys.exit(1)
+
+        # Get the course outline
+        try:
+            course_title = a_webdriver.find_element(By.CSS_SELECTOR,
+                                                    ".course-info > .ql-title-medium").text.strip()
+            course_outline_element = a_webdriver.find_element(By.XPATH,
+                                                              f"//ql-course-outline")
+
+            # The modules list
+            course_modules_list = json.loads(course_outline_element.get_attribute("modules"))
+        except NoSuchElementException as course_outline_element_error:
+            print(f"(complete_videos) Unable to find course outline. {course_outline_element_error}")
+            sys.exit(1)
+
+        print(f"(complete_videos) \033[45m====| {course_title.upper()} |====\033[0m")
+
+        # Check Completion status of each video activity.
+        for course_module in course_modules_list:
+            # Go through the modules
+            module_title: str = course_module["title"].strip()
+            print(
+                f"(complete_videos) \033[34m• {module_title}\033[0m")
+
+            steps: list[dict] = course_module['steps']
+
+            # Go through the steps
+            for step in steps:
+                activity: dict = step['activities'][0]
+                activity_type: str = activity['type']
+                activity_id: str = activity['id']
+                activity_href: str = activity['href']
+                activity_title: str = activity['title'].strip()
+                activity_is_complete: bool = activity['isComplete']
+
+                # If the video is not completed yet, let complete it
+                if activity_type == "video" and activity_is_complete is False:
+                    print(f"(complete_videos) •-> "
+                          f"Video: {activity_id:>6} - {activity_title}")
+
+                    # Browse the video page
+                    a_webdriver.get(f"{BASE_URL}{activity_href}")
+
+                    # play_video(my_driver)
+                    time.sleep(random() * 6 + 6)  # Hold for 10 seconds (or any desired duration)
+
+                    # Mark the video as completed
+                    self.mark_completed_button(a_webdriver,
+                                               activity_id)
+                    print(
+                        f"(complete_videos) •-• [+]"
+                    )
+
+                    # Hold for a while before moving to the next video
+                    time.sleep(random() * 6 + 6)  # Hold for 10 seconds (or any desired duration)
+
+                # If the video is already completed, just print it out
+                elif activity_type == "video" and activity_is_complete is True:
+                    print(f"(complete_videos) •-• COMPLETED •-"
+                          f"Video: {activity_id:>6} - {activity_title}")
+
+    # Find and click the 'Mark as Completed' button for the current activity
+    def mark_completed_button(self, mywebdriver: WebDriver, activity_id: str) -> None:
+        """
+        Find and click the 'Mark as Completed' button for the current activity.
+        :param mywebdriver: WebDriver instance
+        :param activity_id: ID of the activity
+        """
+
+        button_href = f"/course_templates/{self.id}/video/{activity_id}/complete_button"
+
+        try:
+            button = mywebdriver.find_element(By.XPATH,
+                                              f"//ql-button[@href='{button_href}']")
+
+            # Click on the button
+            button.click()
+        except NoSuchElementException as mark_completed_button_error:
+            print(f"(mark_completed_button) {mark_completed_button_error}")
+            # Some video page doesn't have a Mark as Completed button, just move on
+            pass
 
 # END OF COURSE CLASS
 # END OF FILE
