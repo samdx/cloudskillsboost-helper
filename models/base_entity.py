@@ -67,7 +67,12 @@ class BaseEntity(Serialize):
         Load the entity data from a JSON file.
         """
 
-        # TODO: Check for file existence and handle exceptions
+        # If the JSON file doesn't exist, create an empty one with a JSON format
+        if not self._json_path.exists():
+            with open(self._json_path, 'w', encoding='utf-8', newline='\n') as json_file:
+                json_file.write('{}')
+        
+        # Load the JSON file even if it's empty, and update the entity's data
         try:
             with open(self._json_path, 'r', encoding='utf-8') as jsonfile:
                 data = json.load(jsonfile)
