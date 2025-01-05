@@ -79,7 +79,7 @@ class CloudSkillsBoost:
 
             # If the user wants to mark the videos as completed
             if mark_complete_video_task:
-                heading = f"Mark Complete Videos: {a_course_id} - {course_name.upper()}"
+                heading = f"{a_course_id} - {course_name.upper()}"
                 print(f"\n\033[45m[{heading:^85}]\033[0m")
                 a_webdriver = launch_browser(profile_folder=WEBDRIVER_PROFILE_FOLDER_NAME,
                                              headless=False,
@@ -91,14 +91,14 @@ class CloudSkillsBoost:
 
             # If the user wants to extract the transcript
             if extract_transcript_task:
-                heading = f"Extract Transcript: {a_course_id} - {course_name.upper()}"
+                heading = f"{a_course_id} - {course_name.upper()}"
                 print(f"\n\033[45m[{heading:^85}]\033[0m")
                 course = Course(id=a_course_id, name=course_name)
                 course.extract_transcript()
 
             # If the user wants to do both tasks
             if both_tasks:
-                heading = f"Both Tasks: {a_course_id} - {course_name.upper()}"
+                heading = f"{a_course_id} - {course_name.upper()}"
                 print(f"\n\033[45m[{heading:^85}]\033[0m")
                 # TODO: Async
                 # Use Edge for a logged in user; Chrome for a non-logged user.
@@ -152,7 +152,7 @@ class CloudSkillsBoost:
                     for course in path_data.courses.values():
                         current_course_id: str = course['id']
                         current_course_name: str = course['name']
-                        heading = f"Mark Complete Videos: {current_course_id} - {current_course_name.upper()}"
+                        heading = f"{current_course_id} - {current_course_name.upper()}"
                         print(f"\n\033[45m[{heading:^85}]\033[0m")
                         course_instance = Course(id=current_course_id, name=current_course_name)
                         course_instance.complete_videos()
@@ -164,7 +164,7 @@ class CloudSkillsBoost:
                         current_course_id: str = course['id']
                         current_course_name: str = course['name']
 
-                        heading = f"Extract Transcript: {current_course_id} - {current_course_name.upper()}"
+                        heading = f"{current_course_id} - {current_course_name.upper()}"
                         print(f"\n\033[45m[{heading:^85}]\033[0m")
 
                         course_instance = Course(id=current_course_id, name=current_course_name)
@@ -176,7 +176,7 @@ class CloudSkillsBoost:
                         current_course_id: str = course['id']
                         current_course_name: str = course['name']
 
-                        heading = f"Both Tasks: {current_course_id} - {current_course_name.upper()}"
+                        heading = f"{current_course_id} - {current_course_name.upper()}"
                         print(f"\n\033[45m[{heading:^85}]\033[0m")
 
                         # TODO: Async
@@ -194,7 +194,7 @@ class CloudSkillsBoost:
             elif a_course_id.isdigit():
                 if mark_complete_video_task:
 
-                    heading = f"Mark Complete Videos: {a_course_id} - {path_data.courses[a_course_id]['name'].upper()}"
+                    heading = f"{a_course_id} - {path_data.courses[a_course_id]['name'].upper()}"
                     print(f"\n\033[45m[{heading:^85}]\033[0m")
 
                     a_webdriver = launch_browser(profile_folder=WEBDRIVER_PROFILE_FOLDER_NAME,
@@ -206,14 +206,14 @@ class CloudSkillsBoost:
                     print("(tasks_coordinator) The course videos has been marked as completed.")
 
                 if extract_transcript_task:
-                    heading = f"Extract Transcript: {a_course_id} - {path_data.courses[a_course_id]['name'].upper()}"
+                    heading = f"{a_course_id} - {path_data.courses[a_course_id]['name'].upper()}"
                     print(f"\n\033[45m[{heading:^85}]\033[0m")
 
                     course_instance = Course(id=a_course_id, name=path_data.courses[a_course_id]['name'])
                     course_instance.extract_transcript()
 
                 if both_tasks:
-                    heading = f"Both Tasks: {a_course_id} - {path_data.courses[a_course_id]['name'].upper()}"
+                    heading = f"{a_course_id} - {path_data.courses[a_course_id]['name'].upper()}"
                     print(f"\n\033[45m[{heading:^85}]\033[0m")
 
                     # TODO: Async
