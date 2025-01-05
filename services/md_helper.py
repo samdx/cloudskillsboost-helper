@@ -169,7 +169,7 @@ class MDHelper:
                                 markdown.append(f"#### Quiz {quiz_number}.")
                                 # Put into a callout format for Obsidian or Typora
                                 quiz_list.append(f"> [!important]")
-                                quiz_list.append(f"> {util_replace_quote_marks(quiz_stem)}**")
+                                quiz_list.append(f"> **{util_replace_quote_marks(quiz_stem)}**")
                                 quiz_list.append(">")
                                 for option in question.get("options"):
                                     quiz_list.append(f"> - [ ] {util_replace_quote_marks(option.get('title'))}")
