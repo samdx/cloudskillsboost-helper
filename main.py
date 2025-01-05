@@ -269,7 +269,6 @@ class CloudSkillsBoost:
                 if not course_id.strip().isdigit():
                     print("ERROR: INVALID OR MISSING COURSE ID. "
                           "PLEASE PROVIDE A VALID NUMERIC COURSE ID!")
-                    sys.exit(1)
 
                 if self.courses_collection and course_id in self.courses_collection.collection:
                     course_title = self.courses_collection.collection[course_id]
