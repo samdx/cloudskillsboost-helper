@@ -19,6 +19,17 @@ from config.settings import BASE_URL_COURSES, BASE_URL, BASE_URL_LAB
 from utils.utils import util_replace_quote_marks, util_strip_html_tags
 from services.launch_browser import launch_browser
 
+COURSE_LD_JSON = "script[type='application/ld+json']"
+COURSE_META_DESCRIPTION = "meta[name='description']"
+COURSE_OUTLINE = "ql-course-outline"
+QL_YOUTUBE_VIDEO = "ql-youtube-video"
+LAB_REVIEW_LAB_ID = "#lab_review_lab_id"
+LAB_CONTENT_OUTLINE = "ul.lab-content__outline"
+QL_QUIZ = "ql-quiz"
+XPATH_START_BUTTON = "//a[@class='start-button button button--positive']"
+XPATH_QUIZ = "//ql-quiz"
+QUIZ_VERSION = "quizVersion"
+QUIZ_ITEMS = "quizItems"
 
 # Course entity based on BaseEntity
 class Course(BaseEntity):
@@ -78,9 +89,9 @@ class Course(BaseEntity):
         course_html = BeautifulSoup(response.text, "html.parser")
         # Get the course properties from the ld+json element including the course objectives, description, etc.
         try:
-            course_ld_json_element = course_html.select_one("script[type='application/ld+json']")
+            course_ld_json_element = course_html.select_one(COURSE_LD_JSON)
             # Locate the <meta> element by its name attribute
-            meta_element = course_html.select_one("meta[name='description']")
+            meta_element = course_html.select_one(COURSE_META_DESCRIPTION)
             # meta_element = course_html.find("meta", {"name": "description"})
 
             if not course_ld_json_element or not meta_element:
@@ -115,7 +126,7 @@ class Course(BaseEntity):
 
         # Get the course outline
         try:
-            course_outline_element = course_html.select_one("ql-course-outline")
+            course_outline_element = course_html.select_one(COURSE_OUTLINE)
             if not course_outline_element:
                 raise NoSuchElementException("(extract_transcript) ql-course-outline is not found.")
 
@@ -162,7 +173,7 @@ class Course(BaseEntity):
                             response.raise_for_status()
                             video_html = BeautifulSoup(response.text, "html.parser")
 
-                            video_element = video_html.select_one("ql-youtube-video")
+                            video_element = video_html.select_one(QL_YOUTUBE_VIDEO)
                             transcript_data = video_element["transcript"]
                             # Please take note: the original value is videoId not videoid
                             # This is because of BeautifulSoup will converts attribute names to lowercase for all
@@ -199,8 +210,8 @@ class Course(BaseEntity):
                             response.raise_for_status()
 
                             lab_page_html = BeautifulSoup(response.text, "html.parser")
-                            lab_review_lab_id_element = lab_page_html.select_one("#lab_review_lab_id")
-                            lab_content_outline_element = lab_page_html.select_one('ul.lab-content__outline')
+                            lab_review_lab_id_element = lab_page_html.select_one(LAB_REVIEW_LAB_ID)
+                            lab_content_outline_element = lab_page_html.select_one(LAB_CONTENT_OUTLINE)
 
                             # Getting the lab id, then compile a permalink for the lab
                             lab_id = lab_review_lab_id_element["value"].strip()
@@ -250,7 +261,7 @@ class Course(BaseEntity):
                             quiz_page_html = BeautifulSoup(response.text, "html.parser")
 
                             # The webpages dynamic and are rendered by JS at client/browser
-                            quiz_element = quiz_page_html.select_one("ql-quiz")
+                            quiz_element = quiz_page_html.select_one(QL_QUIZ)
 
                             # Some quiz comes with a Start button and time limited
                             # For that we need help from WebDriver, requests simply can't handle dynamic web pages.
@@ -260,22 +271,21 @@ class Course(BaseEntity):
                                 a_webdriver.get(activity_full_url)
 
                                 # Get the Start button and click it
-                                start_button = a_webdriver.find_element(By.XPATH,
-                                                                        "//a[@class='start-button button button--positive']")
+                                start_button = a_webdriver.find_element(By.XPATH, XPATH_START_BUTTON)
                                 start_button.click()
 
                                 # Find the ql-quiz element again
-                                quiz_element = a_webdriver.find_element(By.XPATH, "//ql-quiz")
-                                quiz_question_data = quiz_element.get_attribute("quizVersion")
+                                quiz_element = a_webdriver.find_element(By.XPATH, XPATH_QUIZ)
+                                quiz_question_data = quiz_element.get_attribute(QUIZ_VERSION)
                             else:
                                 # Again, if it's requests with BeautifulSoup, attrs will be lower():
                                 # quizversion vs quizVersion
-                                quiz_question_data = quiz_element["quizversion"]
+                                quiz_question_data = quiz_element[QUIZ_VERSION.lower()]
 
                             # Parse the JSON data
                             quiz_question_json = json.loads(quiz_question_data)
                             # Add the quiz items to the activity
-                            activity['quizItems'] = quiz_question_json.get('quizItems')
+                            activity[QUIZ_ITEMS] = quiz_question_json.get(QUIZ_ITEMS)
 
                             print(f"(extract_transcript) •-• [+]")
 
