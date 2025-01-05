@@ -27,7 +27,7 @@ class Lab(BaseEntity):
         # can use the same helper for Path
         md_helper = MDHelper()
         # Generate the markdown content
-        path_md = md_helper.md_helper_path(self.to_dict())
+        path_md = md_helper.md_helper_lab(self.to_dict())
 
         # Write the markdown content to a file, overwrite if exists
         with open(self._md_path, "w", encoding="utf-8", newline='\n') as md_file:
