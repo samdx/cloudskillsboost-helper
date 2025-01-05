@@ -69,4 +69,20 @@ class Path(BaseEntity):
         # Courses list of the Path
         self.courses = courses_list
 
+    # Print out the courses list of a certain Path
+    def courses_list(self):
+        """
+        Print out the courses list of a certain Path.
+        """
+        # Show the Path Title
+        heading = f"{self.id} - {self.name.upper()}"
+        print(f"\n\033[45m[{heading:^85}]\033[0m\n")
+
+        # Print out each course in the Path
+        for course in self.courses.values():
+            course_id = course['id']
+            course_name = course['name']
+            print(f"+|-• \033[35m[{course_id:>5} - {course_name:<72}]\033[0m")
+
+
 # TODO: Make Path() matches the json file structure from the website
