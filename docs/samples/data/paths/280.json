@@ -1,0 +1,41 @@
+{
+  "id": "280",
+  "name": "Google Cloud Applied AI Summit Learning Path",
+  "type": "Path",
+  "url": "https://www.cloudskillsboost.google/paths/280",
+  "description": "This learning path contains courses and labs on Vertex AI and Duet AI in Google Cloud, for technical practitioners looking to upskill with the latest Google Cloud AI technology.",
+  "date": "2025-01-05",
+  "datePublished": "2025-01-02",
+  "courses": {
+    "6395": {
+      "id": "6395",
+      "type": "Course",
+      "name": "Generative AI with Vertex AI: Prompt Design",
+      "url": "https://www.cloudskillsboost.google/course_templates/6395"
+    },
+    "881": {
+      "id": "881",
+      "type": "Course",
+      "name": "Gemini for Application Developers",
+      "url": "https://www.cloudskillsboost.google/course_templates/881"
+    },
+    "878": {
+      "id": "878",
+      "type": "Course",
+      "name": "Gemini for Cloud Architects",
+      "url": "https://www.cloudskillsboost.google/course_templates/878"
+    },
+    "886": {
+      "id": "886",
+      "type": "Course",
+      "name": "Gemini for Security Engineers",
+      "url": "https://www.cloudskillsboost.google/course_templates/886"
+    },
+    "892": {
+      "id": "892",
+      "type": "Course",
+      "name": "Conversational AI on Vertex AI and Dialogflow CX",
+      "url": "https://www.cloudskillsboost.google/course_templates/892"
+    }
+  }
+}
