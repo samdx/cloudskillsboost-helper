@@ -8,6 +8,9 @@ This is a small tools for scraping contents from Google Cloud Skills Boost websi
 
 ## Samples
 
+## PDF Files
+- Course: [Conversational AI on Vertex AI and Dialogflow CX](docs/samples/output/courses/Conversational-AI-on-Vertex-AI-and-Dialogflow-CX.md)
+
 ### Output Markdown Files
 
 - A Collection: [Paths Collection](docs/samples/paths.md)
