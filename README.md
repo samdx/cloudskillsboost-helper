@@ -8,6 +8,10 @@ This is a small tools for scraping contents from Google Cloud Skills Boost websi
 
 ## Samples
 
+## Output PDF Files
+
+- [A Place Holder]()
+
 ### Output Markdown Files
 
 - A Collection: [Paths Collection](docs/samples/paths.md)
