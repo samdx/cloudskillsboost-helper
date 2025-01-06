@@ -295,6 +295,31 @@ class Course(BaseEntity):
 
                         except NoSuchElementException as quiz_element_error:
                             print(f"(extract_transcript) Error: Failed to get Quiz's text. {quiz_element_error}")
+                    
+                    # Proceed logic for link activity type
+                    elif activity_type == 'link':
+                        print(f"(extract_transcript) •-> "
+                              f"Lnk: {activity_id:>6} - {activity_title}")
+
+                        # Get the link's URL
+                        try:
+                            response = requests.get(activity_full_url)
+                            response.raise_for_status()
+                            link_page_html = BeautifulSoup(response.text, "html.parser")
+
+                            # Get the link's URL
+                            link_url_a_tag = link_page_html.select_one(LINK_URL_A_TAG)
+
+                            # Add the link's URL to the activity as a new key
+                            activity['link'] = link_url_a_tag['href']
+
+                            # Get the link's text, you may not need this
+                            # link_text = link_url_a_tag.get_text(strip=True)
+
+                            print(f"(extract_transcript) •-• [+]")
+
+                        except NoSuchElementException as link_element_error:
+                            print(f"(extract_transcript) Error: Failed to get Link's URL. {link_element_error}")
 
         # Save the course data to a JSON file and a Markdown file
         self.save_json()
