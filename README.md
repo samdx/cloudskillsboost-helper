@@ -11,7 +11,7 @@ This is a small tools for scraping contents from Google Cloud Skills Boost websi
 ## PDF Files
 
 - Path: [Google Cloud Applied AI Summit Learning Path](docs/samples/output/paths/Google-Cloud-Applied-AI-Summit-Learning-Path.pdf)
-- Course: [Conversational AI on Vertex AI and Dialogflow CX](docs/samples/output/courses/Conversational-AI-on-Vertex-AI-and-Dialogflow-CX.md)
+- Course: [Conversational AI on Vertex AI and Dialogflow CX](docs/samples/output/courses/Conversational-AI-on-Vertex-AI-and-Dialogflow-CX.pdf)
 
 ### Output Markdown Files
 
