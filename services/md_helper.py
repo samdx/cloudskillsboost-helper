@@ -175,6 +175,10 @@ class MDHelper:
                                     quiz_list.append(f"> - [ ] {util_replace_quote_marks(option.get('title'))}")
                                 markdown.append("\n".join(quiz_list))
                                 quiz_number += 1
+                        
+                        # If it's a link, let put a link here
+                        elif activity_type == 'link':
+                            markdown.append(f"- {activity['link']}")
 
         # End of modules
 

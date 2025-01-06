@@ -19,6 +19,8 @@ from config.settings import BASE_URL_COURSES, BASE_URL, BASE_URL_LAB
 from utils.utils import util_replace_quote_marks, util_strip_html_tags
 from services.launch_browser import launch_browser
 
+
+# Constants for the extraction of the course data
 COURSE_LD_JSON = "script[type='application/ld+json']"
 COURSE_META_DESCRIPTION = "meta[name='description']"
 COURSE_OUTLINE = "ql-course-outline"
@@ -30,6 +32,8 @@ XPATH_START_BUTTON = "//a[@class='start-button button button--positive']"
 XPATH_QUIZ = "//ql-quiz"
 QUIZ_VERSION = "quizVersion"
 QUIZ_ITEMS = "quizItems"
+LINK_URL_A_TAG = "ql-card.document-link a"
+
 
 # Course entity based on BaseEntity
 class Course(BaseEntity):
@@ -291,6 +295,31 @@ class Course(BaseEntity):
 
                         except NoSuchElementException as quiz_element_error:
                             print(f"(extract_transcript) Error: Failed to get Quiz's text. {quiz_element_error}")
+                    
+                    # Proceed logic for link activity type
+                    elif activity_type == 'link':
+                        print(f"(extract_transcript) •-> "
+                              f"Lnk: {activity_id:>6} - {activity_title}")
+
+                        # Get the link's URL
+                        try:
+                            response = requests.get(activity_full_url)
+                            response.raise_for_status()
+                            link_page_html = BeautifulSoup(response.text, "html.parser")
+
+                            # Get the link's URL
+                            link_url_a_tag = link_page_html.select_one(LINK_URL_A_TAG)
+
+                            # Add the link's URL to the activity as a new key
+                            activity['link'] = link_url_a_tag['href']
+
+                            # Get the link's text, you may not need this
+                            # link_text = link_url_a_tag.get_text(strip=True)
+
+                            print(f"(extract_transcript) •-• [+]")
+
+                        except NoSuchElementException as link_element_error:
+                            print(f"(extract_transcript) Error: Failed to get Link's URL. {link_element_error}")
 
         # Save the course data to a JSON file and a Markdown file
         self.save_json()
@@ -458,7 +487,7 @@ class Course(BaseEntity):
                         video_prompt.append(f"topic: {self.name}, {module_title}")
                         video_prompt.append(f"title: {activity['title'].strip()}")
                         video_prompt.append(f"transcript: {activity.get('transcript', '(No transcript available)')}")
-                        this_video['transcript'] = '; '.join(video_prompt)
+                        this_video['prompt'] = '; '.join(video_prompt)
 
                         activities[activity_id] = this_video
                 steps[step_id] = activities
