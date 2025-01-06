@@ -2,7 +2,9 @@
 
 ![Welcome Screen](docs/assets/welcome-screen.png)
 
-This is a small tools for scraping contents from Google Cloud Skills Boost website to Markdown files, which help to build Personal Knowledge Base, Obsidian, for example.
+A helper or a scraper.
+
+This is a small tools for scraping contents from Google Cloud Skills Boost website to Markdown files, which helps to build your Personal Knowledge Base, Obsidian, for example.
 
 ## Features
 
@@ -28,8 +30,8 @@ Check [CONTRIBUTION](CONTRIBUTION.md) for more.
 ### 1. Clone the repo
 
 ```sh
-git clone https://github.com/samdx/cloudskillsboost.git
-cd cloudskillsboost
+git clone https://github.com/samdx/cloudskillsboost-helper.git
+cd cloudskillsboost-helper
 ```
 
 ### 2. Create a Virtual Environment
