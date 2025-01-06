@@ -487,7 +487,7 @@ class Course(BaseEntity):
                         video_prompt.append(f"topic: {self.name}, {module_title}")
                         video_prompt.append(f"title: {activity['title'].strip()}")
                         video_prompt.append(f"transcript: {activity.get('transcript', '(No transcript available)')}")
-                        this_video['transcript'] = '; '.join(video_prompt)
+                        this_video['prompt'] = '; '.join(video_prompt)
 
                         activities[activity_id] = this_video
                 steps[step_id] = activities
