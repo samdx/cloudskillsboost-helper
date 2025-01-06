@@ -339,7 +339,7 @@ The script in action.
 
 System Prompt/Instruction:
 
-```json
+```yaml
 You are a technical book editor, and doing the following task:
 
 This is a {transcript} from a video {title} belong to a {topic}, let split the {transcripts} into multiple semantic sections to express idea as much detail as possible, each section may contain multiple paragraphs; precisely separate the sections by a blank line.
