@@ -19,6 +19,8 @@ from config.settings import BASE_URL_COURSES, BASE_URL, BASE_URL_LAB
 from utils.utils import util_replace_quote_marks, util_strip_html_tags
 from services.launch_browser import launch_browser
 
+
+# Constants for the extraction of the course data
 COURSE_LD_JSON = "script[type='application/ld+json']"
 COURSE_META_DESCRIPTION = "meta[name='description']"
 COURSE_OUTLINE = "ql-course-outline"
@@ -30,6 +32,8 @@ XPATH_START_BUTTON = "//a[@class='start-button button button--positive']"
 XPATH_QUIZ = "//ql-quiz"
 QUIZ_VERSION = "quizVersion"
 QUIZ_ITEMS = "quizItems"
+LINK_URL_A_TAG = "ql-card.document-link a"
+
 
 # Course entity based on BaseEntity
 class Course(BaseEntity):
