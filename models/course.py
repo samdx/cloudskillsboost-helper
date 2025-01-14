@@ -328,6 +328,223 @@ class Course(BaseEntity):
         # Inform the user that the course transcript extraction is completed
         print(f"(extract_transcript) \033[34m•-• COMPLETED: {self.id} - {self.name.upper()}\033[0m\n")
 
+    # Fetch the Course data from the partner website including the course outline, modules, and activities
+    def extract_transcript_partner(self) -> None:
+        f"""
+        Gather transcript of a course from partner site. Return its id and name.\
+        - Write down the course MD file.
+        """
+
+        # Create an instance of the HTML2Text class
+        html2md = html2text.HTML2Text()
+        html2md.body_width = 0  # Disable word wrapping to minimize newlines
+
+        # The course URL
+        course_url = f"{BASE_URL_PARTNERS}/{self.id}"
+
+        print("\nTranscript Extracting from partner site is starting...\n")
+
+        # Launch the browser
+        a_webdriver = launch_browser(profile_folder=WEBDRIVER_PROFILE_FOLDER_NAME, headless=False, browser='chrome')
+
+        # Browse the course url
+        try:
+            a_webdriver.get(course_url)
+        except Exception as get_course_url_error:
+            print(f"(extract_transcript_partner) Error: Unable to load the course page. {get_course_url_error}")
+            return
+
+        # Parse the HTML content
+        course_html = BeautifulSoup(a_webdriver.page_source, "html.parser")
+        # Get the course properties from the ld+json element including the course objectives, description, etc.
+        try:
+            course_ld_json_element = course_html.select_one(COURSE_LD_JSON)
+            meta_element = course_html.select_one(COURSE_META_DESCRIPTION)
+
+            if not course_ld_json_element or not meta_element:
+                raise NoSuchElementException("(extract_transcript_partner) meta_element not found.")
+
+            course_ld_json_text = course_ld_json_element.get_attribute('innerHTML')
+
+            # Extract the content attribute
+            course_description = html.unescape(meta_element['content'])
+            course_description = util_strip_html_tags(course_description)
+            course_description = re.sub(r'\s{2,}', '\n\n', course_description)
+            course_description = util_replace_quote_marks(course_description)
+
+            course_objectives_json = json.loads(course_ld_json_text)
+
+            # Set the course properties
+            self.id = course_objectives_json.get('@id').split('/')[-1]
+            self.url = course_objectives_json.get('@id')
+            self.type = course_objectives_json.get('@type')
+            self.name = course_objectives_json.get('name').strip()
+            self.description = course_description
+            self.datePublished = course_objectives_json.get('datePublished')
+            self.topics = course_objectives_json.get('about')
+            self.objectives = course_objectives_json.get('teaches')
+
+        except NoSuchElementException as _:
+            print(
+                f"(extract_transcript_partner) Error: Failed to process the course: {self.id}{': ' + self.name if self.name else ''}.\n")
+            return  # Exit the function early
+
+        # Get the course outline
+        try:
+            course_outline_element = course_html.select_one(COURSE_OUTLINE)
+            if not course_outline_element:
+                raise NoSuchElementException("(extract_transcript_partner) ql-course-outline is not found.")
+
+            # Set the course modules, this is important
+            self.modules = json.loads(course_outline_element["modules"])
+        except NoSuchElementException as _:
+            print(
+                f"(extract_transcript_partner) Error: Failed to detect outline for: {self.id}{': ' + self.name if self.name else ''}.")
+            return
+
+        # Go through the course modules and extract the transcript for each video
+        for module in self.modules:
+            module_title = module["title"].strip()
+            print(f"(extract_transcript_partner) \033[34m• MODULE: {module_title}\033[0m")
+
+            if module.get("description"):
+                module_description = util_strip_html_tags(html.unescape(module.get("description")))
+                module_description = util_replace_quote_marks(module_description)
+            else:
+                module_description = ''
+
+            module['description'] = module_description
+
+            for step in module['steps']:
+                activities = step['activities']
+                for activity in activities:
+                    activity_type = activity['type']
+                    activity_id = activity['id']
+                    activity_title = activity['title'].strip()
+                    activity_full_url = f"{BASE_URL_PARTNERS}{activity['href']}"
+
+                    if activity_type == "video":
+                        print(f"(extract_transcript_partner) •-> "
+                              f"Vid: {activity_id:>6} - {activity_title}")
+
+                        try:
+                            a_webdriver.get(activity_full_url)
+                            video_html = BeautifulSoup(a_webdriver.page_source, "html.parser")
+
+                            video_element = video_html.select_one(QL_YOUTUBE_VIDEO)
+                            transcript_data = video_element["transcript"]
+                            video_id = video_element["videoid"]
+
+                            activity['videoId'] = video_id
+
+                            if transcript_data:
+                                transcript_json = json.loads(transcript_data)
+                                video_transcript = " ".join([f"{item['text']}" for item in transcript_json])
+                                video_transcript = util_replace_quote_marks(video_transcript)
+                                activity['transcript'] = video_transcript
+                            else:
+                                activity['transcript'] = '(No video transcript.)'
+
+                            print(f"(extract_transcript_partner) •-• [+]")
+
+                        except NoSuchElementException as get_video_activity_error:
+                            print(f"(extract_transcript_partner) Error: Unable to extract transcript. {get_video_activity_error}")
+
+                    elif activity_type == "lab":
+                        print(f"(extract_transcript_partner) •-> "
+                              f"Lab: {activity_id:>6} - {activity_title}")
+                        lab_title = activity_title
+                        lab_description = f"{activity['description']}"
+
+                        try:
+                            a_webdriver.get(activity_full_url)
+                            lab_page_html = BeautifulSoup(a_webdriver.page_source, "html.parser")
+                            lab_review_lab_id_element = lab_page_html.select_one(LAB_REVIEW_LAB_ID)
+                            lab_content_outline_element = lab_page_html.select_one(LAB_CONTENT_OUTLINE)
+
+                            lab_id = lab_review_lab_id_element["value"].strip()
+                            lab_permalink = f"{BASE_URL_LAB}/{lab_id}"
+
+                            lab_steps = {}
+                            if lab_content_outline_element:
+                                for a_tag in lab_content_outline_element.find_all('a'):
+                                    step = a_tag['href'][-1]
+                                    text = a_tag.text
+                                    lab_steps[step] = text
+
+                        except NoSuchElementException as _error:
+                            print(f"(extract_transcript_partner) {activity_title}:\n"
+                                  f"Unable to locate the id lab_review_lab_id\n")
+                            raise NoSuchElementException
+
+                        lab = Lab(
+                            id=lab_id,
+                            name=lab_title,
+                            url=lab_permalink,
+                            description=lab_description,
+                            steps=lab_steps
+                        )
+
+                        lab.save_json()
+                        lab.save_markdown()
+
+                        labs_collection = Collection(type='labs', name='Labs Collection')
+                        labs_collection.load_json()
+                        labs_collection.add_item(lab_id, lab_title)
+                        labs_collection.save_json()
+
+                        print(f"(extract_transcript_partner) •-• [+]")
+
+                    elif activity_type == 'quiz':
+                        print(f"(extract_transcript_partner) •-> "
+                              f"Qui: {activity_id:>6} - {activity_title}")
+                        try:
+                            a_webdriver.get(activity_full_url)
+                            quiz_page_html = BeautifulSoup(a_webdriver.page_source, "html.parser")
+
+                            quiz_element = quiz_page_html.select_one(QL_QUIZ)
+
+                            if quiz_element is None:
+                                a_webdriver.get(activity_full_url)
+                                start_button = a_webdriver.find_element(By.XPATH, XPATH_START_BUTTON)
+                                start_button.click()
+
+                                quiz_element = a_webdriver.find_element(By.XPATH, XPATH_QUIZ)
+                                quiz_question_data = quiz_element.get_attribute(QUIZ_VERSION)
+                            else:
+                                quiz_question_data = quiz_element[QUIZ_VERSION.lower()]
+
+                            quiz_question_json = json.loads(quiz_question_data)
+                            activity[QUIZ_ITEMS] = quiz_question_json.get(QUIZ_ITEMS)
+
+                            print(f"(extract_transcript_partner) •-• [+]")
+
+                        except NoSuchElementException as quiz_element_error:
+                            print(f"(extract_transcript_partner) Error: Failed to get Quiz's text. {quiz_element_error}")
+                    
+                    elif activity_type == 'link':
+                        print(f"(extract_transcript_partner) •-> "
+                              f"Lnk: {activity_id:>6} - {activity_title}")
+
+                        try:
+                            a_webdriver.get(activity_full_url)
+                            link_page_html = BeautifulSoup(a_webdriver.page_source, "html.parser")
+
+                            link_url_a_tag = link_page_html.select_one(LINK_URL_A_TAG)
+                            activity['link'] = link_url_a_tag['href']
+
+                            print(f"(extract_transcript_partner) •-• [+]")
+
+                        except NoSuchElementException as link_element_error:
+                            print(f"(extract_transcript_partner) Error: Failed to get Link's URL. {link_element_error}")
+
+        self.save_json()
+        self.save_markdown()
+
+        print(f"(extract_transcript_partner) \033[34m•-• COMPLETED: {self.id} - {self.name.upper()}\033[0m\n")
+
+        a_webdriver.quit()
+
     # Complete the videos in the course
     def complete_videos(self):
         f"""
