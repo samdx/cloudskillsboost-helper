@@ -358,6 +358,15 @@ class CloudSkillsBoost:
                 print("Ya. Good day.")
                 running = False
             
+            # This launches a browser to login to the website
+            elif course_or_path.lower() == '0' or course_or_path.lower() == "b":
+                print("Launching a browser instance for you to login.\n")
+                a_webdriver = launch_browser(
+                    profile_folder=WEBDRIVER_PROFILE_FOLDER_NAME,
+                    headless=False,
+                    browser='chrome')
+                a_webdriver.get(BASE_URL)
+
             elif course_or_path.lower() == '5' or course_or_path.lower() == 'g':
                 course_id = input(f"•{'COURSE ID: ':>15}")
                 if not course_id.strip().isdigit():
