@@ -304,7 +304,7 @@ class CloudSkillsBoost:
                               f"\033[0m\n")
                     else:
                         print(f"\n"
-                              "\033[33mYOU PROVIDED A WRONG PATH ID, I BELIEVE: {path_id}\n"
+                              f"\033[33mYOU PROVIDED A WRONG PATH ID, I BELIEVE: {path_id}\n"
                               "PLEASE RETRY WITH THE FOLLOWING LIST OF PATH:\033[0m\n")
                         self.paths_collection.print_list()
                         continue
