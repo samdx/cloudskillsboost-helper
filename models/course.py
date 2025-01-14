@@ -15,7 +15,7 @@ import json
 import html
 import requests
 from bs4 import BeautifulSoup
-from config.settings import BASE_URL_COURSES, BASE_URL, BASE_URL_LAB
+from config.settings import BASE_URL_COURSES, BASE_URL, BASE_URL_LAB, WEBDRIVER_PROFILE_FOLDER_NAME
 from utils.utils import util_replace_quote_marks, util_strip_html_tags
 from services.launch_browser import launch_browser
 
@@ -336,14 +336,15 @@ class Course(BaseEntity):
         Turn off the headless mode to use a graphic browser and login to your account.
         """
 
-        # TODO: Check for the course's json file, if it doesn't exist, no need to fetch the course, just complete the videos.
-
-        # We need a browser to complete the videos
-        a_webdriver = launch_browser(None, True)
+        # We need a browser to complete the videos, requests can't handle dynamic web pages
+        a_webdriver = launch_browser(
+            profile_folder=WEBDRIVER_PROFILE_FOLDER_NAME,
+            headless=False,
+            browser='chrome')
 
         # Browse the course url
         try:
-            a_webdriver.get(self.url)
+            a_webdriver.get(self._url)
         except Exception as get_course_url_error:
             print(f"(complete_videos) Error: Unable to load the course page. {get_course_url_error}")
             input("Press Enter to exit the script.")
@@ -407,6 +408,9 @@ class Course(BaseEntity):
                 elif activity_type == "video" and activity_is_complete is True:
                     print(f"(complete_videos) •-• COMPLETED •-"
                           f"Video: {activity_id:>6} - {activity_title}")
+
+            # Quit the WebDriver
+            a_webdriver.quit()
 
     # Find and click the 'Mark as Completed' button for the current activity
     def mark_completed_button(self, mywebdriver: WebDriver, activity_id: str) -> None:

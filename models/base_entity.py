@@ -1,6 +1,6 @@
 from datetime import datetime
 import json
-from config.settings import DATA_FOLDER_NAME, OUTPUT_FOLDER_NAME
+from config.settings import BASE_URL_COURSES, BASE_URL_LAB, BASE_URL_PATHS, DATA_FOLDER_NAME, OUTPUT_FOLDER_NAME
 from pathlib import Path as PathlibPath
 
 from utils.utils import util_replace_special_chars
@@ -30,6 +30,17 @@ class BaseEntity(Serialize):
         """
 
         return {k: v for k, v in self.__dict__.items() if not k.startswith('_')}
+
+    # URL
+    # TODO: Make self.url a property and persistent by checking if url is provided or not
+    @property
+    def _url(self):
+        if self.type == 'Path':
+            return f"{BASE_URL_PATHS}/{self.id}"
+        if self.type == 'Course':
+            return f"{BASE_URL_COURSES}/{self.id}"
+        if self.type == 'Lab':
+            return f"{BASE_URL_LAB}/{self.id}"
 
     # Properties to get the JSON and Markdown file names and paths
     @property

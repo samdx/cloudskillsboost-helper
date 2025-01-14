@@ -81,12 +81,10 @@ class CloudSkillsBoost:
             if mark_complete_video_task:
                 heading = f"{a_course_id} - {course_name.upper()}"
                 print(f"\n\033[45m[{heading:^85}]\033[0m")
-                a_webdriver = launch_browser(profile_folder=WEBDRIVER_PROFILE_FOLDER_NAME,
-                                             headless=False,
-                                             browser='edge')
+
                 course = Course(id=a_course_id, name=course_name)
                 course.complete_videos()
-                a_webdriver.quit()
+
                 print("(tasks_coordinator) The course videos has been marked as completed.")
 
             # If the user wants to extract the transcript
@@ -358,6 +356,15 @@ class CloudSkillsBoost:
                 print("Ya. Good day.")
                 running = False
             
+            # This launches a browser to login to the website
+            elif course_or_path.lower() == '0' or course_or_path.lower() == "b":
+                print("Launching a browser instance for you to login.\n")
+                a_webdriver = launch_browser(
+                    profile_folder=WEBDRIVER_PROFILE_FOLDER_NAME,
+                    headless=False,
+                    browser='chrome')
+                a_webdriver.get(BASE_URL)
+
             elif course_or_path.lower() == '5' or course_or_path.lower() == 'g':
                 course_id = input(f"•{'COURSE ID: ':>15}")
                 if not course_id.strip().isdigit():
