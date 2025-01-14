@@ -336,8 +336,6 @@ class Course(BaseEntity):
         Turn off the headless mode to use a graphic browser and login to your account.
         """
 
-        # TODO: Check for the course's json file, if it doesn't exist, no need to fetch the course, just complete the videos.
-
         # We need a browser to complete the videos
         a_webdriver = launch_browser(None, True)
 
