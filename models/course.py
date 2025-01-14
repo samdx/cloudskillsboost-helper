@@ -343,7 +343,7 @@ class Course(BaseEntity):
 
         # Browse the course url
         try:
-            a_webdriver.get(self.url)
+            a_webdriver.get(self._url)
         except Exception as get_course_url_error:
             print(f"(complete_videos) Error: Unable to load the course page. {get_course_url_error}")
             input("Press Enter to exit the script.")
