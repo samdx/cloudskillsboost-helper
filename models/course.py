@@ -408,6 +408,9 @@ class Course(BaseEntity):
                     print(f"(complete_videos) •-• COMPLETED •-"
                           f"Video: {activity_id:>6} - {activity_title}")
 
+            # Quit the WebDriver
+            a_webdriver.quit()
+
     # Find and click the 'Mark as Completed' button for the current activity
     def mark_completed_button(self, mywebdriver: WebDriver, activity_id: str) -> None:
         """
