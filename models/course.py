@@ -15,7 +15,7 @@ import json
 import html
 import requests
 from bs4 import BeautifulSoup
-from config.settings import BASE_URL_COURSES, BASE_URL, BASE_URL_LAB
+from config.settings import BASE_URL_COURSES, BASE_URL, BASE_URL_LAB, WEBDRIVER_PROFILE_FOLDER_NAME
 from utils.utils import util_replace_quote_marks, util_strip_html_tags
 from services.launch_browser import launch_browser
 
@@ -336,8 +336,11 @@ class Course(BaseEntity):
         Turn off the headless mode to use a graphic browser and login to your account.
         """
 
-        # We need a browser to complete the videos
-        a_webdriver = launch_browser(None, True)
+        # We need a browser to complete the videos, requests can't handle dynamic web pages
+        a_webdriver = launch_browser(
+            profile_folder=WEBDRIVER_PROFILE_FOLDER_NAME,
+            headless=False,
+            browser='chrome')
 
         # Browse the course url
         try:
