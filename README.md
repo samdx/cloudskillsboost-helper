@@ -4,6 +4,8 @@
 
 A helper or a scraper.
 
+TL;DR
+
 This is a small tools for scraping contents from Google Cloud Skills Boost website to Markdown files, which helps to build your Personal Knowledge Base, Obsidian, for example.
 
 ## Samples
