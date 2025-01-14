@@ -32,6 +32,7 @@ class BaseEntity(Serialize):
         return {k: v for k, v in self.__dict__.items() if not k.startswith('_')}
 
     # URL
+    # TODO: Make self.url a property and persistent by checking if url is provided or not
     @property
     def _url(self):
         if self.type == 'Path':
