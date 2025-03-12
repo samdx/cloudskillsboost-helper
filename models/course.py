@@ -225,7 +225,7 @@ class Course(BaseEntity):
                             lab_steps = {}
                             if lab_content_outline_element:
                                 for a_tag in lab_content_outline_element.find_all('a'):
-                                    step = a_tag['href'][-1]
+                                    step = a_tag['href'].strip('#step')
                                     text = a_tag.text
                                     lab_steps[step] = text
 
