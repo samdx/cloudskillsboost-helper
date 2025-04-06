@@ -6,7 +6,7 @@
     <h2>{{ path.name }}</h2>
     <p>{{ path.description }}</p>
     <h3>Courses & Progress</h3>
-    <ul>
+    <ul class="collection">
         {% for course_id, course_data in path.courses.items() %}
         <li class="collection-item">
             <label>
