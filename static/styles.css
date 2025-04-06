@@ -47,3 +47,29 @@ nav.fixed {
 body {
     padding-top: 64px; /* Add padding to prevent content from overlapping the navbar */
 }
+
+/* Styles for the sidenav */
+
+.sidenav {
+    padding-top: 64px; /* Adjust padding to match the navbar height */
+    width: 260px;
+    background-color: #f5f5f5;
+}
+
+.sidenav a {
+    font-size: 16px;
+    color: #000;
+}
+
+.sidenav .badge {
+    background-color: #2196f3;
+    color: #fff;
+    font-weight: bold;
+}
+.sidenav .badge:hover {
+    background-color: #1976d2;
+}
+
+.sidenav .badge:active {
+    background-color: #0d47a1;
+}
