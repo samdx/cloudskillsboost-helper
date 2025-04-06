@@ -1,0 +1,12 @@
+.fixed-width {
+    display: inline-block;
+    width: 5ch;
+    text-align: right;
+    margin-top: 0.2em;
+}
+.highlight {
+    background-color: yellow;
+}
+.collection-list {
+    list-style: bullet;
+}
