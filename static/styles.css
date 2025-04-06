@@ -82,7 +82,7 @@ body {
 }
 
 /* Ensure the sidenav spans the full height */
-.sidenav.sidenav-fixed {
+.sidenav .sidenav-fixed {
     margin-top: 64px;
     position: fixed;
     top: 0;
