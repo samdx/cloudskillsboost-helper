@@ -1,30 +1,24 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>{{ path.name }}</title>
-    <link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}">
-</head>
-<body>
-    <h1>{{ path.name }}</h1>
+{% extends 'base.html' %}
+
+{% block title %}Path Details: {{ path.name }}{% endblock %}
+
+{% block content %}
+    <h2>{{ path.name }}</h2>
     <p>{{ path.description }}</p>
-    <h2>Courses in this Path</h2>
+    <h3>Courses & Progress</h3>
     <ul>
-        {% for course in path.courses.values() %}
-        <li>
-            <input type="checkbox" {% if course.id in completed_courses %}checked{% endif %} disabled>
-            [<code class="fixed-width">{{ course.id }}</code>] {{ course.name }}
+        {% for course_id, course_data in path.courses.items() %}
+        <li class="collection-item">
+            <label>
+                <input type="checkbox" {% if course_id in completed_courses %}checked{% endif %} disabled>
+                <span>
+                    <button class="btn-small blue lighten-1 waves-effect waves-light">
+                        <a href="{{ BASE_URL_COURSES }}/{{ course_id }}" target="_blank" rel="noopener noreferrer">{{ course_id }}</a>
+                    </button>
+                    <a href="{{ url_for('course_details', course_id=course_id) }}">{{ course_data.name }}</a>
+                </span>
+            </label>
         </li>
         {% endfor %}
     </ul>
-    <form action="{{ url_for('process_path', path_id=path.id) }}" method="post">
-        <select name="action">
-            <option value="complete_videos">Mark Videos as Completed</option>
-            <option value="extract_transcripts">Extract Transcripts</option>
-            <option value="both">Both</option>
-        </select>
-        <button type="submit">Process Path</button>
-    </form>
-</body>
-</html>
+{% endblock %}
