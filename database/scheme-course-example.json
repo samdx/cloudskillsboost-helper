@@ -1,125 +1,5 @@
 {
   "@context": "https://schema.org/",
-  "@id": "https://www.cloudskillsboost.google/course_templates/101",
-  "@type": "Course",
-  "name": "Introduction to Google Cloud",
-  "description": "This course provides an overview of Google Cloud services and tools, including Compute Engine, Cloud Storage, and BigQuery.",
-  "educationalLevel": "Beginner",
-  "image": [
-    "https://cdn.qwiklabs.com/example-course-image.jpg"
-  ],
-  "provider": {
-    "@type": "Organization",
-    "name": "Google Cloud",
-    "url": "https://cloud.google.com/learn"
-  },
-  "publisher": {
-    "@type": "Organization",
-    "name": "Google Cloud Skills Boost",
-    "url": "https://cloudskillsboost.google"
-  },
-  "about": [
-    "Compute Engine",
-    "Cloud Computing",
-    "Cloud Infrastructure"
-  ],
-  "teaches": [
-    "Understand Google Cloud's core services",
-    "Deploy and manage virtual machines",
-    "Store and analyze data using Google Cloud tools"
-  ],
-  "datePublished": "2025-01-01",
-  "inLanguage": "en",
-  "availableLanguage": ["en", "es", "fr"],
-  "offers": [
-    {
-      "@type": "Offer",
-      "category": "Partially Free"
-    },
-    {
-      "@type": "Offer",
-      "category": "Subscription"
-    }
-  ],
-  "hasCourseInstance": [
-    {
-      "@type": "CourseInstance",
-      "courseMode": "Online",
-      "courseWorkload": "PT5H"
-    }
-  ],
-  "aggregateRating": {
-    "@type": "AggregateRating",
-    "ratingValue": "4.5",
-    "reviewCount": "1200"
-  },
-  "modules": [
-    {
-      "id": "module1",
-      "title": "Getting Started with Google Cloud",
-      "description": "Learn the basics of Google Cloud and its core services.",
-      "steps": [
-        {
-          "id": "step1",
-          "prompt": null,
-          "isOptional": true,
-          "activities": [
-            {
-              "id": "activity1",
-              "href": "/course_templates/101/video/1",
-              "isLocked": false,
-              "duration": 120000,
-              "title": "Introduction to Google Cloud",
-              "description": null,
-              "type": "video",
-              "isComplete": true,
-              "inProgress": false,
-              "score": null,
-              "disabled": false
-            }
-          ],
-          "isComplete": true,
-          "isTestedOut": false,
-          "allActivitiesRequired": false
-        }
-      ],
-      "expanded": false
-    },
-    {
-      "id": "module2",
-      "title": "Compute and Storage Services",
-      "description": "Explore Compute Engine, Cloud Storage, and other key services.",
-      "steps": [
-        {
-          "id": "step2",
-          "prompt": null,
-          "isOptional": true,
-          "activities": [
-            {
-              "id": "activity2",
-              "href": "/course_templates/101/video/2",
-              "isLocked": false,
-              "duration": 180000,
-              "title": "Compute Engine Overview",
-              "description": null,
-              "type": "video",
-              "isComplete": true,
-              "inProgress": false,
-              "score": null,
-              "disabled": false
-            }
-          ],
-          "isComplete": true,
-          "isTestedOut": false,
-          "allActivitiesRequired": false
-        }
-      ],
-      "expanded": false
-    }
-  ]
-},
-{
-  "@context": "https://schema.org/",
   "@id": "https://www.cloudskillsboost.google/course_templates/60",
   "@type": "Course",
   "name": "Google Cloud Fundamentals: Core Infrastructure",
@@ -192,5 +72,12 @@
       ],
       "expanded": false
     }
-  ]
+  ],
+  "additionalInfo": {
+    "prerequisites": [
+      "Basic understanding of cloud concepts",
+      "Familiarity with web technologies"
+    ],
+    "duration": "PT10H"
+  }
 }
