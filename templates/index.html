@@ -32,7 +32,7 @@
     
         <!-- Topics Section -->
         <li><div class="divider"></div></li>
-        <li><a class="subheader">Topics</a></li>
+        <li><a class="subheader">Topics <span class="badge">{{ topics|length }}</span></a></li>
         {% for topic in topics %}
         <li><a href="{{ url_for('browse_by_topic', topic=topic) }}">{{ topic }}</a></li>
         {% endfor %}
