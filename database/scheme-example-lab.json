@@ -1,6 +1,6 @@
 {
   "@context": "https://schema.org/",
-  "@id": "https://www.cloudskillsboost.google/labs/301",
+  "@id": "https://www.cloudskillsboost.google/catalog_lab/301",
   "@type": "Lab",
   "name": "Deploying a Virtual Machine",
   "description": "In this lab, you will deploy a virtual machine on Google Cloud using Compute Engine.",
@@ -20,11 +20,14 @@
   "datePublished": "2025-03-01",
   "inLanguage": "en",
   "availableLanguage": ["en"],
-  "url": "https://www.cloudskillsboost.google/labs/301",
+  "url": "https://www.cloudskillsboost.google/catalog_lab/301",
   "steps": {
     "1": "Sign in to the Google Cloud Console",
     "2": "Create a Compute Engine instance",
     "3": "Verify the instance is running",
-    "4": "End the lab"
+    "4": "End the lab",
+    "5": "Review your deployment",
+    "6": "Submit your feedback",
+    "7": "Download your lab completion certificate"
   }
 }
