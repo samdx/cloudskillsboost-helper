@@ -93,3 +93,10 @@ body {
     width: 5em; /* Full width */
     text-align: right; /* Align text to the right */
 }
+
+.btn-small a {
+    color: #dcdcdc; /* Change text color */
+}
+.btn-small a:hover {
+    color: #fff; /* Change text color on hover */
+}
