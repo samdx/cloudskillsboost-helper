@@ -19,6 +19,7 @@ courses_collection.load_json()
 labs_collection.load_json()
 
 topics = set()
+topics_to_courses = {}
 
 @app.route('/')
 def home():
@@ -116,14 +117,13 @@ def process_path(path_id):
 
 @app.route('/browse/topic/<topic>')
 def browse_by_topic(topic):
-    # Filter courses, paths, and labs by the selected topic
-    filtered_courses = {}
+    """
+    filtered_courses = topics_to_courses.get(topic, [])
 
-    for course_id, course_name in courses_collection.collection.items():
-        course = Course(id=course_id)
-        course.load_json()
-        if topic in course.topics:
-            filtered_courses[course_id] = course_name
+    This route filters and displays courses associated with the given topic.
+    """
+    # Filter courses, paths, and labs by the selected topic
+    filtered_courses = topics_to_courses.get(topic, {})
 
     return render_template(
         'browse_by_topic.html',
@@ -132,29 +132,46 @@ def browse_by_topic(topic):
     )
 
 
-def gather_all_topics(courses_collection):
+def extract_unique_topics(courses_collection):
     """
     Gather all unique topics from the downloaded courses in the 'data/courses/' folder.
 
     :param courses_collection: The collection of courses.
     :return: A sorted list of unique topics.
     """
+
     topics_set = set()  # Use a set to avoid duplicate topics
+    topics_to_courses = {}  # Dictionary to map topics to courses
     courses_folder = PathLib("data/courses")  # Path to the courses folder
 
-    for course_id in courses_collection.collection.keys():
+    if not isinstance(courses_collection.collection, dict):
+        raise TypeError("courses_collection.collection must be a dictionary")
+
+    for course_id, course_name in courses_collection.collection.items():  # Updated to use items()
         course_file = courses_folder / f"{course_id}.json"  # Construct the file path
+
         if course_file.exists():  # Check if the course JSON file exists
             course = Course(id=course_id)  # Create a new Course instance
             course.load_json()  # Load the JSON file
             topics = course.topics  # Extract the 'topics' key
             topics_set.update(topics)  # Add topics to the set
-
-    return sorted(topics_set)  # Return a sorted list of unique topics
+            for topic in topics:
+                # Ensure the topic is a string
+                if not isinstance(topic, str):
+                    raise ValueError(f"Topic '{topic}' is not a string")
+                # Map topic to course name
+                if topic not in topics_to_courses:
+                    topics_to_courses[topic] = {}
+                topics_to_courses[topic][course_id] = course_name  # Map topic to course name directly
+        else:
+            # Skip if the file does not exist
+            continue
+    # Sort the topics set to get a consistent order
+    return sorted(topics_set), topics_to_courses  # Return a sorted list of unique topics
 
 
 if __name__ == '__main__':
-    topics = gather_all_topics(courses_collection)
+    topics, topics_to_courses = extract_unique_topics(courses_collection)
     app.run(host='0.0.0.0', port=8080, debug=True)
 
 # Note:
