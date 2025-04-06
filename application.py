@@ -2,6 +2,7 @@ import os
 from flask import Flask, request, jsonify, render_template, redirect, url_for
 from config.settings import BASE_URL, BASE_URL_COURSES, BASE_URL_LAB, BASE_URL_PATHS
 from models.course import Course
+from models.lab import Lab
 from models.path import Path
 from models.collection import Collection
 from pathlib import Path as PathLib
@@ -65,13 +66,19 @@ def path_details(path_id):
     path_data = Path(id=path_id)
     path_data.load_json()
 
-    return render_template('path.html', path=path_data)
+    return render_template('path.html', BASE_URL_COURSES=BASE_URL_COURSES, path=path_data)
 
 
 @app.route('/labs/<lab_id>')
 def lab_details(lab_id):
     # Logic to fetch and display lab details
-    return f"Details for lab {lab_id}"
+    lab = labs_collection.collection.get(lab_id)
+    if not lab:
+        return jsonify({"error": "Lab not found"}), 404
+    # Load lab data
+    lab_data = Lab(id=lab_id)
+    lab_data.load_json()
+    return render_template('lab.html', lab=lab_data)
 
 
 @app.route('/course/<course_id>/complete_videos', methods=['POST'])
