@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CloudSkillsBoost</title>
+</head>
+<body>
+    <h1>Welcome to CloudSkillsBoost</h1>
+    <h2>Paths</h2>
+    <ul>
+        {% for path_id, path_name in paths.items() %}
+        <li><a href="{{ url_for('path_details', path_id=path_id) }}">{{ path_name }}</a></li>
+        {% endfor %}
+    </ul>
+
+    <h2>Courses</h2>
+    <ul>
+        {% for course_id, course_name in courses.items() %}
+        <li><a href="{{ url_for('course_details', course_id=course_id) }}">{{ course_name }}</a></li>
+        {% endfor %}
+    </ul>
+</body>
+</html>

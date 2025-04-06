@@ -1,0 +1,18 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{{ course.name }}</title>
+</head>
+<body>
+    <h1>{{ course.name }}</h1>
+    <p>{{ course.description }}</p>
+    <form action="{{ url_for('complete_videos', course_id=course.id) }}" method="post">
+        <button type="submit">Mark Videos as Completed</button>
+    </form>
+    <form action="{{ url_for('extract_transcript', course_id=course.id) }}" method="post">
+        <button type="submit">Extract Transcript</button>
+    </form>
+</body>
+</html>

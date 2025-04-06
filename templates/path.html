@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{{ path.name }}</title>
+</head>
+<body>
+    <h1>{{ path.name }}</h1>
+    <p>{{ path.description }}</p>
+    <h2>Courses in this Path</h2>
+    <ul>
+        {% for course in path.courses.values() %}
+        <li>{{ course.name }}</li>
+        {% endfor %}
+    </ul>
+    <form action="{{ url_for('process_path', path_id=path.id) }}" method="post">
+        <select name="action">
+            <option value="complete_videos">Mark Videos as Completed</option>
+            <option value="extract_transcripts">Extract Transcripts</option>
+            <option value="both">Both</option>
+        </select>
+        <button type="submit">Process Path</button>
+    </form>
+</body>
+</html>
