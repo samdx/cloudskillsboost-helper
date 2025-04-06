@@ -1,73 +1,7 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Cloud Skills Boost Helper</title>
-    <!-- Materialize CSS -->
-    <link href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css" rel="stylesheet">
-    <!-- Custom Styles -->
-    <link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}">
-    <!-- Materialize JS -->
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js" defer></script>
-    <!-- Custom JS -->
-    <script src="{{ url_for('static', filename='script.js') }}" defer></script>
-</head>
-<body class="grey lighten-4">
-    <!-- Navigation Bar -->
-    <nav class="blue fixed">
-        <div class="nav-wrapper container">
-            <a href="#" class="brand-logo">CLOUD SKILLS BOOST HELPER</a>
-            <button class="navbar-button btn-small blue lighten-1 waves-effect waves-light right">RE-FETCH</button>
-        </div>
-    </nav>
+{% extends 'base.html' %}
 
-    <!-- Left Side Navigation Panel -->
-    <ul id="slide-out" class="sidenav sidenav-fixed">
-        <!-- TOC Section (Fixed) -->
-        <div class="toc-fixed toc-table">
-            <li><a class="subheader">Table Of Contents</a></li>
-            <div class="toc-dynamic">
-                <!-- Auto-generated TOC -->
-            </div>
-            <li><div class="divider"></div></li>
-            <li><a class="subheader">Topics <span class="badge">{{ topics|length }}</span></a></li>
-        </div>
-    
-        <!-- Topics Section (Scrollable) -->
-        <div class="topics-scrollable">
-            {% for topic in topics %}
-            <li><a href="{{ url_for('browse_by_topic', topic=topic) }}">{{ topic }}</a></li>
-            {% endfor %}
-        </div>
-    </ul>
+{% block title %}Home - Cloud Skills Boost Helper{% endblock %}
 
-    <!-- Main Content -->
-    <div class="container" style="margin-left: 300px; margin-right: 300px;">
-        {% include 'contents.html' %}
-    </div>
-
-    <script>
-        // Initialize the sidenav
-        document.addEventListener('DOMContentLoaded', function() {
-            var elems = document.querySelectorAll('.sidenav');
-            var instances = M.Sidenav.init(elems);
-
-            // Generate TOC dynamically based on h2 headings in contents.html
-            const tocContainer = document.querySelector('.toc-table .toc-dynamic'); // Updated selector
-            const headings = document.querySelectorAll('.container h2');
-            headings.forEach(heading => {
-                const id = heading.id || heading.textContent.trim().replace(/\s+/g, '-').toLowerCase();
-                heading.id = id; // Ensure the heading has an ID
-                const li = document.createElement('li');
-                const a = document.createElement('a');
-                a.href = `#${id}`;
-                a.className = 'toc-link'; // Add class for styling
-                a.textContent = heading.textContent;
-                li.appendChild(a);
-                tocContainer.appendChild(li);
-            });
-        });
-    </script>
-</body>
-</html>
+{% block content %}
+    {% include 'contents.html' %}
+{% endblock %}
