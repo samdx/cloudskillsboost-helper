@@ -9,25 +9,36 @@
             display: inline-block;
             width: 5ch;
             text-align: right;
+            margin-top: 0.2em;
         }
         .highlight {
             background-color: yellow;
+        }
+        .collection-list {
+            list-style: bullet;
         }
     </style>
 </head>
 <body>
     <h1>Welcome to CloudSkillsBoost</h1>
     <h2>Paths</h2>
-    <ul>
+    <ul class="collection-list">
         {% for path_id, path_name in paths.items() %}
-        <li>[<code class="fixed-width">{{ path_id }}</code>] <a href="{{ url_for('path_details', path_id=path_id) }}">{{ path_name }}</a></li>
+        <li>
+            <input type="checkbox" {% if path_id in completed_paths %}checked{% endif %} disabled>
+            [<code class="fixed-width">{{ path_id }}</code>] <a href="{{ url_for('path_details', path_id=path_id) }}">{{ path_name }}</a>
+        </li>
         {% endfor %}
     </ul>
 
     <h2>Courses</h2>
-    <ul>
+    <ul class="collection-list">
         {% for course_id, course_name in courses.items() %}
-        <li>[<code class="fixed-width">{{ course_id }}</code>] <a href="{{ url_for('course_details', course_id=course_id) }}">{{ course_name }}</a></li>
+        <li>
+            <input type="checkbox" {% if course_id in completed_courses %}checked{% endif %} disabled>
+            [<code class="fixed-width">{{ course_id }}</code>] <a href="{{ url_for('course_details', course_id=course_id) }}">{{ course_name }}</a>
+            <button onclick="alert('Extracting transcript for {{ course_id }}')">Extract Transcript</button>
+        </li>
         {% endfor %}
     </ul>
 </body>
