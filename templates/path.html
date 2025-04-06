@@ -4,20 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>{{ path.name }}</title>
-    <style>
-        .fixed-width {
-            display: inline-block;
-            width: 5ch;
-            text-align: right;
-            margin-top: 0.2em;
-        }
-        .highlight {
-            background-color: yellow;
-        }
-        .collection-list {
-            list-style: bullet;
-        }
-    </style>
+    <link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}">
 </head>
 <body>
     <h1>{{ path.name }}</h1>
