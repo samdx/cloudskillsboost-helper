@@ -1,0 +1,41 @@
+{
+  "@context": "https://schema.org/",
+  "@id": "https://www.cloudskillsboost.google/course_templates/101",
+  "@type": "Course",
+  "name": "Introduction to Google Cloud",
+  "description": "This course provides an overview of Google Cloud services and tools, including Compute Engine, Cloud Storage, and BigQuery.",
+  "image": [
+    "https://cdn.qwiklabs.com/example-course-image.jpg"
+  ],
+  "provider": {
+    "@type": "Organization",
+    "name": "Google Cloud",
+    "url": "https://cloud.google.com/learn"
+  },
+  "publisher": {
+    "@type": "Organization",
+    "name": "Google Cloud Skills Boost",
+    "url": "https://cloudskillsboost.google"
+  },
+  "datePublished": "2025-01-01",
+  "inLanguage": "en",
+  "availableLanguage": ["en", "es", "fr"],
+  "url": "https://www.cloudskillsboost.google/course_templates/101",
+  "modules": [
+    {
+      "id": "module1",
+      "title": "Getting Started with Google Cloud",
+      "description": "Learn the basics of Google Cloud and its core services."
+    },
+    {
+      "id": "module2",
+      "title": "Compute and Storage Services",
+      "description": "Explore Compute Engine, Cloud Storage, and other key services."
+    }
+  ],
+  "teaches": [
+    "Understand Google Cloud's core services",
+    "Deploy and manage virtual machines",
+    "Store and analyze data using Google Cloud tools"
+  ]
+}

@@ -1,0 +1,36 @@
+{
+  "@context": "https://schema.org/",
+  "@id": "https://www.cloudskillsboost.google/paths/201",
+  "@type": "Path",
+  "name": "Cloud Engineer Learning Path",
+  "description": "This learning path guides you through the skills and knowledge required to become a Google Cloud Engineer.",
+  "image": [
+    "https://cdn.qwiklabs.com/example-path-image.jpg"
+  ],
+  "provider": {
+    "@type": "Organization",
+    "name": "Google Cloud",
+    "url": "https://cloud.google.com/learn"
+  },
+  "publisher": {
+    "@type": "Organization",
+    "name": "Google Cloud Skills Boost",
+    "url": "https://cloudskillsboost.google"
+  },
+  "datePublished": "2025-02-01",
+  "inLanguage": "en",
+  "availableLanguage": ["en", "es"],
+  "url": "https://www.cloudskillsboost.google/paths/201",
+  "hasPart": [
+    {
+      "@type": "Course",
+      "name": "Google Cloud Fundamentals: Core Infrastructure",
+      "url": "https://www.cloudskillsboost.google/course_templates/60"
+    },
+    {
+      "@type": "Lab",
+      "name": "Deploying a Virtual Machine",
+      "url": "https://www.cloudskillsboost.google/labs/102"
+    }
+  ]
+}
