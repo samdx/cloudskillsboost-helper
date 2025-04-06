@@ -1,0 +1,58 @@
+{
+    "@context": "https://schema.org/",
+    "@id": "https://www.cloudskillsboost.google/course_templates/874",
+    "@type": "Course",
+    "name": "Developing Applications with Google Cloud: Foundations",
+    "description": "\u003cp\u003eIn this course, you learn the fundamentals of application development on Google Cloud. You learn best practices for cloud applications, and how to select compute and data options to match your application use cases. You're introduced to generative AI and how it's used to help build applications. You learn about authentication and authorization, application deployment, continuous integration and delivery, and monitoring and performance tuning for your applications running in Google Cloud. U...",
+    "educationalLevel": "Beginner",
+    "image": [
+        "https://cdn.qwiklabs.com/IV53Ax75GIoDDCH65oVavw6ogPIqrRImjyK816uQobM%3D"
+    ],
+    "provider": {
+        "@type": "Organization",
+        "name": "Google Cloud",
+        "url": "https://cloud.google.com/learn"
+    },
+    "publisher": {
+        "@type": "Organization",
+        "name": "Google Cloud Skills Boost",
+        "url": "https://cloudskillsboost.google"
+    },
+    "about": [
+        "Cloud Computing",
+        "Cloud Applications"
+    ],
+    "teaches": [
+        "Discuss best practices for application development in the cloud.",
+        "Understand how to choose the appropriate data storage option for application use cases.",
+        "Use authentication and authorization to secure an application.",
+        "Describe use cases for the different Google Cloud compute options used for running applications."
+    ],
+    "datePublished": "2025-01-14",
+    "inLanguage": "en",
+    "availableLanguage": [
+        "en"
+    ],
+    "offers": [
+        {
+            "@type": "Offer",
+            "category": "Partially Free"
+        },
+        {
+            "@type": "Offer",
+            "category": "Subscription"
+        }
+    ],
+    "hasCourseInstance": [
+        {
+            "@type": "CourseInstance",
+            "courseMode": "Online",
+            "courseWorkload": "PT6H45M"
+        }
+    ],
+    "aggregateRating": {
+        "@type": "AggregateRating",
+        "ratingValue": "4.23",
+        "reviewCount": "219"
+    }
+}
