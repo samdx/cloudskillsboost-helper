@@ -37,7 +37,7 @@
             <li class="collection-item">
                 <label>
                     <input type="checkbox" {% if path_id in completed_paths %}checked{% endif %} disabled>
-                    <span><button class="btn-small blue lighten-1 waves-effect waves-light">[<code class="fixed-width">{{ path_id }}</code>]</button> <a href="{{ url_for('path_details', path_id=path_id) }}">{{ path_name }}</a></span>
+                    <span><button class="btn-small blue lighten-1 waves-effect waves-light">{{ path_id }}</button> <a href="{{ url_for('path_details', path_id=path_id) }}">{{ path_name }}</a></span>
                 </label>
             </li>
             {% endfor %}
@@ -49,9 +49,8 @@
             <li class="collection-item">
                 <label>
                     <input type="checkbox" {% if course_id in completed_courses %}checked{% endif %} disabled>
-                    <span><button class="btn-small blue lighten-1 waves-effect waves-light">[<code class="fixed-width">{{ course_id }}</code>]</button> <a href="{{ url_for('course_details', course_id=course_id) }}">{{ course_name }}</a></span>
+                    <span><button class="btn-small blue lighten-1 waves-effect waves-light">{{ course_id }}</button> <a href="{{ url_for('course_details', course_id=course_id) }}">{{ course_name }}</a></span>
                 </label>
-                <button class="btn-small blue lighten-1 waves-effect waves-light" onclick="alert('Extracting transcript for {{ course_id }}')">Extract Transcript</button>
             </li>
             {% endfor %}
         </ul>
