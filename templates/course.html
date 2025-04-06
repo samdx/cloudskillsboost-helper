@@ -1,18 +1,22 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>{{ course.name }}</title>
-</head>
-<body>
-    <h1>{{ course.name }}</h1>
+{% extends 'base.html' %}
+
+{% block title %}Course Details: {{ course.name }}{% endblock %}
+
+{% block content %}
+    <h2>{{ course.name }}</h2>
     <p>{{ course.description }}</p>
-    <form action="{{ url_for('complete_videos', course_id=course.id) }}" method="post">
-        <button type="submit">Mark Videos as Completed</button>
-    </form>
-    <form action="{{ url_for('extract_transcript', course_id=course.id) }}" method="post">
-        <button type="submit">Extract Transcript</button>
-    </form>
-</body>
-</html>
+    <h3>Objectives</h3>
+    <ul>
+        {% for objective in course.objectives %}
+        <li>{{ objective }}</li>
+        {% endfor %}
+    </ul>
+    <h3>Modules</h3>
+    <ul>
+        {% for module in course.modules %}
+        <li class="collection-item">
+            <strong>{{ module.title }}</strong>: {{ module.description }}
+        </li>
+        {% endfor %}
+    </ul>
+{% endblock %}
