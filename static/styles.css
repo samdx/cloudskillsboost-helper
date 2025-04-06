@@ -10,3 +10,21 @@
 .collection-list {
     list-style: bullet;
 }
+.collapsible-content {
+    display: none; /* Hide content by default */
+    margin-left: 1em;
+}
+
+.collapsible-heading {
+    cursor: pointer;
+    user-select: none;
+}
+
+.collapsible-heading::after {
+    content: " ▼"; /* Down arrow */
+    font-size: 0.8em;
+}
+
+.collapsible-heading.collapsed::after {
+    content: " ▶"; /* Right arrow */
+}
