@@ -50,7 +50,14 @@ def course_details(course_id):
     if not course:
         return jsonify({"error": "Course not found"}), 404
 
-    return render_template('course.html', course=course)
+    return render_template(
+        'course.html',
+        course=course,
+        topics=topics,
+        BASE_URL_LAB=BASE_URL_LAB,
+        BASE_URL_COURSES=BASE_URL_COURSES,
+        BASE_URL_PATHS=BASE_URL_PATHS
+    )
 
 
 @app.route('/path/<path_id>')
@@ -66,7 +73,12 @@ def path_details(path_id):
     path_data = Path(id=path_id)
     path_data.load_json()
 
-    return render_template('path.html', BASE_URL_COURSES=BASE_URL_COURSES, path=path_data)
+    return render_template(
+        'path.html',
+        BASE_URL_COURSES=BASE_URL_COURSES,
+        path=path_data,
+        topics=topics
+    )
 
 
 @app.route('/labs/<lab_id>')
@@ -78,7 +90,12 @@ def lab_details(lab_id):
     # Load lab data
     lab_data = Lab(id=lab_id)
     lab_data.load_json()
-    return render_template('lab.html', lab=lab_data)
+    return render_template(
+        'lab.html',
+        BASE_URL_LAB=BASE_URL_LAB,
+        lab=lab_data,
+        topics=topics
+    )
 
 
 @app.route('/course/<course_id>/complete_videos', methods=['POST'])
@@ -134,8 +151,11 @@ def browse_by_topic(topic):
 
     return render_template(
         'browse_by_topic.html',
-        topic=topic,
-        courses=filtered_courses
+        topics=topics,
+        courses=filtered_courses,
+        BASE_URL_COURSES=BASE_URL_COURSES,
+        BASE_URL_LAB=BASE_URL_LAB,
+        BASE_URL_PATHS=BASE_URL_PATHS
     )
 
 
