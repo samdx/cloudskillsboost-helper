@@ -10,14 +10,14 @@
     <h2>Paths</h2>
     <ul>
         {% for path_id, path_name in paths.items() %}
-        <li><a href="{{ url_for('path_details', path_id=path_id) }}">{{ path_name }}</a></li>
+        <li> <code>{{ path_id }}</code> <a href="{{ url_for('path_details', path_id=path_id) }}">{{ path_name }}</a></li>
         {% endfor %}
     </ul>
 
     <h2>Courses</h2>
     <ul>
         {% for course_id, course_name in courses.items() %}
-        <li><a href="{{ url_for('course_details', course_id=course_id) }}">{{ course_name }}</a></li>
+        <li> <code>{{ course_id }}</code> <a href="{{ url_for('course_details', course_id=course_id) }}">{{ course_name }}</a></li>
         {% endfor %}
     </ul>
 </body>
