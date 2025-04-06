@@ -30,5 +30,15 @@
         </li>
         {% endfor %}
     </ul>
+
+    <h2 class="collapsible-heading">Labs</h2>
+    <ul class="collection-list collapsible-content">
+        {% for lab_id, lab_name in labs.items() %}
+        <li>
+            <input type="checkbox" {% if lab_id in completed_labs %}checked{% endif %} disabled>
+            [<code class="fixed-width">{{ lab_id }}</code>] <a href="{{ BASE_URL_LAB }}/{{ lab_id }}" target="_blank" rel="noopener noreferrer">{{ lab_name }}</a>
+        </li>
+        {% endfor %}
+    </ul>
 </body>
 </html>
