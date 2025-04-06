@@ -99,6 +99,14 @@ body {
     border-bottom: 0.5px solid #ddd; /* Optional: Add a divider */
 }
 
+.toc-dynamic li {
+    text-decoration: none; /* Remove underline */
+    padding-left: 5px; /* Add padding to the left */
+    font-size: smaller; /* Smaller font size */
+    font-weight: normal; /* Normal font weight */
+}
+
+
 /* Scrollable Topics Section */
 .topics-scrollable {
     overflow-y: auto; /* Enable vertical scrolling */
