@@ -1,8 +1,10 @@
+import os
 from flask import Flask, request, jsonify, render_template, redirect, url_for
 from config.settings import BASE_URL, BASE_URL_COURSES, BASE_URL_LAB, BASE_URL_PATHS
 from models.course import Course
 from models.path import Path
 from models.collection import Collection
+from pathlib import Path as PathLib
 
 app = Flask(__name__)
 
@@ -16,12 +18,14 @@ paths_collection.load_json()
 courses_collection.load_json()
 labs_collection.load_json()
 
+topics = set()
 
 @app.route('/')
 def home():
     """
     Home page for the CloudSkillsBoost web application.
     """
+
     return render_template(
         'index.html',
         paths=paths_collection.collection,
@@ -30,7 +34,8 @@ def home():
         BASE_URL_LAB=BASE_URL_LAB,
         BASE_URL_COURSES=BASE_URL_COURSES,
         BASE_URL_PATHS=BASE_URL_PATHS,
-        BASE_URL=BASE_URL
+        BASE_URL=BASE_URL,
+        topics=topics  # Pass the unique topics to the template
     )
 
 
@@ -109,8 +114,47 @@ def process_path(path_id):
 
     return jsonify({"message": f"Processed all courses in path {path_id} with action: {action}."})
 
+@app.route('/browse/topic/<topic>')
+def browse_by_topic(topic):
+    # Filter courses, paths, and labs by the selected topic
+    filtered_courses = {}
+
+    for course_id, course_name in courses_collection.collection.items():
+        course = Course(id=course_id)
+        course.load_json()
+        if topic in course.topics:
+            filtered_courses[course_id] = course_name
+
+    return render_template(
+        'browse_by_topic.html',
+        topic=topic,
+        courses=filtered_courses
+    )
+
+
+def gather_all_topics(courses_collection):
+    """
+    Gather all unique topics from the downloaded courses in the 'data/courses/' folder.
+
+    :param courses_collection: The collection of courses.
+    :return: A sorted list of unique topics.
+    """
+    topics_set = set()  # Use a set to avoid duplicate topics
+    courses_folder = PathLib("data/courses")  # Path to the courses folder
+
+    for course_id in courses_collection.collection.keys():
+        course_file = courses_folder / f"{course_id}.json"  # Construct the file path
+        if course_file.exists():  # Check if the course JSON file exists
+            course = Course(id=course_id)  # Create a new Course instance
+            course.load_json()  # Load the JSON file
+            topics = course.topics  # Extract the 'topics' key
+            topics_set.update(topics)  # Add topics to the set
+
+    return sorted(topics_set)  # Return a sorted list of unique topics
+
 
 if __name__ == '__main__':
+    topics = gather_all_topics(courses_collection)
     app.run(host='0.0.0.0', port=8080, debug=True)
 
 # Note:

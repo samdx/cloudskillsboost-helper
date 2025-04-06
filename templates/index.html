@@ -24,9 +24,18 @@
 
     <!-- Side Navigation Panel -->
     <ul id="slide-out" class="sidenav sidenav-fixed">
+        <!-- Table of Contents -->
+        <li><a class="subheader">TOC</a></li>
         <li><a href="#paths">Paths <span class="badge">{{ paths|length }}</span></a></li>
         <li><a href="#courses">Courses <span class="badge">{{ courses|length }}</span></a></li>
         <li><a href="#labs">Labs <span class="badge">{{ labs|length }}</span></a></li>
+    
+        <!-- Topics Section -->
+        <li><div class="divider"></div></li>
+        <li><a class="subheader">Topics</a></li>
+        {% for topic in topics %}
+        <li><a href="{{ url_for('browse_by_topic', topic=topic) }}">{{ topic }}</a></li>
+        {% endfor %}
     </ul>
 
     <!-- Main Content -->
