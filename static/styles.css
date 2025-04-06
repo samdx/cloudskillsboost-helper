@@ -54,6 +54,7 @@ body {
     padding-top: 64px; /* Adjust padding to match the navbar height */
     width: 260px;
     background-color: #f5f5f5;
+    overflow: hidden; /* Disable the scrollbar */
 }
 
 .sidenav a {
