@@ -28,3 +28,15 @@
 .collapsible-heading.collapsed::after {
     content: " ▶"; /* Right arrow */
 }
+
+nav.fixed {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    z-index: 1000; /* Ensure it stays above other elements */
+}
+
+body {
+    padding-top: 64px; /* Add padding to prevent content from overlapping the navbar */
+}
