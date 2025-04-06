@@ -2,8 +2,6 @@
 
 This document outlines the changes, updates, and removals required in the codebase, particularly in the `models` package, to transition from the current JSON-based storage to Firestore as the database.
 
----
-
 ## **1. Overview of Changes**
 
 - **Database Integration**: Replace JSON file-based storage with Firestore for storing and retrieving data.
@@ -12,8 +10,6 @@ This document outlines the changes, updates, and removals required in the codeba
 - **Collections**: Map existing collections (`courses`, `labs`, `paths`) to Firestore collections.
 - **Error Handling**: Update error handling to account for Firestore-specific exceptions.
 - **Data Serialization**: Ensure compatibility between Firestore document structure and existing data models.
-
----
 
 ## **2. Changes to the `models` Package**
 
@@ -45,8 +41,6 @@ class BaseEntity:
         db.collection(collection_name).document(self.id).delete()
 ```
 
----
-
 ### **2.2. `Course` Class**
 
 - **Current Role**: Represents a course entity, handles extracting course data and saving it to JSON.
@@ -70,8 +64,6 @@ class BaseEntity:
   - Save extracted data (e.g., modules, activities) directly to Firestore.
   - Remove file-based operations like `save_json`.
 
----
-
 ### **2.3. `Lab` Class**
 
 - **Current Role**: Represents a lab entity, handles extracting lab data and saving it to JSON.
@@ -92,8 +84,6 @@ class BaseEntity:
 
 - **Update Lab Steps**:
   - Save lab steps as subcollections in Firestore.
-
----
 
 ### **2.4. `Path` Class**
 
@@ -116,8 +106,6 @@ class BaseEntity:
 - **Update `hasPart` Relationships**:
   - Save `hasPart` as references to related documents in Firestore.
 
----
-
 ### **2.5. `Collection` Class**
 
 - **Current Role**: Manages collections of entities (e.g., `courses`, `labs`, `paths`) and handles JSON file operations.
@@ -138,8 +126,6 @@ class BaseEntity:
           db.collection(collection_name).document(item_id).set(item_data)
   ```
 
----
-
 ## **3. Updates to Utility Functions**
 
 - **Current Role**: Provide helper functions for JSON serialization, HTML parsing, etc.
@@ -147,23 +133,17 @@ class BaseEntity:
   - Remove JSON-specific utilities (e.g., `save_json`, `load_json`).
   - Add Firestore-specific utilities for data serialization/deserialization.
 
----
-
 ## **4. Updates to Error Handling**
 
 - **Current Role**: Handle exceptions related to file operations and HTML parsing.
 - **Changes**:
   - Add handling for Firestore-specific exceptions (e.g., `google.api_core.exceptions.NotFound`).
 
----
-
 ## **5. Removal of JSON File Operations**
 
 - **Files Affected**:
   - Remove JSON file operations from `BaseEntity`, `Course`, `Lab`, `Path`, and `Collection`.
   - Remove JSON-specific utility functions.
-
----
 
 ## **6. Firestore Client Initialization**
 
@@ -177,8 +157,6 @@ from google.cloud import firestore
 db = firestore.Client()
 ```
 
----
-
 ## **7. Testing and Validation**
 
 - **Unit Tests**:
@@ -186,8 +164,6 @@ db = firestore.Client()
   - Remove tests for JSON file operations.
 - **Integration Tests**:
   - Test Firestore integration for all models and collections.
-
----
 
 ## **8. Summary of Changes**
 
@@ -201,16 +177,12 @@ db = firestore.Client()
 | Utility Functions| Remove JSON-specific utilities, add Firestore utilities.              |
 | Error Handling   | Add Firestore-specific exception handling.                             |
 
----
-
 ## **9. Benefits of Refactoring**
 
 - **Scalability**: Firestore provides a scalable solution for managing large datasets.
 - **Real-Time Updates**: Firestore enables real-time updates for data changes.
 - **Simplified Codebase**: Removing JSON file operations reduces complexity.
 - **Cloud Integration**: Firestore aligns with the planned deployment to Cloud Run.
-
----
 
 ## **10. Next Steps**
 
