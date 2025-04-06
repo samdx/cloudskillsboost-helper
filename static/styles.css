@@ -10,14 +10,11 @@
 .collection-list {
     list-style: bullet;
 }
-.collapsible-content {
-    display: none; /* Hide content by default */
-    margin-left: 1em;
-}
 
 .collapsible-heading {
     cursor: pointer;
     user-select: none;
+    margin-bottom: 0.5em;
 }
 
 .collapsible-heading::after {
@@ -27,6 +24,11 @@
 
 .collapsible-heading.collapsed::after {
     content: " ▶"; /* Right arrow */
+}
+
+.collapsible-content {
+    display: none; /* Hide content by default */
+    margin-left: 1em;
 }
 
 nav.fixed {
