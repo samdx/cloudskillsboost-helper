@@ -62,6 +62,12 @@ def path_details(path_id):
     return render_template('path.html', path=path_data)
 
 
+@app.route('/labs/<lab_id>')
+def lab_details(lab_id):
+    # Logic to fetch and display lab details
+    return f"Details for lab {lab_id}"
+
+
 @app.route('/course/<course_id>/complete_videos', methods=['POST'])
 def complete_videos(course_id):
     """
