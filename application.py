@@ -1,5 +1,5 @@
 from flask import Flask, request, jsonify, render_template, redirect, url_for
-from config.settings import BASE_URL_LAB
+from config.settings import BASE_URL, BASE_URL_COURSES, BASE_URL_LAB, BASE_URL_PATHS
 from models.course import Course
 from models.path import Path
 from models.collection import Collection
@@ -28,9 +28,9 @@ def home():
         courses=courses_collection.collection,
         labs=labs_collection.collection,
         BASE_URL_LAB=BASE_URL_LAB,
-        BASE_URL_COURSES=BASE_URL_LAB,
-        BASE_URL_PATHS=BASE_URL_LAB,
-        BASE_URL=BASE_URL_LAB
+        BASE_URL_COURSES=BASE_URL_COURSES,
+        BASE_URL_PATHS=BASE_URL_PATHS,
+        BASE_URL=BASE_URL
     )
 
 
