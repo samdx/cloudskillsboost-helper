@@ -1,30 +1,14 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Browse by Topic: {{ topic }}</title>
-    <link href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css" rel="stylesheet">
-</head>
-<body class="grey lighten-4">
-    <nav class="blue">
-        <div class="nav-wrapper container">
-            <a href="{{ url_for('home') }}" class="brand-logo">CloudSkillsBoost</a>
-        </div>
-    </nav>
+{% extends 'base.html' %}
 
-    <div class="container">
-        <h2>Browse by Topic: {{ topic }}</h2>
+{% block title %}Browse by Topic: {{ topic }}{% endblock %}
 
-        <h3>Courses</h3>
-        <ul class="collection">
-            {% for course_id, course_name in courses.items() %}
-            <li class="collection-item">
-                <a href="{{ url_for('course_details', course_id=course_id) }}">{{ course_name }}</a>
-            </li>
-            {% endfor %}
-        </ul>
-
-    </div>
-</body>
-</html>
+{% block content %}
+    <h2>Courses for Topic: {{ topic }}</h2>
+    <ul class="collection">
+        {% for course_id, course_name in courses.items() %}
+        <li class="collection-item">
+            <a href="{{ url_for('course_details', course_id=course_id) }}">{{ course_name }}</a>
+        </li>
+        {% endfor %}
+    </ul>
+{% endblock %}
