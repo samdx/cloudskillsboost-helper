@@ -1,0 +1,14 @@
+{% extends 'base.html' %}
+
+{% block title %}Lab Details: {{ lab.name }}{% endblock %}
+
+{% block content %}
+    <h2>{{ lab.name }}</h2>
+    <p>{{ lab.description }}</p>
+    <h3>Steps</h3>
+    <ul>
+        {% for step in lab.steps %}
+        <li class="collection-item">{{ step.description }}</li>
+        {% endfor %}
+    </ul>
+{% endblock %}
