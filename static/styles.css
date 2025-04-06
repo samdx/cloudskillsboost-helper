@@ -80,6 +80,31 @@ body {
     width: 100%; /* Make buttons full width */
 }
 
+/* Ensure the sidenav spans the full height */
+.sidenav.sidenav-fixed {
+    margin-top: 64px;
+    position: fixed;
+    top: 0;
+    left: 0;
+    height: 100%;
+    overflow: hidden; /* Prevent scrolling for the entire sidenav */
+    z-index: 1000;
+}
+
+/* Fixed TOC Section */
+.toc-fixed {
+    position: relative;
+    padding-bottom: 1rem; /* Add spacing below the TOC */
+    border-bottom: 0.5px solid #ddd; /* Optional: Add a divider */
+}
+
+/* Scrollable Topics Section */
+.topics-scrollable {
+    overflow-y: auto; /* Enable vertical scrolling */
+    height: calc(100% - 150px); /* Adjust height to fit below the TOC */
+    padding-top: 1rem; /* Add spacing above the topics */
+}
+
 /* Style for the button in the list */
 
 .btn-small {

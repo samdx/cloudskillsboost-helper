@@ -24,18 +24,22 @@
 
     <!-- Side Navigation Panel -->
     <ul id="slide-out" class="sidenav sidenav-fixed">
-        <!-- Table of Contents -->
-        <li><a class="subheader">TOC</a></li>
-        <li><a href="#paths">Paths <span class="badge">{{ paths|length }}</span></a></li>
-        <li><a href="#courses">Courses <span class="badge">{{ courses|length }}</span></a></li>
-        <li><a href="#labs">Labs <span class="badge">{{ labs|length }}</span></a></li>
+        <!-- TOC Section (Fixed) -->
+        <div class="toc-fixed">
+            <li><a class="subheader">Table Of Contents</a></li>
+            <li><a href="#paths">Paths <span class="badge">{{ paths|length }}</span></a></li>
+            <li><a href="#courses">Courses <span class="badge">{{ courses|length }}</span></a></li>
+            <li><a href="#labs">Labs <span class="badge">{{ labs|length }}</span></a></li>
+            <li><div class="divider"></div></li>
+            <li><a class="subheader">Topics <span class="badge">{{ topics|length }}</span></a></li>
+        </div>
     
-        <!-- Topics Section -->
-        <li><div class="divider"></div></li>
-        <li><a class="subheader">Topics <span class="badge">{{ topics|length }}</span></a></li>
-        {% for topic in topics %}
-        <li><a href="{{ url_for('browse_by_topic', topic=topic) }}">{{ topic }}</a></li>
-        {% endfor %}
+        <!-- Topics Section (Scrollable) -->
+        <div class="topics-scrollable">
+            {% for topic in topics %}
+            <li><a href="{{ url_for('browse_by_topic', topic=topic) }}">{{ topic }}</a></li>
+            {% endfor %}
+        </div>
     </ul>
 
     <!-- Main Content -->
