@@ -44,56 +44,7 @@
 
     <!-- Main Content -->
     <div class="container" style="margin-left: 300px;">
-        <h2 id="paths" class="collapsible-heading blue-text text-darken-2">Paths</h2>
-        <ul class="collection collapsible-content">
-            {% for path_id, path_name in paths.items() %}
-            <li class="collection-item">
-                <label>
-                    <input type="checkbox" {% if path_id in completed_paths %}checked{% endif %} disabled>
-                    <span>
-                        <button class="btn-small blue lighten-1 waves-effect waves-light">
-                            <a href="{{ BASE_URL_PATHS }}/{{ path_id }}" target="_blank" rel="noopener noreferrer">{{ path_id }}</a>
-                        </button> 
-                        <a href="{{ url_for('path_details', path_id=path_id) }}">{{ path_name }}</a>
-                    </span>
-                </label>
-            </li>
-            {% endfor %}
-        </ul>
-
-        <h2 id="courses" class="collapsible-heading blue-text text-darken-2">Courses</h2>
-        <ul class="collection collapsible-content">
-            {% for course_id, course_name in courses.items() %}
-            <li class="collection-item">
-                <label>
-                    <input type="checkbox" {% if course_id in completed_courses %}checked{% endif %} disabled>
-                    <span>
-                        <button class="btn-small blue lighten-1 waves-effect waves-light">
-                            <a href="{{ BASE_URL_COURSES }}/{{ course_id }}" target="_blank" rel="noopener noreferrer">{{ course_id }}</a>
-                        </button>
-                        <a href="{{ url_for('course_details', course_id=course_id) }}">{{ course_name }}</a>
-                    </span>
-                </label>
-            </li>
-            {% endfor %}
-        </ul>
-
-        <h2 id="labs" class="collapsible-heading blue-text text-darken-2">Labs</h2>
-        <ul class="collection collapsible-content">
-            {% for lab_id, lab_name in labs.items() %}
-            <li class="collection-item">
-                <label>
-                    <input type="checkbox" {% if lab_id in completed_labs %}checked{% endif %} disabled>
-                    <span>
-                        <button class="btn-small blue lighten-1 waves-effect waves-light">
-                            <a href="{{ BASE_URL_LAB }}/{{ lab_id }}" target="_blank" rel="noopener noreferrer">{{ lab_id }}</a>
-                        </button>
-                        <a href="{{ url_for('lab_details', lab_id=lab_id) }}" target="_blank" rel="noopener noreferrer">{{ lab_name }}</a>
-                    </span>
-                </label>
-            </li>
-            {% endfor %}
-        </ul>
+        {% include 'contents.html' %}
     </div>
 
     <script>
@@ -105,5 +56,3 @@
     </script>
 </body>
 </html>
-
-<!-- TODO: Display tags/topics on the left sidenav (below the Table Of Content), allow user to browse courses/paths/labs based on selected tags. -->
