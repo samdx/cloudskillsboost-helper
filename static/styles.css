@@ -73,3 +73,23 @@ body {
 .sidenav .badge:active {
     background-color: #0d47a1;
 }
+
+/* Style for buttons in the sidenav */
+.sidenav button {
+    margin: 5px 0; /* Add some margin for spacing */
+    width: 100%; /* Make buttons full width */
+}
+
+/* Style for the button in the list */
+
+.btn-small {
+    padding: 0 8px; /* Reduce horizontal padding */
+    height: auto; /* Allow the button to adjust to the text height */
+    line-height: 1.5; /* Match the line height of the text */
+    font-size: 1rem; /* Adjust font size to fit the text */
+    margin: 0; /* Remove extra margin */
+    align-items: center; /* Center align items */
+    justify-content: center; /* Center justify items */
+    width: 5em; /* Full width */
+    text-align: right; /* Align text to the right */
+}

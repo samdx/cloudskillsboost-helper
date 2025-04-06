@@ -37,7 +37,7 @@
             <li class="collection-item">
                 <label>
                     <input type="checkbox" {% if path_id in completed_paths %}checked{% endif %} disabled>
-                    <span>[<code class="fixed-width">{{ path_id }}</code>] <a href="{{ url_for('path_details', path_id=path_id) }}">{{ path_name }}</a></span>
+                    <span><button class="btn-small blue lighten-1 waves-effect waves-light">[<code class="fixed-width">{{ path_id }}</code>]</button> <a href="{{ url_for('path_details', path_id=path_id) }}">{{ path_name }}</a></span>
                 </label>
             </li>
             {% endfor %}
@@ -49,7 +49,7 @@
             <li class="collection-item">
                 <label>
                     <input type="checkbox" {% if course_id in completed_courses %}checked{% endif %} disabled>
-                    <span>[<code class="fixed-width">{{ course_id }}</code>] <a href="{{ url_for('course_details', course_id=course_id) }}">{{ course_name }}</a></span>
+                    <span><button class="btn-small blue lighten-1 waves-effect waves-light">[<code class="fixed-width">{{ course_id }}</code>]</button> <a href="{{ url_for('course_details', course_id=course_id) }}">{{ course_name }}</a></span>
                 </label>
                 <button class="btn-small blue lighten-1 waves-effect waves-light" onclick="alert('Extracting transcript for {{ course_id }}')">Extract Transcript</button>
             </li>
@@ -62,7 +62,7 @@
             <li class="collection-item">
                 <label>
                     <input type="checkbox" {% if lab_id in completed_labs %}checked{% endif %} disabled>
-                    <span>[<code class="fixed-width">{{ lab_id }}</code>] <a href="{{ BASE_URL_LAB }}/{{ lab_id }}" target="_blank" rel="noopener noreferrer">{{ lab_name }}</a></span>
+                    <span><button class="btn-small blue lighten-1 waves-effect waves-light">{{ lab_id }}</button> <a href="{{ BASE_URL_LAB }}/{{ lab_id }}" target="_blank" rel="noopener noreferrer">{{ lab_name }}</a></span>
                 </label>
             </li>
             {% endfor %}
