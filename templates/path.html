@@ -4,6 +4,20 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>{{ path.name }}</title>
+    <style>
+        .fixed-width {
+            display: inline-block;
+            width: 5ch;
+            text-align: right;
+            margin-top: 0.2em;
+        }
+        .highlight {
+            background-color: yellow;
+        }
+        .collection-list {
+            list-style: bullet;
+        }
+    </style>
 </head>
 <body>
     <h1>{{ path.name }}</h1>
@@ -11,7 +25,10 @@
     <h2>Courses in this Path</h2>
     <ul>
         {% for course in path.courses.values() %}
-        <li>{{ course.name }}</li>
+        <li>
+            <input type="checkbox" {% if course.id in completed_courses %}checked{% endif %} disabled>
+            [<code class="fixed-width">{{ course.id }}</code>] {{ course.name }}
+        </li>
         {% endfor %}
     </ul>
     <form action="{{ url_for('process_path', path_id=path.id) }}" method="post">
