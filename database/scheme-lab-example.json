@@ -1,38 +1,5 @@
 {
   "@context": "https://schema.org/",
-  "@id": "https://www.cloudskillsboost.google/catalog_lab/301",
-  "@type": "Lab",
-  "name": "Deploying a Virtual Machine",
-  "description": "In this lab, you will deploy a virtual machine on Google Cloud using Compute Engine.",
-  "image": [
-    "https://cdn.qwiklabs.com/example-lab-image.jpg"
-  ],
-  "provider": {
-    "@type": "Organization",
-    "name": "Google Cloud",
-    "url": "https://cloud.google.com/learn"
-  },
-  "publisher": {
-    "@type": "Organization",
-    "name": "Google Cloud Skills Boost",
-    "url": "https://cloudskillsboost.google"
-  },
-  "datePublished": "2025-03-01",
-  "inLanguage": "en",
-  "availableLanguage": ["en"],
-  "url": "https://www.cloudskillsboost.google/catalog_lab/301",
-  "steps": {
-    "1": "Sign in to the Google Cloud Console",
-    "2": "Create a Compute Engine instance",
-    "3": "Verify the instance is running",
-    "4": "End the lab",
-    "5": "Review your deployment",
-    "6": "Submit your feedback",
-    "7": "Download your lab completion certificate"
-  }
-},
-{
-  "@context": "https://schema.org/",
   "@id": "https://www.cloudskillsboost.google/catalog_lab/1119",
   "@type": "Lab",
   "name": "Google Cloud Fundamentals: Getting Started with Cloud Marketplace",
