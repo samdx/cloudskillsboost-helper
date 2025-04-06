@@ -125,3 +125,19 @@ body {
 .btn-small a:hover {
     color: #fff; /* Change text color on hover */
 }
+
+.nav-wrapper .navbar-button {
+    padding: 0 8px; /* Reduce horizontal padding */
+    height: 100%; /* Allow the button to adjust to the text height */
+    margin: 10; /* Remove extra margin */
+    width: 10em; /* Full width */
+    text-align: center; /* Align text to the center */
+    /* background-color: #2196f3; */
+    color: #fff;
+    transition: background-color 0.3s;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-size-adjust: 150%;
+    border-radius: 5px;
+}
