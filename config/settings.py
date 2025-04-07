@@ -14,3 +14,17 @@ BASE_URL_PARTNERS: str = "https://partner.cloudskillsboost.google"
 # Webdriver configuration
 WEBDRIVER_PROFILE_FOLDER_NAME: str = '.webdriver_profiles'
 WEBDRIVER_OPTIONS_HEADLESS: bool = True
+
+# Constants for the extraction of the course data
+LD_JSON = "script[type='application/ld+json']"
+COURSE_META_DESCRIPTION = "meta[name='description']"
+COURSE_OUTLINE = "ql-course-outline"
+QL_YOUTUBE_VIDEO = "ql-youtube-video"
+LAB_REVIEW_LAB_ID = "#lab_review_lab_id"
+LAB_CONTENT_OUTLINE = "ul.lab-content__outline"
+QL_QUIZ = "ql-quiz"
+XPATH_START_BUTTON = "//a[@class='start-button button button--positive']"
+XPATH_QUIZ = "//ql-quiz"
+QUIZ_VERSION = "quizVersion"
+QUIZ_ITEMS = "quizItems"
+LINK_URL_A_TAG = "ql-card.document-link a"
