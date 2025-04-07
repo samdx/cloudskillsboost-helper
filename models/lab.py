@@ -6,10 +6,10 @@ from .base_entity import BaseEntity
 class Lab(BaseEntity):
     def __init__(self,
                  id: str,
-                 name: str,
-                 description: str,
-                 url: str,
-                 steps: dict,
+                 name: str = None,
+                 description: str = None,
+                 url: str = None,
+                 steps: dict = None,
                  type: str = 'Lab'):
         super().__init__(id,
                          name,
