@@ -11,15 +11,11 @@ class Path(BaseEntity):
     def __init__(self,
                  id: str = None,
                  name: str = None,
-                 type: str = 'Path',
                  description: str = None,
-                 url: str = None,
                  datePublished: str = None,
                  courses: dict = None):
         super().__init__(id,
                          name,
-                         type,
-                         url,
                          description)
         self.datePublished = datePublished
         self.courses = courses or {}
