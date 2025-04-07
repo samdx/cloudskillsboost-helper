@@ -22,6 +22,23 @@ labs_collection.load_json()
 topics = set()
 topics_to_courses = {}
 
+@app.context_processor
+def inject_global_data():
+    """
+    Inject global data into all templates.
+    """
+
+    return {
+        'labs': labs_collection.collection,
+        'courses': courses_collection.collection,
+        'paths': paths_collection.collection,
+        'topics': topics,
+        'BASE_URL_LAB': BASE_URL_LAB,
+        'BASE_URL_COURSES': BASE_URL_COURSES,
+        'BASE_URL_PATHS': BASE_URL_PATHS,
+        'BASE_URL': BASE_URL
+    }
+
 @app.route('/')
 def home():
     """
