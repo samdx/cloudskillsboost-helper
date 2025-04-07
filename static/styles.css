@@ -10,6 +10,16 @@ body {
     padding-top: 64px; /* Add padding to prevent content from overlapping the navbar */
 }
 
+/* Fix the navbar's container margins */
+.nav-wrapper.container {
+    margin-left: 0 !important; /* Remove dynamic left margin */
+    margin-right: 0 !important; /* Remove dynamic right margin */
+    width: 100%; /* Ensure the navbar spans the full width */
+    max-width: none; /* Remove any max-width constraints */
+    padding-left: 20px; /* Remove padding */
+    padding-right: 20px; /* Remove padding */
+}
+
 .fixed-width {
     display: inline-block;
     width: 5ch;
