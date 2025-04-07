@@ -42,7 +42,7 @@
                 <button class="btn-small blue lighten-1 waves-effect waves-light">
                     <a href="{{ BASE_URL_LAB }}/{{ lab_id }}" target="_blank" rel="noopener noreferrer">{{ lab_id }}</a>
                 </button>
-                <a href="{{ url_for('lab_details', lab_id=lab_id) }}" target="_blank" rel="noopener noreferrer">{{ lab_name }}</a>
+                <a href="{{ url_for('lab_details', lab_id=lab_id) }}">{{ lab_name }}</a>
             </span>
         </label>
     </li>
