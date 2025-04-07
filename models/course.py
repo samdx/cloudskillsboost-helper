@@ -73,13 +73,12 @@ class Course(BaseEntity):
         # h.ignore_links = True  # Ignore links if you don't want them in the output
 
         # The course URL
-        course_url = f"{BASE_URL_COURSES}/{self.id}"
 
         print("\nTranscript Extracting is starting...\n")
 
         # Browse the course url
         try:
-            response = requests.get(course_url)
+            response = requests.get(self.url, timeout=20)
             response.raise_for_status()
         except requests.RequestException as get_course_url_error:
             print(f"(extract_transcript) Error: Unable to load the course page. {get_course_url_error}")
@@ -111,8 +110,6 @@ class Course(BaseEntity):
 
             # Set the course properties
             self.id = course_objectives_json.get('@id').split('/')[-1]
-            self.url = course_objectives_json.get('@id')
-            self.type = course_objectives_json.get('@type')
             self.name = course_objectives_json.get('name').strip()
             self.description = course_description
             self.datePublished = course_objectives_json.get('datePublished')
