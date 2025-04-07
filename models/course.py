@@ -234,7 +234,6 @@ class Course(BaseEntity):
                         lab = Lab(
                             id=lab_id,
                             name=lab_title,
-                            url=lab_permalink,
                             description=lab_description,
                             steps=lab_steps
                         )

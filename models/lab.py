@@ -8,14 +8,11 @@ class Lab(BaseEntity):
                  id: str,
                  name: str,
                  description: str,
-                 url: str,
-                 steps: dict,
-                 type: str = 'Lab'):
+                 steps: dict):
         super().__init__(id,
                          name,
-                         type,
-                         description,
-                         url)
+                         description
+                         )
         self.steps = steps or {}
 
     # Save the Lab data to a Markdown file
