@@ -6,13 +6,13 @@
     <h2 class="blue-text text-darken-2">{{ course.name }}</h2>
     <p>{{ course.description }}</p>
     <h3>Objectives</h3>
-    <ul>
+    <ul class="collection">
         {% for objective in course.objectives %}
-        <li>{{ objective }}</li>
+        <li class="collection-item">{{ objective }}</li>
         {% endfor %}
     </ul>
     <h3>Modules</h3>
-    <ul>
+    <ul class="collection">
         {% for module in course.modules %}
         <li class="collection-item">
             <strong>{{ module.title }}</strong>: {{ module.description }}
