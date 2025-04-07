@@ -30,12 +30,12 @@ body {
 }
 
 .collapsible-heading::after {
-    content: " ▼"; /* Down arrow */
+    content: " - "; /* Down arrow */
     font-size: 0.8em;
 }
 
 .collapsible-heading.collapsed::after {
-    content: " ▶"; /* Right arrow */
+    content: " + "; /* Right arrow */
 }
 
 .collapsible-content {
