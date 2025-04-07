@@ -9,7 +9,7 @@ from .base_entity import BaseEntity
 # Path entity
 class Path(BaseEntity):
     def __init__(self,
-                 id: str = None,
+                 id: str,
                  name: str = None,
                  description: str = None,
                  datePublished: str = None,
@@ -55,7 +55,7 @@ class Path(BaseEntity):
                 "id": course_id,
                 "type": course["@type"],
                 "name": course["name"].strip(),
-                "url": course["url"]
+                "url": course["url"].strip()
             }
 
         # Core Path details    
