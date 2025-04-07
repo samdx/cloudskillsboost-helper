@@ -28,7 +28,9 @@
         <div class="toc-fixed toc-table">
             <li><a class="subheader">Table Of Contents</a></li>
             <div class="toc-dynamic">
-                <!-- Auto-generated TOC -->
+                <li><a href="/#paths">Paths <span class="badge">{{ paths|length }}</span></a></li>
+                <li><a href="/#courses">Courses <span class="badge">{{ courses|length }}</span></a></li>
+                <li><a href="/#labs">Labs <span class="badge">{{ labs|length }}</span></a></li>
             </div>
             <li><div class="divider"></div></li>
             <li><a class="subheader">Topics <span class="badge">{{ topics|length }}</span></a></li>
@@ -46,28 +48,6 @@
     <div class="container" style="margin-left: 300px; margin-right: 300px;">
         {% block content %}{% endblock %}
     </div>
-
-    <script>
-        // Initialize the sidenav
-        document.addEventListener('DOMContentLoaded', function() {
-            var elems = document.querySelectorAll('.sidenav');
-            var instances = M.Sidenav.init(elems);
-
-            // Generate TOC dynamically based on h2 headings in contents.html
-            const tocContainer = document.querySelector('.toc-table .toc-dynamic'); // Updated selector
-            const headings = document.querySelectorAll('.container h2');
-            headings.forEach(heading => {
-                const id = heading.id || heading.textContent.trim().replace(/\s+/g, '-').toLowerCase();
-                heading.id = id; // Ensure the heading has an ID
-                const li = document.createElement('li');
-                const a = document.createElement('a');
-                a.href = `#${id}`;
-                a.className = 'toc-link'; // Add class for styling
-                a.textContent = heading.textContent;
-                li.appendChild(a);
-                tocContainer.appendChild(li);
-            });
-        });
-    </script>
+    <!-- Footer -->
 </body>
 </html>
