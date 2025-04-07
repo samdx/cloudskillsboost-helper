@@ -12,14 +12,10 @@ class BaseEntity(Serialize):
     def __init__(self,
                  id: str,
                  name: str,
-                 type: str,
                  description: str,
-                 url: str,
                  date: str = None):
         self.id = id
         self.name = name
-        self.type = type
-        self.url = url
         self.description = description
         self.date = date or str(datetime.today().date())
 
