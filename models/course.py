@@ -38,19 +38,15 @@ LINK_URL_A_TAG = "ql-card.document-link a"
 # Course entity based on BaseEntity
 class Course(BaseEntity):
     def __init__(self,
-                 id: str = None,
+                 id: str,
                  name: str = None,
-                 type: str = 'Course',
                  description: str = None,
-                 url: str = None,
                  datePublished: str = None,
                  objectives: list = None,
                  topics: list = None,
                  modules: list = None):
         super().__init__(id,
                          name,
-                         type,
-                         url,
                          description)
         self.datePublished = datePublished or ""
         self.objectives = objectives or []
