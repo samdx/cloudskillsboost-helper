@@ -20,18 +20,7 @@ body {
     padding-right: 20px; /* Remove padding */
 }
 
-.fixed-width {
-    display: inline-block;
-    width: 5ch;
-    text-align: right;
-    margin-top: 0.2em;
-}
-.highlight {
-    background-color: yellow;
-}
-.collection-list {
-    list-style: bullet;
-}
+/* Collapsible list */
 
 .collapsible-heading {
     cursor: pointer;
@@ -159,4 +148,17 @@ body {
     justify-content: center;
     text-size-adjust: 150%;
     border-radius: 5px;
+}
+
+.fixed-width {
+    display: inline-block;
+    width: 5ch;
+    text-align: right;
+    margin-top: 0.2em;
+}
+.highlight {
+    background-color: yellow;
+}
+.collection-list {
+    list-style: bullet;
 }
