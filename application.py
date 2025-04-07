@@ -152,7 +152,7 @@ def browse_by_topic(topic):
 
     return render_template(
         'browse_by_topic.html',
-        courses=filtered_courses
+        filtered_courses=filtered_courses
     )
 
 

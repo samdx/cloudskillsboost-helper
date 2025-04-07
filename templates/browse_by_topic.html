@@ -5,7 +5,7 @@
 {% block content %}
     <h2>Courses for Topic: {{ topic }}</h2>
     <ul class="collection">
-        {% for course_id, course_name in courses.items() %}
+        {% for course_id, course_name in filtered_courses.items() %}
         <li class="collection-item">
             <a href="{{ url_for('course_details', course_id=course_id) }}">{{ course_name }}</a>
         </li>
