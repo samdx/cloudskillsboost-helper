@@ -23,11 +23,12 @@ class BaseEntity(Serialize):
         self.description = description
         self.date = date or str(datetime.today().date())
 
-    # Convert the entity's data to a dictionary without private attributes
-    def to_dict(self):
+    @property
+    def type(self):
         """
-        Convert the entity's data to a dictionary.
+        Dynamically determine the type based on the class name.
         """
+        return self.__class__.__name__
 
         return {k: v for k, v in self.__dict__.items() if not k.startswith('_')}
 
@@ -71,6 +72,17 @@ class BaseEntity(Serialize):
             return PathlibPath(OUTPUT_FOLDER_NAME) / 'courses' / self._md_name
         if self.type == 'Lab':
             return PathlibPath(OUTPUT_FOLDER_NAME) / 'labs' / self._md_name
+
+    # Convert the entity's data to a dictionary without private attributes
+    def to_dict(self):
+        """
+        Convert the entity's data to a dictionary.
+        """
+
+        the_dict = {k: v for k, v in self.__dict__.items() if not k.startswith('_')}
+        the_dict['type'] = self.type
+        the_dict['url'] = self.url
+        return the_dict
 
     # Load the entity data from a JSON file
     def load_json(self):
