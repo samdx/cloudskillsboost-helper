@@ -30,18 +30,21 @@ class BaseEntity(Serialize):
         """
         return self.__class__.__name__
 
-        return {k: v for k, v in self.__dict__.items() if not k.startswith('_')}
-
-    # URL
-    # TODO: Make self.url a property and persistent by checking if url is provided or not
     @property
-    def _url(self):
-        if self.type == 'Path':
-            return f"{BASE_URL_PATHS}/{self.id}"
-        if self.type == 'Course':
-            return f"{BASE_URL_COURSES}/{self.id}"
-        if self.type == 'Lab':
-            return f"{BASE_URL_LAB}/{self.id}"
+    def url(self):
+        """
+        Dynamically generate the URL based on the type.
+        """
+        base_url = {
+            "Path": BASE_URL_PATHS,
+            "Course": BASE_URL_COURSES,
+            "Lab": BASE_URL_LAB
+        }.get(self.type, None)
+
+        if not base_url:
+            raise ValueError(f"Invalid entity type: {self.type}")
+
+        return f"{base_url}/{self.id}"
 
     # Properties to get the JSON and Markdown file names and paths
     @property
