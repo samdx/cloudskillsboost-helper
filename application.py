@@ -42,7 +42,7 @@ def inject_global_data():
 @app.route('/')
 def home():
     """
-    Home page for the CloudSkillsBoost web application.
+    Home page for the Cloud Skills Boost Helper.
     """
 
     return render_template(
