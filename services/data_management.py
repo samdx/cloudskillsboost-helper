@@ -1,18 +1,35 @@
 
 import html
 import json
-from pathlib import Path
 import re
 from bs4 import BeautifulSoup
 from selenium.common import NoSuchElementException
 import requests
-from config.settings import LD_JSON, COURSE_META_DESCRIPTION, COURSE_OUTLINE
+from config.settings import BASE_URL_LAB, LAB_CONTENT_OUTLINE, LAB_REVIEW_LAB_ID, LAB_TITLE, LD_JSON, META_DESCRIPTION, COURSE_OUTLINE, META_DESCRIPTION, PATH_CARDS
+from models.collection import Collection
 from models.course import Course
+from models.lab import Lab
+from models.path import Path
 from utils.utils import util_replace_quote_marks, util_strip_html_tags
 
 class DataManagement():
-    
-    def fetch_path_data(path_id):
+    def __init__(self):
+        self.paths_collection, self.courses_collection, self.labs_collection = self.load_data()
+
+    @staticmethod
+    def load_data():
+        col_paths = Collection(type='paths')
+        col_paths.load_json()
+
+        col_courses = Collection(type='courses')
+        col_courses.load_json()
+
+        col_labs = Collection(type='labs')
+        col_labs.load_json()
+
+        return col_paths, col_courses, col_labs
+
+    def fetch_path_data(self, path_id):
         
         """
         Fetch path data based on the provided path_id.
@@ -63,7 +80,7 @@ class DataManagement():
         a_path.save_json()
         a_path.save_markdown()
 
-    def fetch_course_data(course_id):
+    def fetch_course_data(self, course_id):
 
         """
         Fetch course data from the website and save it to a JSON file.
@@ -87,11 +104,11 @@ class DataManagement():
         try:
             course_ld_json_element = course_html.select_one(LD_JSON)
             # Locate the <meta> element by its name attribute
-            meta_element = course_html.select_one(COURSE_META_DESCRIPTION)
+            meta_element = course_html.select_one(META_DESCRIPTION)
             # meta_element = course_html.find("meta", {"name": "description"})
 
             if not course_ld_json_element or not meta_element:
-                raise NoSuchElementException("(write_script) meta_element not found.")
+                raise NoSuchElementException("(fetch_data) meta_element not found.")
 
             course_ld_json_text = course_ld_json_element.string
 
@@ -137,9 +154,78 @@ class DataManagement():
         a_course.save_json()
         a_course.save_markdown()
 
-    def fetch_lab_data(lab_id):
+    def fetch_lab_data(self, lab_id):
         """
         Fetch lab data based on the provided lab_id.
         """
 
-        pass
+        a_lab = Lab(id=lab_id)
+        
+        # Get the lab title, description, and permalink
+        try:
+            response = requests.get(a_lab.url)
+            response.raise_for_status()
+
+            lab_page_html = BeautifulSoup(response.text, "html.parser")
+
+            lab_title_element = lab_page_html.select_one(LAB_TITLE)
+            lab_id_element = lab_page_html.select_one(LAB_REVIEW_LAB_ID)
+            lab_description_element = lab_page_html.select_one(META_DESCRIPTION)
+            lab_content_outline_element = lab_page_html.select_one(LAB_CONTENT_OUTLINE)
+
+            # Getting the lab id, then compile a permalink for the lab
+            lab_title = lab_title_element.text.strip()
+            lab_description = lab_description_element['content'].strip()
+            lab_id = lab_id_element["value"].strip()
+            lab_permalink = a_lab.url
+
+            # Extract outline or steps from the lab
+            lab_steps = {}
+            if lab_content_outline_element:
+                for a_tag in lab_content_outline_element.find_all('a'):
+                    step = a_tag['href'].strip('#step')
+                    text = a_tag.text
+                    lab_steps[step] = text
+
+        except NoSuchElementException as _error:
+            print(f"(extract_transcript) {lab_title}:\n"
+                    f"Unable to locate the id lab_review_lab_id\n")
+            raise NoSuchElementException
+
+        # Create a Lab instance
+        lab = Lab(
+            id=lab_id,
+            name=lab_title,
+            url=lab_permalink,
+            description=lab_description,
+            steps=lab_steps
+        )
+
+        # Save the lab data to a JSON file and a Markdown file
+        lab.save_json()
+        lab.save_markdown()
+
+    def fetch_data(self):
+        """
+        Fetch all paths from Cloud Skills Boost website.
+        """
+
+        if self.paths_collection.fetch_paths():
+            print("Paths List refreshed. Proceed with courses of each path.\n")
+            self.paths_collection.save_json()
+            self.paths_collection.write_md()
+        else:
+            print("Paths List not refreshed. Proceed with courses of each path.\n")
+
+        # Get all courses from all the paths
+        for path_id in self.paths_collection.collection.keys():
+            path_data = Path(id=path_id)
+
+            path_data.fetch_data()
+            path_data.save_json()
+            path_data.save_markdown()
+    
+            # Add the course to the courses collection
+            for course in path_data.courses.values():
+                self.courses_collection.add_item(course['id'], course['name'])
+        self.courses_collection.save_json()
