@@ -55,9 +55,15 @@ def course_details(course_id):
     """
     Display details of a specific course.
     """
+
+    # Ensure the course does exist
     course = courses_collection.collection.get(course_id)
     if not course:
         return jsonify({"error": "Course not found"}), 404
+
+    # Get the course's data
+    course = Course(id=course_id)
+    course.load_json()
 
     return render_template(
         'course.html',
@@ -87,12 +93,15 @@ def path_details(path_id):
 @app.route('/labs/<lab_id>')
 def lab_details(lab_id):
     # Logic to fetch and display lab details
+
     lab = labs_collection.collection.get(lab_id)
     if not lab:
         return jsonify({"error": "Lab not found"}), 404
+
     # Load lab data
     lab_data = Lab(id=lab_id)
     lab_data.load_json()
+
     return render_template(
         'lab.html',
         lab=lab_data,
