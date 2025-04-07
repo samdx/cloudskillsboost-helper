@@ -5,6 +5,8 @@ from config.settings import *
 from services.md_helper import MDHelper
 from .base_entity import BaseEntity
 
+# Constants for the extraction of the course data
+LD_JSON = "script[type='application/ld+json']"
 
 # Path entity
 class Path(BaseEntity):
@@ -38,14 +40,14 @@ class Path(BaseEntity):
             path_html = BeautifulSoup(response.text, "html.parser")
 
             # Locate the <script> tag containing the JSON data
-            script_element = path_html.select_one("script[type='application/ld+json']")
+            script_element = path_html.select_one(LD_JSON)
             json_content = script_element.string
 
             # Parse JSON content
             path_data = json.loads(json_content)
 
         except Exception as error:
-            print(f"fetch_course(): Unable to find LD+JSON element - {error}")
+            print(f"fetch_data(): Unable to find LD+JSON element - {error}")
             return {}
 
         # Process Path and Courses data
