@@ -1,3 +1,15 @@
+nav.fixed {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    z-index: 1000; /* Ensure it stays above other elements */
+}
+
+body {
+    padding-top: 64px; /* Add padding to prevent content from overlapping the navbar */
+}
+
 .fixed-width {
     display: inline-block;
     width: 5ch;
@@ -28,24 +40,12 @@
 
 .collapsible-content {
     overflow: hidden; /* Ensure content doesn't overflow during animation */
-    max-height: 0; /* Start with content hidden */
+    max-height: auto; /* Start with content hidden */
     transition: max-height 0.4s ease-out; /* Smooth transition for expanding/collapsing */
 }
 
 .collapsible-content.expanded {
     max-height: 1000px; /* Large enough to fit the content */
-}
-
-nav.fixed {
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 100%;
-    z-index: 1000; /* Ensure it stays above other elements */
-}
-
-body {
-    padding-top: 64px; /* Add padding to prevent content from overlapping the navbar */
 }
 
 /* Styles for the sidenav */
