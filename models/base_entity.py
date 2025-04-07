@@ -73,6 +73,25 @@ class BaseEntity(Serialize):
         if self.type == 'Lab':
             return PathlibPath(OUTPUT_FOLDER_NAME) / 'labs' / self._md_name
 
+    @url.getter
+    def url(self):
+        """
+        Getter for the URL property.
+        """
+
+        # If the URL is not set, generate it based on the type
+        if not self._url:
+            if self.type == 'Path':
+                self.url = f"{BASE_URL_PATHS}/{self.id}"
+            elif self.type == 'Course':
+                self.url = f"{BASE_URL_COURSES}/{self.id}"
+            elif self.type == 'Lab':
+                self.url = f"{BASE_URL_LAB}/{self.id}"
+            else:
+                raise ValueError("Invalid entity type")
+        
+        return self._url
+
     # Load the entity data from a JSON file
     def load_json(self):
         """
