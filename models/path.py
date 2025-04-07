@@ -64,7 +64,7 @@ class Path(BaseEntity):
                 "url": course["url"]
             }
 
-        # Core Path details    
+        # Core Path details
         self.name = path_data['name'].strip()
         self.description = path_data['description'].strip()
         self.datePublished = path_data['datePublished'].strip()
