@@ -46,15 +46,7 @@ def home():
     """
 
     return render_template(
-        'index.html',
-        paths=paths_collection.collection,
-        courses=courses_collection.collection,
-        labs=labs_collection.collection,
-        BASE_URL_LAB=BASE_URL_LAB,
-        BASE_URL_COURSES=BASE_URL_COURSES,
-        BASE_URL_PATHS=BASE_URL_PATHS,
-        BASE_URL=BASE_URL,
-        topics=topics  # Pass the unique topics to the template
+        'index.html'
     )
 
 
@@ -69,11 +61,7 @@ def course_details(course_id):
 
     return render_template(
         'course.html',
-        course=course,
-        topics=topics,
-        BASE_URL_LAB=BASE_URL_LAB,
-        BASE_URL_COURSES=BASE_URL_COURSES,
-        BASE_URL_PATHS=BASE_URL_PATHS
+        course=course
     )
 
 
@@ -92,9 +80,7 @@ def path_details(path_id):
 
     return render_template(
         'path.html',
-        BASE_URL_COURSES=BASE_URL_COURSES,
-        path=path_data,
-        topics=topics
+        path=path_data
     )
 
 
@@ -109,9 +95,7 @@ def lab_details(lab_id):
     lab_data.load_json()
     return render_template(
         'lab.html',
-        BASE_URL_LAB=BASE_URL_LAB,
         lab=lab_data,
-        topics=topics
     )
 
 
@@ -168,11 +152,7 @@ def browse_by_topic(topic):
 
     return render_template(
         'browse_by_topic.html',
-        topics=topics,
-        courses=filtered_courses,
-        BASE_URL_COURSES=BASE_URL_COURSES,
-        BASE_URL_LAB=BASE_URL_LAB,
-        BASE_URL_PATHS=BASE_URL_PATHS
+        courses=filtered_courses
     )
 
 
