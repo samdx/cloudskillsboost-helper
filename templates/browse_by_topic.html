@@ -7,7 +7,15 @@
     <ul class="collection">
         {% for course_id, course_name in filtered_courses.items() %}
         <li class="collection-item">
-            <a href="{{ url_for('course_details', course_id=course_id) }}">{{ course_name }}</a>
+            <label>
+                <input type="checkbox" {% if course_id in completed_courses %}checked{% endif %} disabled>
+                <span>
+                    <button class="btn-small blue lighten-1 waves-effect waves-light">
+                        <a href="{{ BASE_URL_COURSES }}/{{ course_id }}" target="_blank" rel="noopener noreferrer">{{ course_id }}</a>
+                    </button>
+                    <a href="{{ url_for('course_details', course_id=course_id) }}">{{ course_name }}</a>
+                </span>
+            </label>
         </li>
         {% endfor %}
     </ul>
