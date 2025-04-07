@@ -22,9 +22,9 @@ class Path(BaseEntity):
 
     # Fetch the Path data from the website
     def fetch_data(self):
-
-        # Path URL
-        self.url = f'{BASE_URL_PATHS}/{self.id}'
+        """
+        Fetch Path data from the website and save it to a JSON file.
+        """
 
         try:
             # Navigate to the path URL
