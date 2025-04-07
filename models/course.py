@@ -433,27 +433,6 @@ class Course(BaseEntity):
             # Some video page doesn't have a Mark as Completed button, just move on
             pass
 
-
-    # Generate the course data to a Markdown file
-    def save_markdown(self):
-        """
-        Write the {self.to_dict()} into a Markdown files for each path.
-        """
-
-        # Create an instance of the MDHelper class
-        md_helper = MDHelper()
-
-        # Generate the markdown content
-        path_md = md_helper.md_helper_course(self.to_dict())
-
-        # Create the folder if it doesn't exist
-        if not self._md_path.parent.exists():
-            self._md_path.parent.mkdir(parents=True, exist_ok=True)
-
-        # Write the markdown content to a file, overwrite if exists
-        with open(self._md_path, "w", encoding="utf-8", newline='\n') as md_file:
-            md_file.write(path_md)
-
     # Generate the prompts for videos from their transcripts
     def generate_prompt(self):
 

@@ -87,24 +87,4 @@ class Path(BaseEntity):
             course_name = course['name']
             print(f"+|-• \033[35m[{course_id:>5} - {course_name:<72}]\033[0m")
 
-    # Generate a Markdown file for the Path
-    def save_markdown(self):
-        """
-        Write the {self.to_dict()} into a Markdown files for each path.
-        """
-
-        # Create a new instance of MDHelper
-        md_helper = MDHelper()
-        # Generate the markdown content
-        path_md = md_helper.md_helper_path(self.to_dict())
-
-        # Create the folder if it doesn't exist
-        md_path_folder = self._md_path.parent
-        if not md_path_folder.exists():
-            md_path_folder.mkdir(parents=True, exist_ok=True)
-
-        # Write the markdown content to a file, overwrite if exists
-        with open(self._md_path, "w", encoding="utf-8", newline='\n') as md_file:
-            md_file.write(path_md)
-
 # TODO: Make Path() matches the json file structure from the website
