@@ -6,9 +6,9 @@ from .base_entity import BaseEntity
 class Lab(BaseEntity):
     def __init__(self,
                  id: str,
-                 name: str,
-                 description: str,
-                 steps: dict):
+                 name: str = None,
+                 description: str = None,
+                 steps: dict = None):
         super().__init__(id,
                          name,
                          description
