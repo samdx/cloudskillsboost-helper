@@ -3,6 +3,7 @@ import json
 from config.settings import BASE_URL_COURSES, BASE_URL_LAB, BASE_URL_PATHS, DATA_FOLDER_NAME, OUTPUT_FOLDER_NAME
 from pathlib import Path as PathlibPath
 
+from services.md_helper import MDHelper
 from utils.utils import util_replace_special_chars
 from .serialize import Serialize
 
@@ -120,3 +121,27 @@ class BaseEntity(Serialize):
         # Save the data to a JSON file with UTF-8 encoding and Unix line endings
         with open(self._json_path, 'w', encoding='utf-8', newline='\n') as jsonfile:
             json.dump(data, jsonfile, ensure_ascii=False, indent=2)
+
+    # Save the entity data to a Markdown file
+    def save_markdown(self):
+        """
+        Save the entity data to a Markdown file.
+        """
+
+        md_helper = MDHelper()
+    
+        # Generate the Markdown content
+        if self.type == 'Path':
+            entity_md = md_helper.md_helper_path(self.to_dict())
+        elif self.type == 'Course':
+            entity_md = md_helper.md_helper_course(self.to_dict())
+        elif self.type == 'Lab':
+            entity_md = md_helper.md_helper_lab(self.to_dict())
+        
+        # Create the folder if it doesn't exist
+        if not self._md_path.parent.exists():
+            self._md_path.parent.mkdir(parents=True, exist_ok=True)
+
+        # Write the entity data to a Markdown file with UTF-8 encoding and Unix line endings
+        with open(self._md_path, "w", encoding="utf-8", newline='\n') as md_file:
+            md_file.write(entity_md)
