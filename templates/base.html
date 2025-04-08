@@ -12,6 +12,19 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js" defer></script>
     <!-- Custom JS -->
     <script src="{{ url_for('static', filename='script.js') }}" defer></script>
+    <link rel="icon" type="image/png" href="{{ url_for('static', filename='favicon.png') }}">
+    <meta name="description" content="A tool to help you boost your cloud skills with curated paths, courses, and labs.">
+    <meta name="keywords" content="cloud skills, courses, labs, paths, learning">
+    <meta name="author" content="Sam Dinh">
+    <meta name="robots" content="index, follow">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            var elems = document.querySelectorAll('.sidenav');
+            var instances = M.Sidenav.init(elems);
+        });
+    </script>
 </head>
 <body class="grey lighten-4">
     <!-- Navigation Bar -->
