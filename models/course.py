@@ -38,19 +38,15 @@ LINK_URL_A_TAG = "ql-card.document-link a"
 # Course entity based on BaseEntity
 class Course(BaseEntity):
     def __init__(self,
-                 id: str = None,
+                 id: str,
                  name: str = None,
-                 type: str = 'Course',
                  description: str = None,
-                 url: str = None,
                  datePublished: str = None,
                  objectives: list = None,
                  topics: list = None,
                  modules: list = None):
         super().__init__(id,
                          name,
-                         type,
-                         url,
                          description)
         self.datePublished = datePublished or ""
         self.objectives = objectives or []
@@ -77,13 +73,12 @@ class Course(BaseEntity):
         # h.ignore_links = True  # Ignore links if you don't want them in the output
 
         # The course URL
-        course_url = f"{BASE_URL_COURSES}/{self.id}"
 
         print("\nTranscript Extracting is starting...\n")
 
         # Browse the course url
         try:
-            response = requests.get(course_url)
+            response = requests.get(self.url, timeout=20)
             response.raise_for_status()
         except requests.RequestException as get_course_url_error:
             print(f"(extract_transcript) Error: Unable to load the course page. {get_course_url_error}")
@@ -115,8 +110,6 @@ class Course(BaseEntity):
 
             # Set the course properties
             self.id = course_objectives_json.get('@id').split('/')[-1]
-            self.url = course_objectives_json.get('@id')
-            self.type = course_objectives_json.get('@type')
             self.name = course_objectives_json.get('name').strip()
             self.description = course_description
             self.datePublished = course_objectives_json.get('datePublished')
@@ -238,7 +231,6 @@ class Course(BaseEntity):
                         lab = Lab(
                             id=lab_id,
                             name=lab_title,
-                            url=lab_permalink,
                             description=lab_description,
                             steps=lab_steps
                         )
@@ -250,7 +242,7 @@ class Course(BaseEntity):
                         # Add the lab to the lab collection
                         labs_collection = Collection(type='labs', name='Labs Collection')
                         labs_collection.load_json()
-                        labs_collection.add_item(lab_id, lab_title)
+                        labs_collection.collection[lab_id] = lab_title
                         labs_collection.save_json()
 
                         print(f"(extract_transcript) •-• [+]")
@@ -327,6 +319,9 @@ class Course(BaseEntity):
 
         # Inform the user that the course transcript extraction is completed
         print(f"(extract_transcript) \033[34m•-• COMPLETED: {self.id} - {self.name.upper()}\033[0m\n")
+
+        # TODO: Add the course to courses_downloaded.json (Collection) with id
+        # TODO: If the course is in the courses_downloaded collection, compare the datepublished
 
     # Complete the videos in the course
     def complete_videos(self):

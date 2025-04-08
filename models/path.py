@@ -11,26 +11,22 @@ LD_JSON = "script[type='application/ld+json']"
 # Path entity
 class Path(BaseEntity):
     def __init__(self,
-                 id: str = None,
+                 id: str,
                  name: str = None,
-                 type: str = 'Path',
                  description: str = None,
-                 url: str = None,
                  datePublished: str = None,
                  courses: dict = None):
         super().__init__(id,
                          name,
-                         type,
-                         url,
                          description)
         self.datePublished = datePublished
         self.courses = courses or {}
 
     # Fetch the Path data from the website
     def fetch_data(self):
-
-        # Path URL
-        self.url = f'{BASE_URL_PATHS}/{self.id}'
+        """
+        Fetch Path data from the website and save it to a JSON file.
+        """
 
         try:
             # Navigate to the path URL
@@ -61,7 +57,7 @@ class Path(BaseEntity):
                 "id": course_id,
                 "type": course["@type"],
                 "name": course["name"].strip(),
-                "url": course["url"]
+                "url": course["url"].strip()
             }
 
         # Core Path details

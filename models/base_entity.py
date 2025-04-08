@@ -3,7 +3,6 @@ import json
 from config.settings import BASE_URL_COURSES, BASE_URL_LAB, BASE_URL_PATHS, DATA_FOLDER_NAME, OUTPUT_FOLDER_NAME
 from pathlib import Path as PathlibPath
 
-from services.md_helper import MDHelper
 from utils.utils import util_replace_special_chars
 from .serialize import Serialize
 
@@ -13,35 +12,33 @@ class BaseEntity(Serialize):
     def __init__(self,
                  id: str,
                  name: str,
-                 type: str,
-                 description: str,
-                 url: str,
-                 date: str = None):
+                 description: str):
         self.id = id
         self.name = name
-        self.type = type
-        self.url = url
         self.description = description
-        self.date = date or str(datetime.today().date())
 
-    # Convert the entity's data to a dictionary without private attributes
-    def to_dict(self):
-        """
-        Convert the entity's data to a dictionary.
-        """
-
-        return {k: v for k, v in self.__dict__.items() if not k.startswith('_')}
-
-    # URL
-    # TODO: Make self.url a property and persistent by checking if url is provided or not
     @property
-    def _url(self):
-        if self.type == 'Path':
-            return f"{BASE_URL_PATHS}/{self.id}"
-        if self.type == 'Course':
-            return f"{BASE_URL_COURSES}/{self.id}"
-        if self.type == 'Lab':
-            return f"{BASE_URL_LAB}/{self.id}"
+    def type(self):
+        """
+        Dynamically determine the type based on the class name.
+        """
+        return self.__class__.__name__
+
+    @property
+    def url(self):
+        """
+        Dynamically generate the URL based on the type.
+        """
+        base_url = {
+            "Path": BASE_URL_PATHS,
+            "Course": BASE_URL_COURSES,
+            "Lab": BASE_URL_LAB
+        }.get(self.type, None)
+
+        if not base_url:
+            raise ValueError(f"Invalid entity type: {self.type}")
+
+        return f"{base_url}/{self.id}"
 
     # Properties to get the JSON and Markdown file names and paths
     @property
@@ -73,24 +70,16 @@ class BaseEntity(Serialize):
         if self.type == 'Lab':
             return PathlibPath(OUTPUT_FOLDER_NAME) / 'labs' / self._md_name
 
-    @url.getter
-    def url(self):
+    # Convert the entity's data to a dictionary without private attributes
+    def to_dict(self):
         """
-        Getter for the URL property.
+        Convert the entity's data to a dictionary.
         """
 
-        # If the URL is not set, generate it based on the type
-        if not self._url:
-            if self.type == 'Path':
-                self.url = f"{BASE_URL_PATHS}/{self.id}"
-            elif self.type == 'Course':
-                self.url = f"{BASE_URL_COURSES}/{self.id}"
-            elif self.type == 'Lab':
-                self.url = f"{BASE_URL_LAB}/{self.id}"
-            else:
-                raise ValueError("Invalid entity type")
-        
-        return self._url
+        the_dict = {k: v for k, v in self.__dict__.items() if not k.startswith('_')}
+        the_dict['type'] = self.type
+        the_dict['url'] = self.url
+        return the_dict
 
     # Load the entity data from a JSON file
     def load_json(self):
@@ -131,27 +120,3 @@ class BaseEntity(Serialize):
         # Save the data to a JSON file with UTF-8 encoding and Unix line endings
         with open(self._json_path, 'w', encoding='utf-8', newline='\n') as jsonfile:
             json.dump(data, jsonfile, ensure_ascii=False, indent=2)
-
-    # Save the entity data to a Markdown file
-    def save_markdown(self):
-        """
-        Save the entity data to a Markdown file.
-        """
-
-        md_helper = MDHelper()
-    
-        # Generate the Markdown content
-        if self.type == 'Path':
-            entity_md = md_helper.md_helper_path(self.to_dict())
-        elif self.type == 'Course':
-            entity_md = md_helper.md_helper_course(self.to_dict())
-        elif self.type == 'Lab':
-            entity_md = md_helper.md_helper_lab(self.to_dict())
-        
-        # Create the folder if it doesn't exist
-        if not self._md_path.parent.exists():
-            self._md_path.parent.mkdir(parents=True, exist_ok=True)
-
-        # Write the entity data to a Markdown file with UTF-8 encoding and Unix line endings
-        with open(self._md_path, "w", encoding="utf-8", newline='\n') as md_file:
-            md_file.write(entity_md)

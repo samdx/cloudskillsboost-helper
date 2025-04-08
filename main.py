@@ -131,7 +131,7 @@ class CloudSkillsBoost:
                 for course in path_data.courses.values():
                     course_id = course['id']
                     course_name = course['name']
-                    self.courses_collection.add_item(course_id, course_name)
+                    self.courses_collection.collection[course_id] = course_name
 
                 # Save the course collection to file.
                 self.courses_collection.save_json()
@@ -404,7 +404,9 @@ class CloudSkillsBoost:
                     path_data.save_markdown()
                     # Add courses from this path to the courses collection
                     for course in path_data.courses.values():
-                        self.courses_collection.add_item(course['id'], course['name'])
+                        course_id = course['id']
+                        course_name = course['name']
+                        self.courses_collection.collection[course_id] = course_name
                 self.courses_collection.save_json()
                 print("\n"
                       "\033[35mDEBUG: COURSES LIST RELOADED.\033[0m\n")
