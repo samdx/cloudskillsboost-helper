@@ -242,7 +242,7 @@ class Course(BaseEntity):
                         # Add the lab to the lab collection
                         labs_collection = Collection(type='labs', name='Labs Collection')
                         labs_collection.load_json()
-                        labs_collection.add_item(lab_id, lab_title)
+                        labs_collection.collection[lab_id] = lab_title
                         labs_collection.save_json()
 
                         print(f"(extract_transcript) •-• [+]")
@@ -319,6 +319,9 @@ class Course(BaseEntity):
 
         # Inform the user that the course transcript extraction is completed
         print(f"(extract_transcript) \033[34m•-• COMPLETED: {self.id} - {self.name.upper()}\033[0m\n")
+
+        # TODO: Add the course to courses_downloaded.json (Collection) with id
+        # TODO: If the course is in the courses_downloaded collection, compare the datepublished
 
     # Complete the videos in the course
     def complete_videos(self):
