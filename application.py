@@ -168,6 +168,11 @@ def topic(topic):
     )
 
 
+@app.route('/about')
+def about():
+    return render_template('about.html')
+
+
 def extract_topics(courses_collection):
     """
     Gather all unique topics from the downloaded courses in the 'data/courses/' folder.
