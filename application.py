@@ -162,7 +162,7 @@ def browse_by_topic(topic):
     filtered_courses = topics_to_courses.get(topic, {})
 
     return render_template(
-        'browse_by_topic.html',
+        'topic.html',
         topic=topic,
         filtered_courses=filtered_courses
     )
