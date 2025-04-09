@@ -151,7 +151,7 @@ def process_path(path_id):
 
     return jsonify({"message": f"Processed all courses in path {path_id} with action: {action}."})
 
-@app.route('/browse/topic/<topic>')
+@app.route('/topic/<topic>')
 def browse_by_topic(topic):
     """
     filtered_courses = topics_to_courses.get(topic, [])
