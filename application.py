@@ -1,4 +1,6 @@
 import os
+import threading
+import time
 from flask import Flask, request, jsonify, render_template, redirect, url_for
 from config.settings import BASE_URL, BASE_URL_COURSES, BASE_URL_LAB, BASE_URL_PATHS
 from models.course import Course
@@ -204,8 +206,29 @@ def extract_unique_topics(courses_collection):
     return sorted(topics_set), topics_to_courses  # Return a sorted list of unique topics
 
 
-if __name__ == '__main__':
+def refresh_topics(interval=300):
+    """
+    Periodically refresh the topics every 5 minutes (300 seconds).
+    """
+    # This function runs in a separate thread to refresh topics
+    # every hour without blocking the main thread
+    global topics, topics_to_courses
+
+    # Load the initial topics and courses
     topics, topics_to_courses = extract_unique_topics(courses_collection)
+
+    # Set the interval for refreshing topics
+    while True:
+        print("Refreshing topics...")
+        time.sleep(interval)  # Wait for the specified interval
+        topics, topics_to_courses = extract_unique_topics(courses_collection)  # Refresh topics
+
+
+if __name__ == '__main__':
+    # Start the background thread for periodic refresh
+    refresh_thread = threading.Thread(target=refresh_topics, daemon=True)
+    refresh_thread.start()
+    # Run the Flask app
     app.run(host='0.0.0.0', port=8080, debug=True)
 
 # Note:
