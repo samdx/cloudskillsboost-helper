@@ -24,11 +24,19 @@
         {% endfor %}
     </ul>
     <h3>Modules</h3>
-    <ul class="collection">
-        {% for module in course.modules %}
-        <li class="collection-item">
-            <strong>{{ module.title }}</strong>: {{ module.description }}
-        </li>
-        {% endfor %}
-    </ul>
+    {% for module in course.modules %}
+        <h4>{{ module.title }}</h4>
+        {{ module.description }}
+        <ol class="collection">
+            {% for step in module.steps %}
+                {% for activity in step.activities %}
+                <li class="collection-item">
+                    <!-- <i class="material-icons left waves-effect waves-light">cloud</i> -->
+                    <strong>{{ activity.title }}</strong>
+                    <span class="badge">{{ activity.type }}</span>
+                </li>
+                {% endfor %}
+            {% endfor %}
+        </ol>
+    {% endfor %}
 {% endblock %}
