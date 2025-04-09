@@ -3,7 +3,11 @@
 {% block title %}Lab Details: {{ lab.name }}{% endblock %}
 
 {% block content %}
-    <h2 class="blue-text text-darken-2">{{ lab.name }}</h2>
+    <h2 class="blue-text text-darken-2">
+        <button class="btn-small blue lighten-1 waves-effect waves-light">
+            <a href="{{ BASE_URL_LAB }}/{{ lab.id }}" target="_blank" rel="noopener noreferrer">{{ lab.id }}</a>
+        </button>
+        {{ lab.name }}</h2>
     <p>{{ lab.description }}</p>
     <h3>Steps</h3>
     <ul>
