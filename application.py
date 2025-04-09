@@ -93,7 +93,7 @@ def path_details(path_id):
 
 
 @app.route('/labs/<lab_id>')
-def lab_details(lab_id):
+def lab(lab_id):
     # Logic to fetch and display lab details
 
     lab = labs_collection.collection.get(lab_id)
