@@ -15,7 +15,7 @@
                     <button class="btn-small blue lighten-1 waves-effect waves-light">
                         <a href="{{ BASE_URL_COURSES }}/{{ course_id }}" target="_blank" rel="noopener noreferrer">{{ course_id }}</a>
                     </button>
-                    <a href="{{ url_for('course_details', course_id=course_id) }}">{{ course_data.name }}</a>
+                    <a href="{{ url_for('course', course_id=course_id) }}">{{ course_data.name }}</a>
                 </span>
             </label>
         </li>

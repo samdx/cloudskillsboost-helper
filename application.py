@@ -53,7 +53,7 @@ def home():
 
 
 @app.route('/course/<course_id>')
-def course_details(course_id):
+def course(course_id):
     """
     Display details of a specific course.
     """
