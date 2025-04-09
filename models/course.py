@@ -15,7 +15,7 @@ import json
 import html
 import requests
 from bs4 import BeautifulSoup
-from config.settings import BASE_URL_COURSES, BASE_URL, BASE_URL_LAB, WEBDRIVER_PROFILE_FOLDER_NAME
+from config.settings import BASE_URL_COURSES, BASE_URL, BASE_URL_LAB, QL_IFRAME, WEBDRIVER_PROFILE_FOLDER_NAME
 from utils.utils import util_replace_quote_marks, util_strip_html_tags
 from services.launch_browser import launch_browser
 
@@ -302,8 +302,12 @@ class Course(BaseEntity):
                             # Get the link's URL
                             link_url_a_tag = link_page_html.select_one(LINK_URL_A_TAG)
 
-                            # Add the link's URL to the activity as a new key
-                            activity['link'] = link_url_a_tag['href']
+                            # If the link is not found, find the html5 page of the course
+                            if link_url_a_tag is None:
+                                link_url_a_tag = link_page_html.select_one(QL_IFRAME)
+                                activity['link'] = link_url_a_tag['src']
+                            else:
+                                activity['link'] = link_url_a_tag['href']
 
                             # Get the link's text, you may not need this
                             # link_text = link_url_a_tag.get_text(strip=True)
