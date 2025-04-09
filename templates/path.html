@@ -3,8 +3,8 @@
 {% block title %}Path Details: {{ path.name }}{% endblock %}
 
 {% block content %}
-    <h2 class="blue-text text-darken-2">
-        <button class="btn-small blue lighten-1 waves-effect waves-light">
+    <h2 class="blue-text text-darken-2 flex-container">
+        <button class="btn-large blue lighten-1 waves-effect waves-light">
             <a href="{{ BASE_URL_PATHS }}/{{ path.id }}" target="_blank" rel="noopener noreferrer">{{ path.id }}</a>
         </button>
         {{ path.name }}</h2>

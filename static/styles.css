@@ -134,6 +134,35 @@ body {
     color: #fff; /* Change text color on hover */
 }
 
+.flex-container {
+    display: flex;
+    align-items: center; /* Vertically align items */
+    gap: 1rem; /* Add spacing between the button and the text */
+}
+
+.flex-container .btn-large {
+    margin: 0; /* Remove default margins from the button */
+}
+
+.btn-large {
+    padding: 0 8px; /* Reduce horizontal padding */
+    height: auto; /* Allow the button to adjust to the text height */
+    line-height: 1.5; /* Match the line height of the text */
+    font-size: 2rem; /* Adjust font size to fit the text */
+    margin: 0; /* Remove extra margin */
+    align-items: center; /* Center align items */
+    justify-content: center; /* Center justify items */
+    width: 5em; /* Full width */
+    text-align: right; /* Align text to the right */
+}
+
+.btn-large a {
+    color: #dcdcdc; /* Change text color */
+}
+.btn-large a:hover {
+    color: #fff; /* Change text color on hover */
+}
+
 .nav-wrapper .navbar-button {
     padding: 0 8px; /* Reduce horizontal padding */
     height: 100%; /* Allow the button to adjust to the text height */
