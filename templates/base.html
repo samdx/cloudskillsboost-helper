@@ -52,7 +52,7 @@
         <!-- Topics Section (Scrollable) -->
         <div class="topics-scrollable">
             {% for topic in topics %}
-            <li><a href="{{ url_for('browse_by_topic', topic=topic) }}">{{ topic }}</a></li>
+            <li><a href="{{ url_for('topic', topic=topic) }}">{{ topic }}</a></li>
             {% endfor %}
         </div>
     </ul>
