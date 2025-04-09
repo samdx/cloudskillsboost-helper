@@ -74,7 +74,7 @@ def course_details(course_id):
 
 
 @app.route('/path/<path_id>')
-def path_details(path_id):
+def path(path_id):
     """
     Display details of a specific path.
     """

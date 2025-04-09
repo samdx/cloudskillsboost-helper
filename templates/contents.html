@@ -8,7 +8,7 @@
                 <button class="btn-small blue lighten-1 waves-effect waves-light">
                     <a href="{{ BASE_URL_PATHS }}/{{ path_id }}" target="_blank" rel="noopener noreferrer">{{ path_id }}</a>
                 </button> 
-                <a href="{{ url_for('path_details', path_id=path_id) }}">{{ path_name }}</a>
+                <a href="{{ url_for('path', path_id=path_id) }}">{{ path_name }}</a>
             </span>
         </label>
     </li>
