@@ -5,6 +5,13 @@
 {% block content %}
     <h2 class="blue-text text-darken-2">{{ course.name }}</h2>
     <p>{{ course.description }}</p>
+    <p><strong>Course ID:</strong> {{ course.id }}</p>
+    <h3>Topics</h3>
+    <ul class="collection">
+        {% for topic in course.topics %}
+        <li class="collection-item"> <a href="{{ url_for('browse_by_topic', topic=topic) }}">{{ topic }}</a></li>
+        {% endfor %}
+    </ul>
     <h3>Objectives</h3>
     <ul class="collection">
         {% for objective in course.objectives %}
