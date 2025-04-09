@@ -168,7 +168,7 @@ def browse_by_topic(topic):
     )
 
 
-def extract_unique_topics(courses_collection):
+def extract_topics(courses_collection):
     """
     Gather all unique topics from the downloaded courses in the 'data/courses/' folder.
 
@@ -215,13 +215,13 @@ def refresh_topics(interval=300):
     global topics, topics_to_courses
 
     # Load the initial topics and courses
-    topics, topics_to_courses = extract_unique_topics(courses_collection)
+    topics, topics_to_courses = extract_topics(courses_collection)
 
     # Set the interval for refreshing topics
     while True:
         print("Refreshing topics...")
         time.sleep(interval)  # Wait for the specified interval
-        topics, topics_to_courses = extract_unique_topics(courses_collection)  # Refresh topics
+        topics, topics_to_courses = extract_topics(courses_collection)  # Refresh topics
 
 
 if __name__ == '__main__':
