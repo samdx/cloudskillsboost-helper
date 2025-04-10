@@ -1,3 +1,10 @@
+<!-- Left Side Navigation Panel -->
+<ul id="slide-out" class="sidenav sidenav-fixed">    
+    {% for topic in topics %}
+    <li class="topic-item"><a href="{{ url_for('topic', topic=topic) }}">{{ topic }}</a></li>
+    {% endfor %}
+</ul>
+
 <h2 id="paths" class="blue-text text-darken-2">Your Recent Touches</h2>
 <h3 class="blue-text text-darken-2">Paths</h3>
 <ul class="collection collapsible-content">
