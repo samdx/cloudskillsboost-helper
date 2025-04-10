@@ -246,6 +246,7 @@ class Course(BaseEntity):
         """
         Process a quiz activity.
         """
+        # TODO: Extract Quiz that need to press the 'Start quiz' button, ie. course/201
         print(f"(process_quiz) •-> Qui: {activity['id']:>6} - {activity['title']}")
         try:
             response = requests.get(url)
