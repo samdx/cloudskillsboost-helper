@@ -3,6 +3,10 @@ body {
     height: auto;
 }
 
+body.container {
+    padding-bottom: 42px; /* Remove padding for the main container */
+}
+
 /* Navbar */
 
 nav.fixed {
