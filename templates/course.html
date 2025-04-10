@@ -3,10 +3,10 @@
 {% block title %}Course Details: {{ course.name }}{% endblock %}
 
 {% block content %}
-    <h2 class="blue-text text-darken-2 flex-container">
+    <h2 class="blue-text text-darken-2">
         {{ course.name }}
-        <!-- Display the course ID -->
-        <span class="badge"><a href="{{ BASE_URL_COURSES }}/{{ course.id }}" target="_blank" rel="noopener noreferrer">{{ course.id }}</a></span>
+        <!-- Display the course ID to the right -->
+        <span class="id-num right"><a href="{{ BASE_URL_COURSES }}/{{ course.id }}" target="_blank" rel="noopener noreferrer">{{ course.id }}</a></span>
     </h2>
     <h3>Description</h3>
     <p>{{ course.description }}</p>
