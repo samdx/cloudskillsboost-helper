@@ -184,7 +184,7 @@ footer.fixed {
     align-items: center; /* Center align items */
     justify-content: center; /* Center justify items */
     width: 5em; /* Full width */
-    text-align: right; /* Align text to the right */
+    text-align: center; /* Align text to the right */
 }
 
 .btn-large a {
