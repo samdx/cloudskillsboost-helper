@@ -160,9 +160,13 @@ def lab(lab_id):
     lab_data = Lab(id=lab_id)
     lab_data.load_json()
 
+    # Generate breadcrumbs for navigation
+    breadcrumbs = generate_breadcrumbs()
+
     return render_template(
         'lab.html',
         lab=lab_data,
+        breadcrumbs=breadcrumbs
     )
 
 
