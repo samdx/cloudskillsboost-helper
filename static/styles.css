@@ -222,3 +222,14 @@ footer.fixed {
 .collection-list {
     list-style: bullet;
 }
+
+/* Display number of courses next to the topic title */
+
+h2 .badge {
+    font-size: inherit;
+    padding: 0px;
+    line-height: inherit;
+    border-radius: 3px;
+    padding: 2px 5px;
+    /* color: darkgrey; */
+}
