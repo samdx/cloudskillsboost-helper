@@ -113,8 +113,8 @@ footer.fixed {
 .sidenav .sidenav-fixed {
     margin-top: 64px;
     position: fixed;
-    bottom: 56px;
-    margin-bottom: 56px;
+    bottom: 42px;
+    margin-bottom: 42px;
     top: 0;
     left: 0;
     height: 100%;
