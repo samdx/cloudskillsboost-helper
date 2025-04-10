@@ -159,22 +159,23 @@ class MDHelper:
 
                         # If it's a quiz, presents all the quiz and answer here
                         elif activity_type == 'quiz':
-                            quizItems = activity['quizItems']
-                            quiz_number = 1
-                            for question in quizItems:
-                                quiz_list = []
-                                quiz_stem = question.get("stem").replace("<p>", "").replace("</p>", "")
-                                quiz_stem = quiz_stem.replace('\n\n', '')
-                                # Each quiz is a level 4 heading
-                                markdown.append(f"#### Quiz {quiz_number}.")
-                                # Put into a callout format for Obsidian or Typora
-                                quiz_list.append(f"> [!important]")
-                                quiz_list.append(f"> **{util_replace_quote_marks(quiz_stem)}**")
-                                quiz_list.append(">")
-                                for option in question.get("options"):
-                                    quiz_list.append(f"> - [ ] {util_replace_quote_marks(option.get('title'))}")
-                                markdown.append("\n".join(quiz_list))
-                                quiz_number += 1
+                            if activity.get('quizItems'):
+                                quizItems = activity['quizItems']
+                                quiz_number = 1
+                                for question in quizItems:
+                                    quiz_list = []
+                                    quiz_stem = question.get("stem").replace("<p>", "").replace("</p>", "")
+                                    quiz_stem = quiz_stem.replace('\n\n', '')
+                                    # Each quiz is a level 4 heading
+                                    markdown.append(f"#### Quiz {quiz_number}.")
+                                    # Put into a callout format for Obsidian or Typora
+                                    quiz_list.append(f"> [!important]")
+                                    quiz_list.append(f"> **{util_replace_quote_marks(quiz_stem)}**")
+                                    quiz_list.append(">")
+                                    for option in question.get("options"):
+                                        quiz_list.append(f"> - [ ] {util_replace_quote_marks(option.get('title'))}")
+                                    markdown.append("\n".join(quiz_list))
+                                    quiz_number += 1
                         
                         # If it's a link, let put a link here
                         elif activity_type == 'link':
