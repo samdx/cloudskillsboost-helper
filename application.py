@@ -249,7 +249,18 @@ def topic(topic):
 
 @app.route('/about')
 def about():
-    return render_template('about.html')
+    """About page for the Cloud Skills Boost Helper.
+    This page provides information about the application, its purpose, and how to use it.
+    It may also include links to documentation, support, or contact information.
+    The about page is typically static and does not require any dynamic data from the database.
+    It serves as a reference for users to understand the application better.
+
+    Returns:
+        str: Rendered HTML template for the about page.
+    """
+    # Generate breadcrumbs for navigation
+    breadcrumbs = generate_breadcrumbs()
+    return render_template('about.html', breadcrumbs=breadcrumbs)
 
 
 def extract_topics(courses_collection):
