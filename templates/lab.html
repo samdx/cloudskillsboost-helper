@@ -3,6 +3,11 @@
 {% block title %}Lab Details: {{ lab.name }}{% endblock %}
 
 {% block content %}
+<ul id="slide-out" class="sidenav sidenav-fixed">    
+    {% for lab_id, lab_name in labs.items() %}
+    <li class="topic-item"><a href="{{ url_for('lab', lab_id=lab_id) }}">{{ lab_name }}</a></li>
+    {% endfor %}
+</ul>
     <h2 class="blue-text text-darken-2">
         {{ lab.name }}
         <!-- Display the Lab ID to the right -->
