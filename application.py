@@ -69,7 +69,7 @@ def courses():
         breadcrumbs=breadcrumbs
     )
 
-@app.route('/course/<course_id>')
+@app.route('/courses/<course_id>')
 def course(course_id):
     """
     Display details of a specific course.
@@ -84,9 +84,13 @@ def course(course_id):
     course = Course(id=course_id)
     course.load_json()
 
+    # Generate breadcrumbs for navigation
+    breadcrumbs = generate_breadcrumbs()
+
     return render_template(
         'course.html',
-        course=course
+        course=course,
+        breadcrumbs=breadcrumbs
     )
 
 @app.route('/paths')
