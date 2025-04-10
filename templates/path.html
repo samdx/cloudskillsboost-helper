@@ -9,30 +9,30 @@
     <li class="topic-item"><a href="{{ url_for('path', path_id=path_id) }}">{{ path_name }}</a></li>
     {% endfor %}
 </ul>
-    <h2 class="blue-text text-darken-2">
-        {{ path.name }}
-        <!-- Display the path ID -->
-        <span class="id-num right"><a href="{{ BASE_URL_PATHS }}/{{ path.id }}" target="_blank" rel="noopener noreferrer">{{ path.id }}</a></span>
-    </h2>
-    <h3>Description</h3>
-    <p>{{ path.description }}</p>
-    <h3>
-        Courses & Progress
-        <!-- Display the number of courses in the path. -->
-        <span class="id-num right">{{ path.courses|length }}</span></h3>
-    <ul class="collection">
-        {% for course_id, course_data in path.courses.items() %}
-        <li class="collection-item">
-            <label>
-                <input type="checkbox" {% if course_id in completed_courses %}checked{% endif %} disabled>
-                <span>
-                    <button class="btn-small blue lighten-1 waves-effect waves-light">
-                        <a href="{{ BASE_URL_COURSES }}/{{ course_id }}" target="_blank" rel="noopener noreferrer">{{ course_id }}</a>
-                    </button>
-                    <a href="{{ url_for('course', course_id=course_id) }}">{{ course_data.name }}</a>
-                </span>
-            </label>
-        </li>
-        {% endfor %}
-    </ul>
+<h2 class="blue-text text-darken-2">
+    {{ path.name }}
+    <!-- Display the path ID -->
+    <span class="id-num right"><a href="{{ BASE_URL_PATHS }}/{{ path.id }}" target="_blank" rel="noopener noreferrer">{{ path.id }}</a></span>
+</h2>
+<h3>Description</h3>
+<p>{{ path.description }}</p>
+<h3>
+    Courses & Progress
+    <!-- Display the number of courses in the path. -->
+    <span class="id-num right">{{ path.courses|length }}</span></h3>
+<ul class="collection">
+    {% for course_id, course_data in path.courses.items() %}
+    <li class="collection-item">
+        <label>
+            <input type="checkbox" {% if course_id in completed_courses %}checked{% endif %} disabled>
+            <span>
+                <button class="btn-small blue lighten-1 waves-effect waves-light">
+                    <a href="{{ BASE_URL_COURSES }}/{{ course_id }}" target="_blank" rel="noopener noreferrer">{{ course_id }}</a>
+                </button>
+                <a href="{{ url_for('course', course_id=course_id) }}">{{ course_data.name }}</a>
+            </span>
+        </label>
+    </li>
+    {% endfor %}
+</ul>
 {% endblock %}
