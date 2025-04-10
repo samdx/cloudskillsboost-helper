@@ -3,6 +3,8 @@ body {
     height: auto;
 }
 
+/* Navbar */
+
 nav.fixed {
     position: fixed;
     top: 0;
@@ -17,6 +19,8 @@ nav ul a span.badge {
     font-weight: normal;
     border-radius: 3px;
 }
+
+/* Footer */
 
 footer.fixed {
     position: fixed;
