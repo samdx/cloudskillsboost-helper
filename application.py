@@ -211,7 +211,7 @@ def process_path(path_id):
 
     return jsonify({"message": f"Processed all courses in path {path_id} with action: {action}."})
 
-@app.route('/topic/<topic>')
+@app.route('/topics/<topic>')
 def topic(topic):
     """
     filtered_courses = topics_to_courses.get(topic, [])
@@ -221,10 +221,14 @@ def topic(topic):
     # Filter courses, paths, and labs by the selected topic
     filtered_courses = topics_to_courses.get(topic, {})
 
+    # Generate breadcrumbs for navigation
+    breadcrumbs = generate_breadcrumbs()
+
     return render_template(
         'topic.html',
         topic=topic,
-        filtered_courses=filtered_courses
+        filtered_courses=filtered_courses,
+        breadcrumbs=breadcrumbs
     )
 
 
