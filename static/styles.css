@@ -1,5 +1,6 @@
 body {
     padding-top: 64px; /* Add padding to prevent content from overlapping the navbar */
+    height: auto;
 }
 
 nav.fixed {
@@ -25,7 +26,7 @@ footer.fixed {
     z-index: 1000; /* Ensure it stays above other elements */
 }
 
-footer {
+.page-footer {
     padding: 10px;
 }
 
