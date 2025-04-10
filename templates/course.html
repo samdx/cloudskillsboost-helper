@@ -3,6 +3,12 @@
 {% block title %}Course Details: {{ course.name }}{% endblock %}
 
 {% block content %}
+<!-- Left Side Navigation Panel -->
+<ul id="slide-out" class="sidenav sidenav-fixed">    
+    {% for course_id, course_name in courses.items() %}
+    <li class="topic-item"><a href="{{ url_for('course', course_id=course_id) }}">{{ course_name }}</a></li>
+    {% endfor %}
+</ul>
     <h2 class="blue-text text-darken-2">
         {{ course.name }}
         <!-- Display the course ID to the right -->
