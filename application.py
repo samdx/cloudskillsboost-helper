@@ -211,6 +211,21 @@ def process_path(path_id):
 
     return jsonify({"message": f"Processed all courses in path {path_id} with action: {action}."})
 
+@app.route('/topics')
+def topics():
+    """
+    Display all available topics.
+    """
+
+    # Generate breadcrumbs for navigation
+    breadcrumbs = generate_breadcrumbs()
+
+    return render_template(
+        'topics.html',
+        topics=topics,
+        breadcrumbs=breadcrumbs
+    )
+
 @app.route('/topics/<topic>')
 def topic(topic):
     """

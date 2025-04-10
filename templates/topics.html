@@ -1,0 +1,14 @@
+{% extends 'base.html' %}
+
+{% block title %}Topics{% endblock %}
+
+{% block content %}
+<h2 id="labs" class="blue-text text-darken-2">Topics</h2>
+<ul class="collection collapsible-content">
+    {% for topic in topics %}
+    <li class="collection-item">
+        <a href="{{ url_for('topic', topic=topic) }}">{{ topic }}</a>
+    </li>
+    {% endfor %}
+</ul>
+{% endblock %}
