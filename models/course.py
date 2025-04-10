@@ -60,6 +60,9 @@ class Course(BaseEntity):
         """
         print("\nTranscript Extracting is starting...\n")
 
+        # Load the course data from JSON even it's empty
+        self.load_json()
+    
         # Fetch and parse the course page
         course_html = self.fetch_course_page()
         if not course_html:
