@@ -30,9 +30,13 @@
     <!-- Navigation Bar -->
     <nav class="blue fixed">
         <div class="nav-wrapper container">
-            <a href="/" class="brand-logo"><i class="material-icons">school</i>CSB Helper</a>
+            <a href="/" class="breadcrumb"><i class="material-icons">school</i></a>
+            <a href="/" class="breadcrumb">CSB Helper</a>
+            {% for segment in breadcrumbs %}
+            <a href="{{ segment.url }}" class="breadcrumb">{{ segment.name }}</a>
+            {% endfor %}
             <ul id="nav-mobile" class="right hide-on-med-and-down">
-                <li><a href="/#paths" class="collection-item"><span class="badge">{{ paths|length }}</span>Paths</a></li>
+                <li><a href="{{ url_for('paths') }}" class="collection-item"><span class="badge">{{ paths|length }}</span>Paths</a></li>
                 <li><a href="/#courses" class="collection-item"><span class="badge">{{ courses|length }}</span>Courses</a></li>
                 <li><a href="/#labs" class="collection-item"><span class="badge">{{ labs|length }}</span>Labs</a></li>
                 <li><a href="{{ url_for('about') }}" class="collection-item">About</a></li>
