@@ -84,6 +84,8 @@ body {
 .sidenav .sidenav-fixed {
     margin-top: 64px;
     position: fixed;
+    bottom: 56px;
+    margin-bottom: 56px;
     top: 0;
     left: 0;
     height: 100%;
