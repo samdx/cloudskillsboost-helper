@@ -1,3 +1,7 @@
+body {
+    padding-top: 64px; /* Add padding to prevent content from overlapping the navbar */
+}
+
 nav.fixed {
     position: fixed;
     top: 0;
