@@ -229,6 +229,22 @@ def refresh_topics(interval=300):
         topics, topics_to_courses = extract_topics(courses_collection)  # Refresh topics
 
 
+def generate_breadcrumbs():
+    """
+    Generate breadcrumb segments based on the current path.
+    """
+    path = request.path.strip('/').split('/')
+    breadcrumbs = []
+    current_path = ''
+    for segment in path:
+        current_path += f'/{segment}'
+        breadcrumbs.append({
+            'name': segment.capitalize(),  # Capitalize the segment for display
+            'url': current_path
+        })
+    return breadcrumbs
+
+
 if __name__ == '__main__':
     # Start the background thread for periodic refresh
     refresh_thread = threading.Thread(target=refresh_topics, daemon=True)
