@@ -3,6 +3,12 @@
 {% block title %}Path Details: {{ path.name }}{% endblock %}
 
 {% block content %}
+<!-- Left Side Navigation Panel -->
+<ul id="slide-out" class="sidenav sidenav-fixed">    
+    {% for path_id, path_name in paths.items() %}
+    <li class="topic-item"><a href="{{ url_for('path', path_id=path_id) }}">{{ path_name }}</a></li>
+    {% endfor %}
+</ul>
     <h2 class="blue-text text-darken-2">
         {{ path.name }}
         <!-- Display the path ID -->
