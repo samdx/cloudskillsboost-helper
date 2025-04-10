@@ -93,6 +93,8 @@ class CloudSkillsBoost:
                 print(f"\n\033[45m[{heading:^85}]\033[0m")
                 course = Course(id=a_course_id, name=course_name)
                 course.extract_transcript()
+                self.courses_collection.collection[course.id] = course.name
+                self.courses_collection.save_json()
 
             # If the user wants to do both tasks
             if both_tasks:
