@@ -47,18 +47,11 @@
     </nav>
 
     <!-- Left Side Navigation Panel -->
-    <ul id="slide-out" class="sidenav sidenav-fixed">
-        <!-- TOC Section (Fixed) -->
-        <div class="toc-fixed toc-table">
-            <li><a class="subheader">Topics <span class="badge">{{ topics|length }}</span></a></li>
-        </div>
-    
+    <ul id="slide-out" class="sidenav sidenav-fixed">    
         <!-- Topics Section (Scrollable) -->
-        <div class="topics-scrollable">
             {% for topic in topics %}
-            <li><a href="{{ url_for('topic', topic=topic) }}">{{ topic }}</a></li>
+            <li class="topic-item"><a href="{{ url_for('topic', topic=topic) }}">{{ topic }}</a></li>
             {% endfor %}
-        </div>
     </ul>
 
     <!-- Main Content -->
