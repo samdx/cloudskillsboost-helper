@@ -3,11 +3,11 @@
 {% block title %}Path Details: {{ path.name }}{% endblock %}
 
 {% block content %}
-    <h2 class="blue-text text-darken-2 flex-container">
-        <button class="btn-large blue lighten-1 waves-effect waves-light">
-            <a href="{{ BASE_URL_PATHS }}/{{ path.id }}" target="_blank" rel="noopener noreferrer">{{ path.id }}</a>
-        </button>
-        {{ path.name }}</h2>
+    <h2 class="blue-text text-darken-2">
+        {{ path.name }}
+        <!-- Display the path ID -->
+        <span class="id-num right"><a href="{{ BASE_URL_PATHS }}/{{ path.id }}" target="_blank" rel="noopener noreferrer">{{ path.id }}</a></span>
+    </h2>
     <h3>Description</h3>
     <p>{{ path.description }}</p>
     <h3>Courses & Progress</h3>

@@ -225,11 +225,10 @@ footer.fixed {
 
 /* Display number of courses next to the topic title */
 
-h2 .badge {
+h2 .id-num {
     font-size: inherit;
-    padding: 0px;
     line-height: inherit;
-    border-radius: 3px;
-    padding: 2px 5px;
+    height: inherit;
+    text-align: right;
     /* color: darkgrey; */
 }
