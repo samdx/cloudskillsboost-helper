@@ -1,0 +1,22 @@
+{% extends 'base.html' %}
+
+{% block title %}Paths{% endblock %}
+
+{% block content %}
+<h2 id="paths" class="blue-text text-darken-2">Paths</h2>
+<ul class="collection collapsible-content">
+    {% for path_id, path_name in paths.items() %}
+    <li class="collection-item">
+        <label>
+            <input type="checkbox" {% if path_id in completed_paths %}checked{% endif %} disabled>
+            <span>
+                <button class="btn-small blue lighten-1 waves-effect waves-light">
+                    <a href="{{ BASE_URL_PATHS }}/{{ path_id }}" target="_blank" rel="noopener noreferrer">{{ path_id }}</a>
+                </button> 
+                <a href="{{ url_for('path', path_id=path_id) }}">{{ path_name }}</a>
+            </span>
+        </label>
+    </li>
+    {% endfor %}
+</ul>
+{% endblock %}
