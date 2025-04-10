@@ -242,3 +242,8 @@ h2 .id-num {
     text-align: right;
     /* color: darkgrey; */
 }
+
+/* Display number of the course/path/id on the very right of item */
+.badge.right.badge-item {
+    text-align: right;
+}

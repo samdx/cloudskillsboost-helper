@@ -10,10 +10,10 @@
         <label>
             <input type="checkbox" {% if lab_id in completed_courses %}checked{% endif %} disabled>
             <span>
-                <button class="btn-small blue lighten-1 waves-effect waves-light">
-                    <a href="{{ BASE_URL_LABS }}/{{ lab_id }}" target="_blank" rel="noopener noreferrer">{{ lab_id }}</a>
-                </button> 
                 <a href="{{ url_for('lab', lab_id=lab_id) }}">{{ lab_name }}</a>
+            </span>
+            <span class="badge right badge-item">
+                <a href="{{ BASE_URL_LABS }}/{{ lab_id }}" target="_blank" rel="noopener noreferrer">{{ lab_id }}</a>
             </span>
         </label>
     </li>
