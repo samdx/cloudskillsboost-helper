@@ -39,3 +39,22 @@ Every contribution is very much welcomed!
 9. **Remove `<p> <p> <br/>` from the transcript/text/description**
 
    - Clean up the transcript/text/description by removing unnecessary HTML tags.
+
+## Enhancements & Fixes
+
+### TODO: Extract quiz in lab (`ql-true-false-probe` and `ql-multiple-choice-probe`)
+
+- Example: https://www.cloudskillsboost.google/focuses/1763?parent=catalog
+
+```html
+<ql-multiple-choice-probe answerindex="2" optiontitles="[
+"Cloud Storage",
+"Pub/Sub",
+"HTTPS",
+"Firebase"
+]" shuffle stem="Which type of trigger is used while creating Cloud Run functions in the lab?">
+```
+
+```html
+<ql-true-false-probe answer="true" stem="Cloud Run functions is a serverless execution environment for event driven services on Google Cloud." >
+```
