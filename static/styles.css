@@ -94,6 +94,17 @@ footer.fixed {
     z-index: 999;
 }
 
+/* Truncate long text in sidenav items */
+.sidenav .topic-item a {
+    display: block; /* Ensure the anchor tag behaves like a block element */
+    white-space: nowrap; /* Prevent text from wrapping to the next line */
+    overflow: hidden; /* Hide overflowing text */
+    text-overflow: ellipsis; /* Add ellipsis (...) for overflowing text */
+    max-width: 100%; /* Ensure the text stays within the element's width */
+    font-size: 12px;
+    padding: 0 12px;
+}
+
 .sidenav a {
     font-size: 10px;
     color: #000;
