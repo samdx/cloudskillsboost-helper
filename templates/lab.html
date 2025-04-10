@@ -16,10 +16,7 @@
         </span>
     </h2>
     <p>{{ lab.description }}</p>
-    <h3>Steps</h3>
-    <ul>
-        {% for step in lab.steps %}
-        <li class="collection-item">{{ step.description }}</li>
-        {% endfor %}
-    </ul>
+    {% for step_id, step_title in lab.steps.items() %}
+    <h3>{{ step_title }}</h3>
+    {% endfor %}
 {% endblock %}
