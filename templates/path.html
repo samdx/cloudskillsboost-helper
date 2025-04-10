@@ -10,7 +10,10 @@
     </h2>
     <h3>Description</h3>
     <p>{{ path.description }}</p>
-    <h3>Courses & Progress</h3>
+    <h3>
+        Courses & Progress
+        <!-- Display the number of courses in the path. -->
+        <span class="id-num right">{{ path.courses|length }}</span></h3>
     <ul class="collection">
         {% for course_id, course_data in path.courses.items() %}
         <li class="collection-item">
