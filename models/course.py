@@ -120,6 +120,12 @@ class Course(BaseEntity):
             course_description = util_replace_quote_marks(course_description)
 
             course_objectives_json = json.loads(course_ld_json_text)
+            datePublished = course_objectives_json.get('datePublished')
+
+            # If the course has the same datePublished, return False and not continue.
+            if datePublished == self.datePublished:
+                print(f"(extract_course_metadata) Course {self.id} already extracted. datePublished: {datePublished}\n")
+                return False
 
             self.id = course_objectives_json.get('@id').split('/')[-1]
             self.name = course_objectives_json.get('name').strip()
