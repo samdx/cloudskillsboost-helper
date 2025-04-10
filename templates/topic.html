@@ -3,7 +3,11 @@
 {% block title %}Browse by Topic: {{ topic }}{% endblock %}
 
 {% block content %}
-    <h2 class="blue-text text-darken-2">{{ topic }}<span class="badge">{{ filtered_courses | length }}</span></h2>
+    <h2 class="blue-text text-darken-2">
+        {{ topic }}
+        <!-- Display the number of courses available in the topic -->
+        <span class="id-num right">{{ filtered_courses | length }}</span>
+    </h2>
     <ul class="collection">
         {% for course_id, course_name in filtered_courses.items() %}
         <li class="collection-item">
