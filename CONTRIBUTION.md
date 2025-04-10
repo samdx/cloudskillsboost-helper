@@ -58,3 +58,12 @@ Every contribution is very much welcomed!
 ```html
 <ql-true-false-probe answer="true" stem="Cloud Run functions is a serverless execution environment for event driven services on Google Cloud." >
 ```
+
+### TODO: Convert document HTML pages or Lab page to Markdown
+
+- Lib: [markdownify](https://github.com/matthewwithanm/python-markdownify)
+
+Example:
+
+- Course: https://www.cloudskillsboost.google/course_templates/1191
+- Lab: https://www.cloudskillsboost.google/focuses/1763?parent=catalog
