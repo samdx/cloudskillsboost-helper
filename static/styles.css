@@ -10,6 +10,13 @@ nav.fixed {
     z-index: 1000; /* Ensure it stays above other elements */
 }
 
+nav ul a span.badge {
+    /* background-color: #2196f3; */
+    color: lightgrey;
+    font-weight: normal;
+    border-radius: 3px;
+}
+
 footer.fixed {
     position: fixed;
     bottom: 0;
@@ -75,8 +82,9 @@ footer {
 
 .sidenav .badge {
     background-color: #2196f3;
-    color: #fff;
-    font-weight: bold;
+    color: lightgrey;
+    font-weight: normal;
+    border-radius: 3px;
 }
 .sidenav .badge:hover {
     background-color: #1976d2;
