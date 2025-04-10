@@ -4,11 +4,13 @@
 
 {% block content %}
     <h2 class="blue-text text-darken-2 flex-container">
+        {{ course.name }}
+    </h2>
+    <p>
         <button class="btn-large blue lighten-1 waves-effect waves-light">
             <a href="{{ BASE_URL_COURSES }}/{{ course.id }}" target="_blank" rel="noopener noreferrer">{{ course.id }}</a>
         </button>
-        {{ course.name }}
-    </h2>
+    </p>
     <h3>Description</h3>
     <p>{{ course.description }}</p>
     <h3>Topics</h3>
