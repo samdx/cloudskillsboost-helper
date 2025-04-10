@@ -51,6 +51,23 @@ def home():
         'index.html'
     )
 
+@app.route('/courses')
+def courses():
+    """
+    Display all courses available in the collection.
+    """
+
+    # Get all courses
+    courses = courses_collection.collection
+
+    # Generate breadcrumbs for navigation
+    breadcrumbs = generate_breadcrumbs()
+
+    return render_template(
+        'courses.html',
+        courses=courses,
+        breadcrumbs=breadcrumbs
+    )
 
 @app.route('/course/<course_id>')
 def course(course_id):
