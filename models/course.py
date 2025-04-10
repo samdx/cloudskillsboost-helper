@@ -226,6 +226,20 @@ class Course(BaseEntity):
             lab_content_outline_element = lab_page_html.select_one(LAB_CONTENT_OUTLINE)
 
             lab_id = lab_review_lab_id_element["value"].strip()
+
+            # Create a Lab instance for the lab_id
+            lab = Lab(
+                id=lab_id
+            )
+            # Load the lab data from JSON even it's empty
+            lab.load_json()
+
+            # If the lab.name does exist, that means the lab has been extracted already.
+            if lab.name:
+                print(f"(process_lab) •-• [+] Existed: {lab.id} - {lab.name}")
+                return False
+
+            # If the lab.name doesn't exist, the lab is new, continue.
             lab_steps = {}
             if lab_content_outline_element:
                 for a_tag in lab_content_outline_element.find_all('a'):
@@ -233,15 +247,16 @@ class Course(BaseEntity):
                     text = a_tag.text
                     lab_steps[step] = text
 
-            lab = Lab(
-                id=lab_id,
-                name=activity['title'],
-                description=activity.get('description', ''),
-                steps=lab_steps
-            )
+            # Set the lab's attributes.
+            lab.name = activity['title']
+            lab.description = activity.get('description', '')
+            lab.steps = lab_steps
+
+            # Save the lab to files.
             lab.save_json()
             lab.save_markdown()
 
+            # Add the lab to the Labs Collection
             labs_collection = Collection(type='labs', name='Labs Collection')
             labs_collection.load_json()
             labs_collection.collection[lab_id] = lab.name
