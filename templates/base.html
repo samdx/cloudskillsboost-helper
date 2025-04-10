@@ -46,14 +46,6 @@
         </div>
     </nav>
 
-    <!-- Left Side Navigation Panel -->
-    <ul id="slide-out" class="sidenav sidenav-fixed">    
-        <!-- Topics Section (Scrollable) -->
-            {% for topic in topics %}
-            <li class="topic-item"><a href="{{ url_for('topic', topic=topic) }}">{{ topic }}</a></li>
-            {% endfor %}
-    </ul>
-
     <!-- Main Content -->
     <!-- Follow the same properties as body -->
     <div>
