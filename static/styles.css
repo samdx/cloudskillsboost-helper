@@ -24,6 +24,12 @@ nav ul a span.badge {
     border-radius: 3px;
 }
 
+
+nav .breadcrumb {
+    /* Use the same color as defined in nav */
+    color: inherit; 
+}
+
 /* Footer */
 
 footer.fixed {
