@@ -89,7 +89,7 @@ def course(course_id):
         course=course
     )
 
-@app.route('/path')
+@app.route('/paths')
 def paths():
     """
     Display all paths available in the collection.
@@ -107,7 +107,7 @@ def paths():
         breadcrumbs=breadcrumbs
     )
 
-@app.route('/path/<path_id>')
+@app.route('/paths/<path_id>')
 def path(path_id):
     """
     Display details of a specific path.
