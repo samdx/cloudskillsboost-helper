@@ -86,9 +86,13 @@ def path(path_id):
     path_data = Path(id=path_id)
     path_data.load_json()
 
+    # Generate breadcrumbs for navigation
+    breadcrumbs = generate_breadcrumbs()
+
     return render_template(
         'path.html',
-        path=path_data
+        path=path_data,
+        breadcrumbs=breadcrumbs
     )
 
 
