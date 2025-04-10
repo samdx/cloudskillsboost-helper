@@ -72,6 +72,23 @@ def course(course_id):
         course=course
     )
 
+@app.route('/path')
+def paths():
+    """
+    Display all paths available in the collection.
+    """
+
+    # Get all paths
+    paths = paths_collection.collection
+
+    # Generate breadcrumbs for navigation
+    breadcrumbs = generate_breadcrumbs()
+
+    return render_template(
+        'paths.html',
+        paths=paths,
+        breadcrumbs=breadcrumbs
+    )
 
 @app.route('/path/<path_id>')
 def path(path_id):
