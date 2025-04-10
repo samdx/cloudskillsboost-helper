@@ -130,6 +130,24 @@ def path(path_id):
     )
 
 
+@app.route('/labs')
+def labs():
+    """
+    Display all labs available in the collection.
+    """
+
+    # Get all labs
+    labs = labs_collection.collection
+
+    # Generate breadcrumbs for navigation
+    breadcrumbs = generate_breadcrumbs()
+
+    return render_template(
+        'labs.html',
+        labs=labs,
+        breadcrumbs=breadcrumbs
+    )
+
 @app.route('/labs/<lab_id>')
 def lab(lab_id):
     # Logic to fetch and display lab details

@@ -1,0 +1,22 @@
+{% extends 'base.html' %}
+
+{% block title %}Labs{% endblock %}
+
+{% block content %}
+<h2 id="labs" class="blue-text text-darken-2">Labs</h2>
+<ul class="collection collapsible-content">
+    {% for lab_id, lab_name in labs.items() %}
+    <li class="collection-item">
+        <label>
+            <input type="checkbox" {% if lab_id in completed_courses %}checked{% endif %} disabled>
+            <span>
+                <button class="btn-small blue lighten-1 waves-effect waves-light">
+                    <a href="{{ BASE_URL_LABS }}/{{ lab_id }}" target="_blank" rel="noopener noreferrer">{{ lab_id }}</a>
+                </button> 
+                <a href="{{ url_for('lab', lab_id=lab_id) }}">{{ lab_name }}</a>
+            </span>
+        </label>
+    </li>
+    {% endfor %}
+</ul>
+{% endblock %}
