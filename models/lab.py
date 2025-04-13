@@ -6,16 +6,13 @@ from .base_entity import BaseEntity
 class Lab(BaseEntity):
     def __init__(self,
                  id: str,
-                 name: str,
-                 description: str,
-                 url: str,
-                 steps: dict,
-                 type: str = 'Lab'):
+                 name: str = None,
+                 description: str = None,
+                 steps: dict = None):
         super().__init__(id,
                          name,
-                         type,
-                         description,
-                         url)
+                         description
+                         )
         self.steps = steps or {}
 
     # Save the Lab data to a Markdown file

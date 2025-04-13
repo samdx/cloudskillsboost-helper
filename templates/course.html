@@ -1,0 +1,53 @@
+{% extends 'base.html' %}
+
+{% block title %}Course Details: {{ course.name }}{% endblock %}
+
+{% block content %}
+<!-- Left Side Navigation Panel -->
+<ul id="slide-out" class="sidenav sidenav-fixed">    
+    {% for course_id, course_name in courses.items() %}
+    <li class="topic-item"><a href="{{ url_for('course', course_id=course_id) }}">{{ course_name }}</a></li>
+    {% endfor %}
+</ul>
+    <h2 class="blue-text text-darken-2">
+        {{ course.name }}
+        <!-- Display the course ID to the right -->
+        <span class="id-num right"><a href="{{ BASE_URL_COURSES }}/{{ course.id }}" target="_blank" rel="noopener noreferrer">{{ course.id }}</a></span>
+    </h2>
+    <!-- Display the date published of the item -->
+    <ul>
+        <li class="right"><span class="badge">datePublished: {{ course.datePublished }}</span></li>
+    </ul>
+    <h3>Description</h3>
+    <p>{{ course.description }}</p>
+    <h3>Topics</h3>
+    <ul class="collection">
+        {% for topic in course.topics %}
+        <li class="collection-item"> <a href="{{ url_for('topic', topic=topic) }}">{{ topic }}</a></li>
+        {% endfor %}
+    </ul>
+    <h3>Objectives</h3>
+    <ul class="collection">
+        {% for objective in course.objectives %}
+        <li class="collection-item">{{ objective }}</li>
+        {% endfor %}
+    </ul>
+    <h3>Modules</h3>
+    {% for module in course.modules %}
+        <h4>{{ module.title }}</h4>
+        {% if module.description is not none %}
+            <p>{{ module.description }}</p>
+        {% endif %}
+        <ol class="collection">
+            {% for step in module.steps %}
+                {% for activity in step.activities %}
+                <li class="collection-item">
+                    <!-- <i class="material-icons left waves-effect waves-light">cloud</i> -->
+                    <strong>{{ activity.title }}</strong>
+                    <span class="badge">{{ activity.type }}</span>
+                </li>
+                {% endfor %}
+            {% endfor %}
+        </ol>
+    {% endfor %}
+{% endblock %}
