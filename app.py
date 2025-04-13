@@ -351,43 +351,9 @@ if __name__ == '__main__':
 # The models should handle the logic for loading data from JSON files and processing courses.
 # The templates (index.html, course.html, path.html) should be created to render the respective pages.
 # The application should be run in an environment where Flask is installed.
-# To run the application, save this code in a file named application.py and run:
-# python application.py
+# To run the application, save this code in a file named app.py and run:
+# python app.py
 # Ensure you have Flask installed in your Python environment.
 # You can install Flask using pip:
 # pip install Flask
 # The application will be accessible at http://localhost:8080
-# Ensure you have the required JSON files in the same directory as this script.
-# The JSON files should contain the data for paths, courses, and labs.
-# The structure of the JSON files should match the expected format for the models.
-# The application can be extended with more features as needed.
-# This code is a basic structure for a Flask web application that manages courses and paths.
-# The application can be further improved with error handling, logging, and user authentication.
-# The application can be deployed on a web server for production use.
-# The application can be containerized using Docker for easier deployment and scaling.
-# The application can be integrated with a database for persistent storage.
-# The application can be tested using unit tests and integration tests.
-# The application can be monitored using tools like Prometheus and Grafana.
-# The application can be secured using HTTPS and authentication mechanisms.
-# The application can be documented using tools like Swagger or OpenAPI.
-# The application can be versioned using Git for source control.
-# The application can be packaged using tools like PyInstaller for distribution.
-# The application can be improved with a better user interface using frontend frameworks like React or Vue.js.
-# The application can be optimized for performance using caching mechanisms.
-# The application can be made responsive for better usability on mobile devices.
-# The application can be localized for different languages and regions.
-# The application can be integrated with third-party APIs for additional functionality.
-# The application can be extended with user profiles and progress tracking.
-# The application can be enhanced with notifications and alerts for users.
-# The application can be improved with search functionality for courses and paths.
-# The application can be extended with user feedback and ratings for courses.
-# The application can be improved with a recommendation system for courses and paths.
-# The application can be extended with social sharing features for courses and paths.
-# The application can be improved with analytics and reporting features.
-# The application can be extended with gamification features for user engagement.
-# The application can be improved with accessibility features for users with disabilities.
-# The application can be extended with a blog or news section for updates and announcements.
-# The application can be improved with a help center or FAQ section for user support.
-# The application can be extended with a community forum for user discussions.
-# The application can be improved with a contact form for user inquiries.
-# The application can be extended with a newsletter subscription feature for updates.
