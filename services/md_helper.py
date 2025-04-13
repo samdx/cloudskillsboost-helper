@@ -179,7 +179,7 @@ class MDHelper:
                         
                         # If it's a link, let put a link here
                         elif activity_type == 'link':
-                            markdown.append(f"- {activity['link']}")
+                            markdown.append(f"- [{activity_title}]({activity['link']})")
 
         # End of modules
 
