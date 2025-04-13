@@ -1,0 +1,28 @@
+{% extends 'base.html' %}
+
+{% block title %}Courses{% endblock %}
+
+{% block content %}
+<!-- Left Side Navigation Panel -->
+<ul id="slide-out" class="sidenav sidenav-fixed">    
+    {% for course_id, course_name in courses.items() %}
+    <li class="topic-item"><a href="{{ url_for('course', course_id=course_id) }}">{{ course_name }}</a></li>
+    {% endfor %}
+</ul>
+<h2 id="courses" class="blue-text text-darken-2">Courses</h2>
+<ul class="collection collapsible-content">
+    {% for course_id, course_name in courses.items() %}
+    <li class="collection-item">
+        <label>
+            <input type="checkbox" {% if course_id in completed_courses %}checked{% endif %} disabled>
+            <span>
+                <a href="{{ url_for('course', course_id=course_id) }}">{{ course_name }}</a>
+            </span>
+            <span class="badge right badge-item">
+                <a href="{{ BASE_URL_PATHS }}/{{ course_id }}" target="_blank" rel="noopener noreferrer">{{ course_id }}</a>
+            </span> 
+        </label>
+    </li>
+    {% endfor %}
+</ul>
+{% endblock %}

@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{% block title %}Cloud Skills Boost Helper{% endblock %}</title>
+    <!-- Materialize CSS -->
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css" rel="stylesheet">
+    <!-- Custom Styles -->
+    <link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}">
+    <!-- Materialize JS -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js" defer></script>
+    <!-- Custom JS -->
+    <script src="{{ url_for('static', filename='script.js') }}" defer></script>
+    <link rel="icon" type="image/png" href="{{ url_for('static', filename='favicon.png') }}">
+    <meta name="description" content="A tool to help you boost your cloud skills with curated paths, courses, and labs.">
+    <meta name="keywords" content="cloud skills, courses, labs, paths, learning">
+    <meta name="author" content="Sam Dinh">
+    <meta name="robots" content="index, follow">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            var elems = document.querySelectorAll('.sidenav');
+            var instances = M.Sidenav.init(elems);
+        });
+    </script>
+</head>
+<body class="grey lighten-4 container">
+    <!-- Navigation Bar -->
+    <nav class="blue fixed">
+        <div class="nav-wrapper container">
+            <a href="/" class="breadcrumb"><i class="material-icons">school</i></a>
+            <a href="/" class="breadcrumb">CSB Helper</a>
+            {% for segment in breadcrumbs %}
+            <a href="{{ segment.url }}" class="breadcrumb">{{ segment.name }}</a>
+            {% endfor %}
+            <ul id="nav-mobile" class="right hide-on-med-and-down">
+                <li><a class="collection-item"><i class="material-icons">search</i></a></li>
+                <li><a href="{{ url_for('paths') }}" class="collection-item"><span class="badge">{{ paths|length }}</span>Paths</a></li>
+                <li><a href="{{ url_for('courses') }}" class="collection-item"><span class="badge">{{ courses|length }}</span>Courses</a></li>
+                <li><a href="{{ url_for('labs') }}" class="collection-item"><span class="badge">{{ labs|length }}</span>Labs</a></li>
+                <li><a href="{{ url_for('topics') }}" class="collection-item"><span class="badge">{{ topics|length }}</span>Topics</a></li>
+                <li><a href="{{ url_for('about') }}" class="collection-item">About</a></li>
+              </ul>
+        </div>
+    </nav>
+
+    <!-- Main Content -->
+    <!-- Follow the same properties as body -->
+    <div>
+        {% block content %}{% endblock %}
+    </div>
+
+    <!-- Footer -->
+    <footer class="page-footer blue footer-copyright fixed">
+          <div class="container">
+          Free of use, no guarantee.
+          <a class="grey-text text-lighten-4 right" href="#!">Feel free to contribute.</a>
+        </div>
+      </footer>
+</body>
+</html>

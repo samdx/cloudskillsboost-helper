@@ -1,0 +1,28 @@
+{% extends 'base.html' %}
+
+{% block title %}Paths{% endblock %}
+
+{% block content %}
+<!-- Left Side Navigation Panel -->
+<ul id="slide-out" class="sidenav sidenav-fixed">    
+    {% for path_id, path_name in paths.items() %}
+    <li class="topic-item"><a href="{{ url_for('path', path_id=path_id) }}">{{ path_name }}</a></li>
+    {% endfor %}
+</ul>
+<h2 id="paths" class="blue-text text-darken-2">Paths</h2>
+<ul class="collection collapsible-content">
+    {% for path_id, path_name in paths.items() %}
+    <li class="collection-item">
+        <label>
+            <input type="checkbox" {% if path_id in completed_paths %}checked{% endif %} disabled>
+            <span>
+                <a href="{{ url_for('path', path_id=path_id) }}">{{ path_name }}</a>
+            </span>
+            <span class="badge right badge-item">
+                <a href="{{ BASE_URL_PATHS }}/{{ path_id }}" target="_blank" rel="noopener noreferrer">{{ path_id }}</a>
+            </span>
+        </label>
+    </li>
+    {% endfor %}
+</ul>
+{% endblock %}

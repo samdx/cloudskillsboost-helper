@@ -1,6 +1,6 @@
-
 /.webdriver_profiles
 *.pyc
 /data/
 .env
 /.venv
+/node_modules

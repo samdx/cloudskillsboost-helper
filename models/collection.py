@@ -101,18 +101,6 @@ class Collection(Serialize):
         with open(self._json_path, 'w', encoding='utf-8', newline='\n') as jsonfile:
             json.dump(data, jsonfile, ensure_ascii=False, indent=2)
 
-    def add_item(self, item_id: str, item_name: str):
-        """
-        Add a course/path/lab to the `collection`.\n
-        :param item_id: str, `Path.id`, `Course.id`, `Lab.id`
-        :param item_name: str, `Path.name`, `Course.name`, `Lab.name`
-        :rtype: None
-        """
-
-        # Assign the course directly without checking, not a big deal, faster
-        self.collection[item_id] = item_name
-        self.save_json()
-
     def print_list(self):
         """
         Print out the collection prior to prompting user for a selection.

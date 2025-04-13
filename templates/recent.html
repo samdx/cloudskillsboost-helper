@@ -1,0 +1,58 @@
+<!-- Left Side Navigation Panel -->
+<ul id="slide-out" class="sidenav sidenav-fixed">    
+    {% for topic in topics %}
+    <li class="topic-item"><a href="{{ url_for('topic', topic=topic) }}">{{ topic }}</a></li>
+    {% endfor %}
+</ul>
+
+<h2 id="paths" class="blue-text text-darken-2">Your Recent Touches</h2>
+<h3 class="blue-text text-darken-2">Paths</h3>
+<ul class="collection collapsible-content">
+    {% for path_id, path_name in paths.items() %}
+    <li class="collection-item">
+        <label>
+            <input type="checkbox" {% if path_id in completed_paths %}checked{% endif %} disabled>
+            <span>
+                <button class="btn-small blue lighten-1 waves-effect waves-light">
+                    <a href="{{ BASE_URL_PATHS }}/{{ path_id }}" target="_blank" rel="noopener noreferrer">{{ path_id }}</a>
+                </button> 
+                <a href="{{ url_for('path', path_id=path_id) }}">{{ path_name }}</a>
+            </span>
+        </label>
+    </li>
+    {% endfor %}
+</ul>
+
+<h3 class="blue-text text-darken-2">Courses</h3>
+<ul class="collection collapsible-content">
+    {% for course_id, course_name in courses.items() %}
+    <li class="collection-item">
+        <label>
+            <input type="checkbox" {% if course_id in completed_courses %}checked{% endif %} disabled>
+            <span>
+                <button class="btn-small blue lighten-1 waves-effect waves-light">
+                    <a href="{{ BASE_URL_COURSES }}/{{ course_id }}" target="_blank" rel="noopener noreferrer">{{ course_id }}</a>
+                </button>
+                <a href="{{ url_for('course', course_id=course_id) }}">{{ course_name }}</a>
+            </span>
+        </label>
+    </li>
+    {% endfor %}
+</ul>
+
+<h3 class="blue-text text-darken-2">Labs</h3>
+<ul class="collection collapsible-content">
+    {% for lab_id, lab_name in labs.items() %}
+    <li class="collection-item">
+        <label>
+            <input type="checkbox" {% if lab_id in completed_labs %}checked{% endif %} disabled>
+            <span>
+                <button class="btn-small blue lighten-1 waves-effect waves-light">
+                    <a href="{{ BASE_URL_LAB }}/{{ lab_id }}" target="_blank" rel="noopener noreferrer">{{ lab_id }}</a>
+                </button>
+                <a href="{{ url_for('lab', lab_id=lab_id) }}">{{ lab_name }}</a>
+            </span>
+        </label>
+    </li>
+    {% endfor %}
+</ul>
