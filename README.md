@@ -4,9 +4,36 @@
 
 A helper or a scraper.
 
-TL;DR
+## TL;DR
 
 This is a small tools for scraping contents from Google Cloud Skills Boost website to Markdown files, which helps to build your Personal Knowledge Base, Obsidian, for example.
+
+The idea:
+
+1. Extract the courses' content from CSB website into Markdown files.
+2. Manage/update those contents in your Personal Knowledge Base (Obsidian for example).
+
+To start:
+
+1. Update `config/settings.py` file to meet your environment.
+2. Create a `venv` for your Python distribution, for example `.venv`.
+3. Install dependencies from `requirements.txt`: `pip3 install -r requirements.txt`.
+4. Start download with the `scrapter.py`.
+
+```bash
+python scrapter.py
+```
+
+Hint:
+
+- A simple web interface to browse your downloaded courses.
+
+```bash
+python app.py
+```
+
+
+5. Open output Markdown files with your Obsidian or any other similar software.
 
 ## Samples
 
