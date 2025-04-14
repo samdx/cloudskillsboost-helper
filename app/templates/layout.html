@@ -18,20 +18,26 @@
 
 <body>
     <!-- Navigation Bar -->
-    <nav role="navigation" class="fixed">
+    <nav role="navigation" class="breadcrumb-wrapper fixed">
         <div class="nav-wrapper container">
-            <a href="#" class="brand-logo">
-                <i class="material-icons">school</i> CBS Helper
-            </a>
+            <div class="brand-logo">
+                <a href="/" class="breadcrumb">
+                    <i class="material-icons">school</i> CBS Helper
+                </a>
+                {% for segment in breadcrumbs %}
+                <a href="{{ segment.url }}" class="breadcrumb">{{ segment.name }}</a>
+                {% endfor %}
+            </div>
             <ul class="right hide-on-med-and-down">
                 <li><a href="#">
                         <i class="material-icons">search</i>
                     </a>
                 </li>
-                <li><a href="#">Paths</a></li>
-                <li><a href="#">Courses</a></li>
-                <li><a href="#">Labs</a></li>
-                <li><a href="#">About</a></li>
+                <li><a href="{{ url_for('paths') }}">Paths</a></li>
+                <li><a href="{{ url_for('courses') }}">Courses</a></li>
+                <li><a href="{{ url_for('labs') }}">Labs</a></li>
+                <li><a href="{{ url_for('topics') }}">Topics</a></li>
+                <li><a href="{{ url_for('about') }}">About</a></li>
                 <li>
                     <a id="theme-switch" href="#" title="Switch to dark mode" tabindex="0">
                         <i class="material-icons">dark_mode</i>
@@ -40,10 +46,11 @@
             </ul>
 
             <ul id="nav-mobile" class="sidenav">
-                <li><a href="#">Paths</a></li>
-                <li><a href="#">Courses</a></li>
-                <li><a href="#">Labs</a></li>
-                <li><a href="#">About</a></li>
+                <li><a href="{{ url_for('paths') }}">Paths</a></li>
+                <li><a href="{{ url_for('courses') }}">Courses</a></li>
+                <li><a href="{{ url_for('labs') }}">Labs</a></li>
+                <li><a href="{{ url_for('topics') }}">Topics</a></li>
+                <li><a href="{{ url_for('about') }}">About</a></li>
             </ul>
             <a href="#" data-target="nav-mobile" class="sidenav-trigger">
                 <i class="material-icons menu">menu</i>

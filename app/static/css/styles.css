@@ -2,6 +2,10 @@ nav .brand-logo {
     color: var(--md-sys-color-primary);
 }
 
+.breadcrumb:last-child {
+    color: var(--md-sys-color-primary);
+}
+
 nav ul:not(.dropdown-content)>li>a {
     color: var(--md-sys-color-primary);
 }
