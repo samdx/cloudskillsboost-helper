@@ -2,6 +2,14 @@ nav ul:not(.dropdown-content) > li > a {
     color: #e9e7e7;
 }
 
+nav.fixed {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    z-index: 1000; /* Ensure it stays above other elements */
+}
+
 footer.fixed {
     padding: 10px;
     position: fixed;
