@@ -51,6 +51,10 @@
 
     <div class="row main-content">
         <div class="col s12 m4 l2 hide-on-med-and-down sidebar">
+            <div class="input-field inline">
+                <input id="filter_item" type="text" class="validate" placeholder=" ">
+                <label for="filter_item">Filter by Paths</label>
+            </div>
             <ul>
                 {% for topic in topics %}
                 <li class="topic-item"><a href="{{ url_for('topic', topic=topic) }}">{{ topic }}</a></li>
@@ -77,9 +81,8 @@
         </div>
         <div class="col s12 m4 l2 hide-on-med-and-down sidebar">
             <div class="input-field inline">
-                <input id="email_inline" type="email" class="validate" placeholder=" ">
-                <label for="email_inline">Filter by Topic</label>
-                <span class="helper-text" data-error="wrong" data-success="right"></span>
+                <input id="filter_topic" type="text" class="validate" placeholder=" ">
+                <label for="filter_topic">Filter by Topic</label>
             </div>
             <ul>
                 {% for topic in topics %}
