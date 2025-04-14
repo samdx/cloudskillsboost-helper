@@ -1,63 +1,148 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>{% block title %}Cloud Skills Boost Helper{% endblock %}</title>
-    <!-- Materialize CSS -->
-    <link href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css" rel="stylesheet">
+    <!--Import Google Icon Font-->
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    <!--Import materialize.css-->
+    <link type="text/css" rel="stylesheet" href="{{ url_for('static', filename='css/materialize.css') }}"
+        media="screen,projection" />
+    <!--Let browser know website is optimized for mobile-->
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <!-- Custom Styles -->
-    <link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}">
-    <!-- Materialize JS -->
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js" defer></script>
-    <!-- Custom JS -->
-    <script src="{{ url_for('static', filename='script.js') }}" defer></script>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/styles.css') }}">
     <link rel="icon" type="image/png" href="{{ url_for('static', filename='favicon.png') }}">
-    <meta name="description" content="A tool to help you boost your cloud skills with curated paths, courses, and labs.">
-    <meta name="keywords" content="cloud skills, courses, labs, paths, learning">
-    <meta name="author" content="Sam Dinh">
-    <meta name="robots" content="index, follow">
-    <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
-    <script>
-        document.addEventListener('DOMContentLoaded', function() {
-            var elems = document.querySelectorAll('.sidenav');
-            var instances = M.Sidenav.init(elems);
-        });
-    </script>
 </head>
-<body class="grey lighten-4 container">
+
+<body>
     <!-- Navigation Bar -->
-    <nav class="blue fixed">
+    <nav role="navigation" class="breadcrumb-wrapper fixed">
         <div class="nav-wrapper container">
-            <a href="/" class="breadcrumb"><i class="material-icons">school</i></a>
-            <a href="/" class="breadcrumb">CSB Helper</a>
-            {% for segment in breadcrumbs %}
-            <a href="{{ segment.url }}" class="breadcrumb">{{ segment.name }}</a>
-            {% endfor %}
-            <ul id="nav-mobile" class="right hide-on-med-and-down">
-                <li><a class="collection-item"><i class="material-icons">search</i></a></li>
-                <li><a href="{{ url_for('paths') }}" class="collection-item"><span class="badge">{{ paths|length }}</span>Paths</a></li>
-                <li><a href="{{ url_for('courses') }}" class="collection-item"><span class="badge">{{ courses|length }}</span>Courses</a></li>
-                <li><a href="{{ url_for('labs') }}" class="collection-item"><span class="badge">{{ labs|length }}</span>Labs</a></li>
-                <li><a href="{{ url_for('topics') }}" class="collection-item"><span class="badge">{{ topics|length }}</span>Topics</a></li>
-                <li><a href="{{ url_for('about') }}" class="collection-item">About</a></li>
-              </ul>
+            <div class="brand-logo">
+                <a href="/" class="breadcrumb">
+                    <i class="material-icons">school</i> CBS Helper
+                </a>
+                {% for segment in breadcrumbs %}
+                <a href="{{ segment.url }}" class="breadcrumb">{{ segment.name }}</a>
+                {% endfor %}
+            </div>
+            <ul class="right hide-on-med-and-down">
+                <li><a href="#">
+                        <i class="material-icons">search</i>
+                    </a>
+                </li>
+                <li><a href="{{ url_for('paths') }}">Paths</a></li>
+                <li><a href="{{ url_for('courses') }}">Courses</a></li>
+                <li><a href="{{ url_for('labs') }}">Labs</a></li>
+                <li><a href="{{ url_for('topics') }}">Topics</a></li>
+                <li><a href="{{ url_for('about') }}">About</a></li>
+                <li>
+                    <a id="theme-switch" href="#" title="Switch to dark mode" tabindex="0">
+                        <i class="material-icons">dark_mode</i>
+                    </a>
+                </li>
+            </ul>
+
+            <ul id="nav-mobile" class="sidenav">
+                <li><a href="{{ url_for('paths') }}">Paths</a></li>
+                <li><a href="{{ url_for('courses') }}">Courses</a></li>
+                <li><a href="{{ url_for('labs') }}">Labs</a></li>
+                <li><a href="{{ url_for('topics') }}">Topics</a></li>
+                <li><a href="{{ url_for('about') }}">About</a></li>
+            </ul>
+            <a href="#" data-target="nav-mobile" class="sidenav-trigger">
+                <i class="material-icons menu">menu</i>
+            </a>
         </div>
     </nav>
 
-    <!-- Main Content -->
-    <!-- Follow the same properties as body -->
-    <div>
-        {% block content %}{% endblock %}
+    <!-- The main container -->
+    <div class="row main-content">
+
+        <!-- The left sidebar -->
+        <div class="col s12 m4 l2 hide-on-med-and-down sidebar">
+            <div class="input-field inline">
+                <input id="filter_item" type="text" class="validate" placeholder=" ">
+                <label for="filter_item">Filter by Paths</label>
+            </div>
+            <ul>
+                {% for topic in topics %}
+                <li class="topic-item"><a href="{{ url_for('topic', topic=topic) }}">{{ topic }}</a></li>
+                {% endfor %}
+            </ul>
+        </div>
+
+        <!-- The main content container -->
+        <div class="col s12 m12 l8 container">
+            {% block content %}{% endblock %}
+        </div>
+
+        <!-- The right sidebar -->
+        <div class="col s12 m4 l2 hide-on-med-and-down sidebar">
+            <div class="input-field inline">
+                <input id="filter_topic" type="text" class="validate" placeholder=" ">
+                <label for="filter_topic">Filter by Topic</label>
+            </div>
+            <ul>
+                {% for topic in topics %}
+                <li class="topic-item"><a href="{{ url_for('topic', topic=topic) }}">{{ topic }}</a></li>
+                {% endfor %}
+            </ul>
+        </div>
+
     </div>
 
     <!-- Footer -->
-    <footer class="page-footer blue footer-copyright fixed">
-          <div class="container">
-          Free of use, no guarantee.
-          <a class="grey-text text-lighten-4 right" href="#!">Feel free to contribute.</a>
+    <footer class="footer-copyright fixed">
+        <div class="container">
+            Free of use, no guarantee.
+            <span class="right">Feel free to contribute.</span>
         </div>
-      </footer>
+    </footer>
+
+    <!--JavaScript at end of body for optimized loading-->
+    <script type="text/javascript" src="{{ url_for('static', filename='js/materialize.js') }}"></script>
+    <script>
+        M.AutoInit();
+    </script>
+
+    <script defer>
+        // Change Theme Setting with a Switch
+        function getTheme() {
+            const isDarkModeEnabledViaCss = window.matchMedia && window.matchMedia('(prefers-color-scheme: light)').matches;
+            const currentTheme = localStorage.getItem('theme');
+            const isDark = currentTheme ? currentTheme === 'dark' : isDarkModeEnabledViaCss;
+            return isDark;
+        }
+
+        function setTheme(enableDark) {
+            document.documentElement.setAttribute('theme', enableDark ? 'dark' : 'light');
+            localStorage.setItem('theme', enableDark ? 'dark' : 'light');
+        }
+
+        function updateDarkModeButtonState(isCurrentlyDarkModeEnabled) {
+            const element = document.querySelector('#theme-switch');
+            element.classList.remove('is-dark');
+            if (isCurrentlyDarkModeEnabled) element.classList.add('is-dark');
+            element.querySelector('i').innerText = isCurrentlyDarkModeEnabled ? 'light_mode' : 'dark_mode';
+            element.title = 'Switch to ' + (isCurrentlyDarkModeEnabled ? 'light' : 'dark') + ' mode';
+        }
+
+        // Init Theme and Button
+        const darkModeButton = document.querySelector('#theme-switch');
+        darkModeButton.addEventListener('click', (e) => {
+            e.preventDefault();
+            const nextState = !getTheme(); // toggle
+            setTheme(nextState);
+            updateDarkModeButtonState(nextState);
+        });
+        const currentState = getTheme();
+        setTheme(currentState);
+        updateDarkModeButtonState(currentState);
+    </script>
+
 </body>
+
 </html>
