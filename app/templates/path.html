@@ -1,42 +1,70 @@
 {% extends 'base.html' %}
 
-{% block title %}Path Details: {{ path.name }}{% endblock %}
+{% block title %}{{ path.name }}{% endblock %}
 
 {% block content %}
-<!-- Left Side Navigation Panel -->
-<ul id="slide-out" class="sidenav sidenav-fixed">    
-    {% for path_id, path_name in paths.items() %}
-    <li class="topic-item"><a href="{{ url_for('path', path_id=path_id) }}">{{ path_name }}</a></li>
-    {% endfor %}
-</ul>
-<h2 class="blue-text text-darken-2">
-    {{ path.name }}
-    <!-- Display the path ID -->
-    <span class="id-num right"><a href="{{ BASE_URL_PATHS }}/{{ path.id }}" target="_blank" rel="noopener noreferrer">{{ path.id }}</a></span>
-</h2>
-<!-- Display the date published of the item -->
-<ul>
-    <li class="right"><span class="badge">datePublished: {{ path.datePublished }}</span></li>
-</ul>
-<h3>Description</h3>
-<p>{{ path.description }}</p>
-<h3>
-    Courses & Progress
-    <!-- Display the number of courses in the path. -->
-    <span class="id-num right">{{ path.courses|length }}</span></h3>
-<ul class="collection">
-    {% for course_id, course_data in path.courses.items() %}
-    <li class="collection-item">
-        <label>
-            <input type="checkbox" {% if course_id in completed_courses %}checked{% endif %} disabled>
-            <span>
-                <button class="btn-small blue lighten-1 waves-effect waves-light">
-                    <a href="{{ BASE_URL_COURSES }}/{{ course_id }}" target="_blank" rel="noopener noreferrer">{{ course_id }}</a>
-                </button>
-                <a href="{{ url_for('course', course_id=course_id) }}">{{ course_data.name }}</a>
-            </span>
-        </label>
-    </li>
-    {% endfor %}
-</ul>
+
+<!-- The main content -->
+<div class="row main-content">
+
+    <!-- The left sidebar -->
+    <div class="col s12 m4 l2 hide-on-med-and-down sidebar">
+        <div class="input-field inline">
+            <input id="filter_item" type="text" class="validate" placeholder=" ">
+            <label for="filter_item">Filter by Path</label>
+        </div>
+        <ul>
+            {% for path_id, path_name in paths.items() %}
+            <li class="topic-item"><a href="{{ url_for('path', path_id=path_id) }}">{{ path_name }}</a></li>
+            {% endfor %}
+        </ul>
+    </div>
+
+    <!-- The main content container -->
+    <div class="col s12 m12 l8 container">
+        <h2 class="blue-text text-darken-2">
+            {{ path.name }}
+            <!-- Display the path ID -->
+            <span class="id-num right"><a href="{{ BASE_URL_PATHS }}/{{ path.id }}" target="_blank" rel="noopener noreferrer">{{ path.id }}</a></span>
+        </h2>
+        <!-- Display the date published of the item -->
+        <blockquote>
+            <p>{{ path.description }}</p>
+        </blockquote>
+        <h3>
+            Courses & Progress
+            <!-- Display the number of courses in the path. -->
+            <span class="id-num right">{{ path.courses|length }}</span>
+        </h3>
+            <ul class="collection">
+                {% for course_id, course_data in path.courses.items() %}
+                <li class="collection-item">
+                    <label>
+                        <input type="checkbox" checked="{% if course_id in completed_courses %}checked{% endif %}" />
+                        <span>
+                            <a href="{{ url_for('course', course_id=course_id) }}">{{ course_data.name }}</a>
+                        </span>
+                        <span class="badge right"><a href="{{ BASE_URL_COURSES }}/{{ course_id }}" target="_blank" rel="noopener noreferrer">{{ course_id }}</a></span>
+                        <span class="badge right">Course</span>
+                    </label>
+                </li>
+                {% endfor %}
+            </ul>
+    </div>
+
+    <!-- The right sidebar -->
+    <div class="col s12 m4 l2 hide-on-med-and-down sidebar">
+        <div class="input-field inline">
+            <input id="filter_topic" type="text" class="validate" placeholder=" ">
+            <label for="filter_topic">Filter by Topic</label>
+        </div>
+        <ul>
+            {% for topic in topics %}
+            <li class="topic-item"><a href="{{ url_for('topic', topic=topic) }}">{{ topic }}</a></li>
+            {% endfor %}
+        </ul>
+    </div>
+
+</div>
+
 {% endblock %}
