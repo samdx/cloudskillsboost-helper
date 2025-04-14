@@ -1,8 +1,15 @@
 # Description: Configuration file for the project
+from pathlib import Path as PathlibPath
 
-# Output folder name
-OUTPUT_FOLDER_NAME: str = "output"
-DATA_FOLDER_NAME: str = "data"
+# Determine the project root directory
+# This to ensure the app can work with relative paths
+PROJECT_ROOT = PathlibPath(__file__).parent.parent.parent
+
+# Output: Folder for Markdown files
+# Data: Folder for JSON files.
+# You can specific path or use the relateve paths here.
+OUTPUT_FOLDER_NAME: str = PathlibPath (PROJECT_ROOT) / "csbmdvault"
+DATA_FOLDER_NAME: str = PathlibPath (PROJECT_ROOT) / "data"
 
 # Base URL for the Cloud Skills Boost website
 BASE_URL: str = "https://www.cloudskillsboost.google"
