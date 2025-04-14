@@ -3,31 +3,54 @@
 {% block title %}Browse by Topic: {{ topic }}{% endblock %}
 
 {% block content %}
-<!-- Left Side Navigation Panel -->
-<ul id="slide-out" class="sidenav sidenav-fixed">    
-    {% for topic in topics %}
-    <li class="topic-item"><a href="{{ url_for('topic', topic=topic) }}">{{ topic }}</a></li>
-    {% endfor %}
-</ul>
 
-    <h2 class="blue-text text-darken-2">
-        {{ topic }}
-        <!-- Display the number of courses available in the topic -->
-        <span class="id-num right">{{ filtered_courses | length }}</span>
-    </h2>
-    <ul class="collection">
-        {% for course_id, course_name in filtered_courses.items() %}
-        <li class="collection-item">
-            <label>
-                <input type="checkbox" {% if course_id in completed_courses %}checked{% endif %} disabled>
-                <span>
-                    <button class="btn-small blue lighten-1 waves-effect waves-light">
+<!-- The main content -->
+<div class="row main-content">
+
+    <!-- The left sidebar -->
+    <div class="col s12 m4 l2 hide-on-med-and-down sidebar">
+    </div>
+
+    <!-- The main content container -->
+    <div class="col s12 m12 l8 container">
+        <h2>
+            {{ topic }}
+            <!-- Display the number of courses available in the topic -->
+            <span class="id-num right">{{ filtered_courses | length }}</span>
+        </h2>
+        <ul class="collection">
+            {% for course_id, course_name in filtered_courses.items() %}
+            <li class="collection-item">
+                <label>
+                    <input type="checkbox" checked="{% if course_id in completed_courses %}checked{% endif %}" />
+                    <span>
+                        <a href="{{ url_for('course', course_id=course_id) }}">{{ course_name }}</a>
+                    </span>
+                    <span class="badge right">
                         <a href="{{ BASE_URL_COURSES }}/{{ course_id }}" target="_blank" rel="noopener noreferrer">{{ course_id }}</a>
-                    </button>
-                    <a href="{{ url_for('course', course_id=course_id) }}">{{ course_name }}</a>
-                </span>
-            </label>
-        </li>
-        {% endfor %}
-    </ul>
+                    </span>
+                    <span class="badge right">Course</span>
+                </label>
+            </li>
+            {% endfor %}
+        </ul>
+    </div>
+
+    <!-- The right sidebar -->
+    <div class="col s12 m4 l2 hide-on-med-and-down sidebar">
+        <div class="input-field inline">
+            <input id="filter_topic" type="text" class="validate" placeholder=" ">
+            <label for="filter_topic">Search for a Topic</label>
+        </div>
+        <ul class="collection">
+            {% for topic in topics %}
+            <li class="collection-item">
+                <a href="{{ url_for('topic', topic=topic) }}">{{ topic }}</a>
+            </li>
+            {% endfor %}
+        </ul>
+    </div>
+
+</div>
+
 {% endblock %}
