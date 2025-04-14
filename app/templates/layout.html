@@ -1,16 +1,18 @@
 <!DOCTYPE html>
-<html>
+<html  lang="en">
 
 <head>
+    <meta charset="UTF-8">
+    <title>{% block title %}Cloud Skills Boost Helper{% endblock %}</title>
     <!--Import Google Icon Font-->
     <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
     <!--Import materialize.css-->
     <link type="text/css" rel="stylesheet" href="{{ url_for('static', filename='css/materialize.css') }}"
         media="screen,projection" />
     <!--Let browser know website is optimized for mobile-->
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <!-- Custom Styles -->
     <link rel="stylesheet" href="{{ url_for('static', filename='css/styles.css') }}">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <link rel="icon" type="image/png" href="{{ url_for('static', filename='favicon.png') }}">
 </head>
 
