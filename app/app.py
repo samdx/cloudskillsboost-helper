@@ -339,6 +339,12 @@ def generate_breadcrumbs():
     return breadcrumbs
 
 
+# Test layout with Materialize
+@app.route('/layout')
+def layout():
+    return render_template('layout.html')
+
+
 if __name__ == '__main__':
     # Start the background thread for periodic refresh
     refresh_thread = threading.Thread(target=refresh_topics, daemon=True)
