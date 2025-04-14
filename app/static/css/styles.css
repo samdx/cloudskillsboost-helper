@@ -1,6 +1,3 @@
-nav ul:not(.dropdown-content) > li > a {
-    color: #e9e7e7;
-}
 
 nav.fixed {
     position: fixed;
