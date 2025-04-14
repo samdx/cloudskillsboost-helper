@@ -20,7 +20,7 @@ nav.fixed {
 
 .collection {
     margin: .5rem 0 1rem 0;
-    border: 1px solid #e4e9ed;
+    /* border: 1px solid #e4e9ed; */
     border-radius: 5px;
     overflow: hidden;
     position: relative
@@ -31,8 +31,8 @@ nav.fixed {
     line-height: 1.5rem;
     padding: 10px 20px;
     margin: 0;
-    border-bottom: 1px solid #e4e9ed;;
-    background-color: #ffffffe0;
+    /* border-bottom: 1px solid #e4e9ed;; */
+    /* background-color: #ffffffe0; */
 }
 
 .sidebar ul {
@@ -46,7 +46,7 @@ nav.fixed {
     line-height: 1.5rem;
     padding: 10px 16px;
     margin: 0;
-    border-bottom: 1px solid #e4e9ed;
+    /* border-bottom: 1px solid #e4e9ed; */
 }
 
 .sidebar a {
