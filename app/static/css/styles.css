@@ -20,7 +20,51 @@ footer.fixed {
 }
 
 .page-footer {
-    /* margin-top: 5rem; */
     padding: 10px;
     /* border-top: 1px dashed var(--md-sys-color-outline-variant); */
-  }
+}
+
+.main-content {
+    margin-top: 64px;
+    margin-bottom: 38px;
+    z-index: 999;
+}
+
+.collection {
+    margin: .5rem 0 1rem 0;
+    border: 1px solid #e4e9ed;
+    border-radius: 5px;
+    overflow: hidden;
+    position: relative
+}
+
+.collection .collection-item {
+    background-color: transparent;
+    line-height: 1.5rem;
+    padding: 10px 20px;
+    margin: 0;
+    border-bottom: 1px solid #e4e9ed;;
+    background-color: #ffffffe0;
+}
+
+.sidebar ul {
+    list-style: none;
+    overflow-y: visible;
+    padding: 0 12px;
+}
+
+.sidebar ul>li {
+    background-color: transparent;
+    line-height: 1.5rem;
+    padding: 10px 16px;
+    margin: 0;
+    border-bottom: 1px solid #e4e9ed;
+}
+
+.sidebar a {
+    color: inherit;
+}
+
+.badge.right{
+    text-align: right;
+}

@@ -15,7 +15,7 @@
 
 <body>
     <!-- Navigation Bar -->
-    <nav role="navigation" class="blue darken-4">
+    <nav role="navigation" class="blue darken-4 fixed">
         <div class="nav-wrapper container">
             <a href="#" class="brand-logo white-text">
                 <i class="material-icons">school</i> CBSHelper
@@ -38,20 +38,48 @@
                 <li><a href="#">About</a></li>
             </ul>
             <a href="#" data-target="nav-mobile" class="sidenav-trigger">
-                <i class="material-icons menu">menu</i>
+                <i class="material-icons menu white-text">menu</i>
             </a>
         </div>
     </nav>
 
-    <div class="row grey lighten-1">
-        <div class="col s12 m4 l2 hide-on-med-and-down">
-            <p>s12 m4</p>
+    <div class="row grey lighten-3 main-content black-text">
+        <div class="col s12 m4 l2 hide-on-med-and-down sidebar">
+            <ul>
+                {% for topic in topics %}
+                <li class="topic-item"><a href="{{ url_for('topic', topic=topic) }}">{{ topic }}</a></li>
+                {% endfor %}
+            </ul>
         </div>
-        <div class="col s12 m4 l8 container">
-            <p>s12 m8</p>
+        <div class="col s12 m12 l8 container">
+            <h2 id="paths">Your Recent Touches</h2>
+            <h3>Paths</h3>
+            <ul class="collection">
+                {% for path_id, path_name in paths.items() %}
+                <li class="collection-item">
+                    <label>
+                        <input type="checkbox" checked="{% if path_id in completed_paths %}checked{% endif %}" />
+                        <span>
+                        <a href="{{ url_for('path', path_id=path_id) }}">{{ path_name }}</a>
+                    </span>
+                    <span class="badge right">{{ path_id }}</span>
+                    <span class="badge right">Path</span>
+                    </label>
+                </li>
+                {% endfor %}
+            </ul>
         </div>
-        <div class="col s12 m4 l2 hide-on-med-and-down">
-            <p>s12 m4</p>
+        <div class="col s12 m4 l2 hide-on-med-and-down sidebar">
+            <div class="input-field inline">
+                <input id="email_inline" type="email" class="validate" placeholder=" ">
+                <label for="email_inline">Filter by Topic</label>
+                <span class="helper-text" data-error="wrong" data-success="right"></span>
+            </div>
+            <ul>
+                {% for topic in topics %}
+                <li class="topic-item"><a href="{{ url_for('topic', topic=topic) }}">{{ topic }}</a></li>
+                {% endfor %}
+            </ul>
         </div>
     </div>
 
