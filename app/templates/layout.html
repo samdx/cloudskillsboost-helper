@@ -12,21 +12,6 @@
     <link rel="stylesheet" href="{{ url_for('static', filename='css/styles.css') }}">
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <link rel="icon" type="image/png" href="{{ url_for('static', filename='favicon.png') }}">
-
-    <script>
-        function getTheme() {
-          const isDarkModeEnabledViaCss = window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches;
-          const currentTheme = localStorage.getItem('theme');
-          const isDark = currentTheme ? currentTheme === 'dark' : isDarkModeEnabledViaCss;
-          return isDark;
-        }
-        function setTheme(enableDark) {
-          document.documentElement.setAttribute('theme', enableDark ? 'dark' : 'light');
-          localStorage.setItem('theme', enableDark ? 'dark' : 'light');
-        }
-        const currentState = getTheme();
-        setTheme(false);
-      </script>
 </head>
 
 <body>
@@ -81,10 +66,10 @@
                     <label>
                         <input type="checkbox" checked="{% if path_id in completed_paths %}checked{% endif %}" />
                         <span>
-                        <a href="{{ url_for('path', path_id=path_id) }}">{{ path_name }}</a>
-                    </span>
-                    <span class="badge right">{{ path_id }}</span>
-                    <span class="badge right">Path</span>
+                            <a href="{{ url_for('path', path_id=path_id) }}">{{ path_name }}</a>
+                        </span>
+                        <span class="badge right">{{ path_id }}</span>
+                        <span class="badge right">Path</span>
                     </label>
                 </li>
                 {% endfor %}
@@ -122,6 +107,42 @@
     <script>
         M.AutoInit();
     </script>
+
+    <script defer>
+        // Change Theme Setting with a Switch
+        function getTheme() {
+            const isDarkModeEnabledViaCss = window.matchMedia && window.matchMedia('(prefers-color-scheme: light)').matches;
+            const currentTheme = localStorage.getItem('theme');
+            const isDark = currentTheme ? currentTheme === 'dark' : isDarkModeEnabledViaCss;
+            return isDark;
+        }
+
+        function setTheme(enableDark) {
+            document.documentElement.setAttribute('theme', enableDark ? 'dark' : 'light');
+            localStorage.setItem('theme', enableDark ? 'dark' : 'light');
+        }
+
+        function updateDarkModeButtonState(isCurrentlyDarkModeEnabled) {
+            const element = document.querySelector('#theme-switch');
+            element.classList.remove('is-dark');
+            if (isCurrentlyDarkModeEnabled) element.classList.add('is-dark');
+            element.querySelector('i').innerText = isCurrentlyDarkModeEnabled ? 'light_mode' : 'dark_mode';
+            element.title = 'Switch to ' + (isCurrentlyDarkModeEnabled ? 'light' : 'dark') + ' mode';
+        }
+
+        // Init Theme and Button
+        const darkModeButton = document.querySelector('#theme-switch');
+        darkModeButton.addEventListener('click', (e) => {
+            e.preventDefault();
+            const nextState = !getTheme(); // toggle
+            setTheme(nextState);
+            updateDarkModeButtonState(nextState);
+        });
+        const currentState = getTheme();
+        setTheme(currentState);
+        updateDarkModeButtonState(currentState);
+    </script>
+
 </body>
 
 </html>
