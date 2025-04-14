@@ -1,7 +1,7 @@
 # Description: Configuration file for the project
 
 # Output folder name
-OUTPUT_FOLDER_NAME: str = '../cloudskillsboost_md'
+OUTPUT_FOLDER_NAME: str = "output"
 DATA_FOLDER_NAME: str = "data"
 
 # Base URL for the Cloud Skills Boost website
