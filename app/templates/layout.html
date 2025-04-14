@@ -5,30 +5,58 @@
     <!--Import Google Icon Font-->
     <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
     <!--Import materialize.css-->
-    <link type="text/css" rel="stylesheet" href="{{ url_for('static', filename='css/materialize.css') }}" media="screen,projection"/>
+    <link type="text/css" rel="stylesheet" href="{{ url_for('static', filename='css/materialize.css') }}"
+        media="screen,projection" />
     <!--Let browser know website is optimized for mobile-->
-    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+    <!-- Custom Styles -->
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/styles.css') }}">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 </head>
 
 <body>
     <!-- Navigation Bar -->
-    <nav class="blue row s12">
-        <div class="nav-wrapper col s12 grey-text">
-            <a href="/" class="breadcrumb"><i class="material-icons">school</i><span> </span>CSB Helper</a>
-            <!-- <a href="/" class="breadcrumb">CSB Helper</a> -->
-            {% for segment in breadcrumbs %}
-            <a href="{{ segment.url }}" class="breadcrumb">{{ segment.name }}</a>
-            {% endfor %}
+    <nav role="navigation" class="blue darken-4">
+        <div class="nav-wrapper container">
+            <a href="#" class="brand-logo white-text">
+                <i class="material-icons">school</i> CBSHelper
+            </a>
+            <ul class="right hide-on-med-and-down">
+                <li><a href="#">Paths</a></li>
+                <li><a href="#">Courses</a></li>
+                <li><a href="#">Labs</a></li>
+                <li><a href="#">About</a></li>
+            </ul>
+
+            <ul id="nav-mobile" class="sidenav">
+                <li><a href="#">Paths</a></li>
+                <li><a href="#">Courses</a></li>
+                <li><a href="#">Labs</a></li>
+                <li><a href="#">About</a></li>
+            </ul>
+            <a href="#" data-target="nav-mobile" class="sidenav-trigger">
+                <i class="material-icons menu">menu</i>
+            </a>
         </div>
     </nav>
-    <div class="row orange">
-        <div class="col s12"><p>s12</p></div>
-        <div class="col s12 m4 l2"><p>s12 m4</p></div>
-        <div class="col s12 m4 l8"><p>s12 m4</p></div>
-        <div class="col s12 m4 l2"><p>s12 m4</p></div>
-      </div>
+
+    <!-- Main Content -->
+    <div>
+        {% block content %}{% endblock %}
+    </div>
+
+    <!-- Footer -->
+    <footer class="page-footer blue darken-4 footer-copyright">
+        <div class="container">
+            Free of use, no guarantee.
+            <span class="right">Feel free to contribute.</span>
+        </div>
+    </footer>
+
     <!--JavaScript at end of body for optimized loading-->
     <script type="text/javascript" src="{{ url_for('static', filename='js/materialize.js') }}"></script>
+    <script>
+        M.AutoInit();
+    </script>
 </body>
 
 </html>
