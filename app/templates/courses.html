@@ -31,7 +31,9 @@
                     <span>
                         <a href="{{ url_for('course', course_id=course_id) }}">{{ course_name }}</a>
                     </span>
-                    <span class="badge right">{{ course_id }}</span>
+                    <span class="badge right">
+                        <a href="{{ BASE_URL_COURSES }}/{{ course_id }}" target="_blank" rel="noopener noreferrer">{{ course_id }}</a>
+                    </span>
                     <span class="badge right">Course</span>
                 </label>
             </li>
