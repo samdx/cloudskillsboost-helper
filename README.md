@@ -56,3 +56,11 @@ Graph View.
 The script in action.
 
 ![The script in action](docs/assets/script-in-action.png)
+
+## Further Reading
+
+1. [Installation](docs/installation.md)
+2. [Usage](docs/usage.md)
+3. [How does the data files look like?](docs/data.md)
+4. [How does the Markdown files look like?](docs/output.md)
+5. [Generate prompts to formatting transcript?](docs/promt-llm.md)
