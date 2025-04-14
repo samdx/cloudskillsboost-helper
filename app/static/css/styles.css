@@ -13,8 +13,8 @@ nav.fixed {
 }
 
 .main-content {
-    margin-top: 64px;
-    margin-bottom: 38px;
+    margin-top: var(--navbar-height);
+    /* margin-bottom: 38px; */
     z-index: 999;
 }
 
