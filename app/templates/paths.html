@@ -3,26 +3,55 @@
 {% block title %}Paths{% endblock %}
 
 {% block content %}
-<!-- Left Side Navigation Panel -->
-<ul id="slide-out" class="sidenav sidenav-fixed">    
-    {% for path_id, path_name in paths.items() %}
-    <li class="topic-item"><a href="{{ url_for('path', path_id=path_id) }}">{{ path_name }}</a></li>
-    {% endfor %}
-</ul>
-<h2 id="paths" class="blue-text text-darken-2">Paths</h2>
-<ul class="collection collapsible-content">
-    {% for path_id, path_name in paths.items() %}
-    <li class="collection-item">
-        <label>
-            <input type="checkbox" {% if path_id in completed_paths %}checked{% endif %} disabled>
-            <span>
-                <a href="{{ url_for('path', path_id=path_id) }}">{{ path_name }}</a>
-            </span>
-            <span class="badge right badge-item">
-                <a href="{{ BASE_URL_PATHS }}/{{ path_id }}" target="_blank" rel="noopener noreferrer">{{ path_id }}</a>
-            </span>
-        </label>
-    </li>
-    {% endfor %}
-</ul>
+
+<!-- The main content -->
+<div class="row main-content">
+
+    <!-- The left sidebar -->
+    <div class="col s12 m4 l2 hide-on-med-and-down sidebar">
+        <div class="input-field inline">
+            <input id="filter_item" type="text" class="validate" placeholder=" ">
+            <label for="filter_item">Filter by Path</label>
+        </div>
+        <ul>
+            {% for path_id, path_name in paths.items() %}
+            <li class="topic-item"><a href="{{ url_for('path', path_id=path_id) }}">{{ path_name }}</a></li>
+            {% endfor %}
+        </ul>
+    </div>
+
+    <!-- The main content container -->
+    <div class="col s12 m12 l8 container">
+        <h2 id="paths">Paths</h2>
+        <ul class="collection">
+            {% for path_id, path_name in paths.items() %}
+            <li class="collection-item">
+                <label>
+                    <input type="checkbox" checked="{% if path_id in completed_paths %}checked{% endif %}" />
+                    <span>
+                        <a href="{{ url_for('path', path_id=path_id) }}">{{ path_name }}</a>
+                    </span>
+                    <span class="badge right">{{ path_id }}</span>
+                    <span class="badge right">Path</span>
+                </label>
+            </li>
+            {% endfor %}
+        </ul>
+    </div>
+
+    <!-- The right sidebar -->
+    <div class="col s12 m4 l2 hide-on-med-and-down sidebar">
+        <div class="input-field inline">
+            <input id="filter_topic" type="text" class="validate" placeholder=" ">
+            <label for="filter_topic">Filter by Topic</label>
+        </div>
+        <ul>
+            {% for topic in topics %}
+            <li class="topic-item"><a href="{{ url_for('topic', topic=topic) }}">{{ topic }}</a></li>
+            {% endfor %}
+        </ul>
+    </div>
+
+</div>
+
 {% endblock %}
