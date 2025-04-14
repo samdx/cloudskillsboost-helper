@@ -3,20 +3,53 @@
 {% block title %}Lab Details: {{ lab.name }}{% endblock %}
 
 {% block content %}
-<ul id="slide-out" class="sidenav sidenav-fixed">    
-    {% for lab_id, lab_name in labs.items() %}
-    <li class="topic-item"><a href="{{ url_for('lab', lab_id=lab_id) }}">{{ lab_name }}</a></li>
-    {% endfor %}
-</ul>
-    <h2 class="blue-text text-darken-2">
-        {{ lab.name }}
-        <!-- Display the Lab ID to the right -->
-        <span class="id-num right">
-            <a href="{{ BASE_URL_LAB }}/{{ lab.id }}" target="_blank" rel="noopener noreferrer">{{ lab.id }}</a>
-        </span>
-    </h2>
-    <p>{{ lab.description }}</p>
-    {% for step_id, step_title in lab.steps.items() %}
-    <h3>{{ step_title }}</h3>
-    {% endfor %}
+
+<!-- The main content -->
+<div class="row main-content">
+
+    <!-- The left sidebar -->
+    <div class="col s12 m4 l2 hide-on-med-and-down sidebar">
+        <div class="input-field inline">
+            <input id="filter_item" type="text" class="validate" placeholder=" ">
+            <label for="filter_item">Filter by Labs</label>
+        </div>
+        <ul>
+            {% for lab_id, lab_name in labs.items() %}
+            <li class="topic-item"><a href="{{ url_for('lab', lab_id=lab_id) }}">{{ lab_name }}</a></li>
+            {% endfor %}
+        </ul>
+    </div>
+
+    <!-- The main content container -->
+    <div class="col s12 m12 l8 container">
+        <h2>
+            {{ lab.name }}
+            <!-- Display the Lab ID to the right -->
+            <span class="id-num right">
+                <a href="{{ BASE_URL_LAB }}/{{ lab.id }}" target="_blank" rel="noopener noreferrer">{{ lab.id }}</a>
+            </span>
+        </h2>
+        <blockquote>
+            <p>{{ lab.description }}</p>
+        </blockquote>
+        {% for step_id, step_title in lab.steps.items() %}
+        <h3>{{ step_title }}</h3>
+        {% endfor %}
+    </div>
+
+    <!-- The right sidebar -->
+    <div class="col s12 m4 l2 hide-on-med-and-down sidebar">
+        <div class="input-field inline">
+            <input id="filter_topic" type="text" class="validate" placeholder=" ">
+            <label for="filter_topic">Filter by Topic</label>
+        </div>
+        <ul>
+            {% for topic in topics %}
+            <li class="topic-item"><a href="{{ url_for('topic', topic=topic) }}">{{ topic }}</a></li>
+            {% endfor %}
+        </ul>
+    </div>
+
+</div>
+
 {% endblock %}
