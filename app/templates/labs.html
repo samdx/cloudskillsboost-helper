@@ -31,7 +31,7 @@
                     <span>
                         <a href="{{ url_for('lab', lab_id=lab_id) }}">{{ lab_name }}</a>
                     </span>
-                    <span class="badge right">{{ lab_id }}</span>
+                    <span class="badge right"><a href="{{ BASE_URL_LAB }}/{{ lab_id }}" target="_blank" rel="noopener noreferrer">{{ lab_id }}</a></span>
                     <span class="badge right">Lab</span>
                 </label>
             </li>
