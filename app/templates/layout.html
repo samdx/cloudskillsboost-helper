@@ -16,9 +16,9 @@
 
 <body>
     <!-- Navigation Bar -->
-    <nav role="navigation" class="blue darken-4 fixed">
+    <nav role="navigation" class="fixed">
         <div class="nav-wrapper container">
-            <a href="#" class="brand-logo white-text">
+            <a href="#" class="brand-logo">
                 <i class="material-icons">school</i> CBS Helper
             </a>
             <ul class="right hide-on-med-and-down">
@@ -44,12 +44,12 @@
                 <li><a href="#">About</a></li>
             </ul>
             <a href="#" data-target="nav-mobile" class="sidenav-trigger">
-                <i class="material-icons menu white-text">menu</i>
+                <i class="material-icons menu">menu</i>
             </a>
         </div>
     </nav>
 
-    <div class="row grey lighten-3 main-content black-text">
+    <div class="row main-content">
         <div class="col s12 m4 l2 hide-on-med-and-down sidebar">
             <ul>
                 {% for topic in topics %}
@@ -95,7 +95,7 @@
     </div>
 
     <!-- Footer -->
-    <footer class="blue darken-4 footer-copyright fixed">
+    <footer class="footer-copyright fixed">
         <div class="container">
             Free of use, no guarantee.
             <span class="right">Feel free to contribute.</span>
