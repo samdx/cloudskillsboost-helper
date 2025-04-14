@@ -1,3 +1,5 @@
 {
-    "files.eol": "\n"
+    "files.eol": "\n",
+    "IDX.aI.enableInlineCompletion": true,
+    "IDX.aI.enableCodebaseIndexing": true
 }
