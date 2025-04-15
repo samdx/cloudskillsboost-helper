@@ -62,7 +62,7 @@
     <div id="panel-content" class="row main-content">
 
         <!-- The left sidebar -->
-        <div class="col s12 m4 l2 hide-on-med-and-down sidebar">
+        <div id="panel-left" class="col s12 m4 l2 hide-on-med-and-down sidebar">
             <div class="input-field inline">
                 <input id="filter_item" type="text" class="validate" placeholder=" ">
                 <label for="filter_item">Filter by Paths</label>
@@ -75,7 +75,7 @@
         </div>
 
         <!-- The main content container -->
-        <div class="col s12 m12 l8 container">
+        <div id="panel-middle" class="col s12 m12 l8 container">
             <h2 id="paths">Recent Touches</h2>
             <ul class="collection">
                 {% for path_id, path_name in paths.items() %}
@@ -94,7 +94,7 @@
         </div>
 
         <!-- The right sidebar -->
-        <div class="col s12 m4 l2 hide-on-med-and-down sidebar">
+        <div id="panel-right" class="col s12 m4 l2 hide-on-med-and-down sidebar">
             <div class="input-field inline">
                 <input id="filter_topic" type="text" class="validate" placeholder=" ">
                 <label for="filter_topic">Filter by Topic</label>
