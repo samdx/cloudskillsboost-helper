@@ -47,6 +47,10 @@ nav.fixed {
     /* background-color: #ffffffe0; */
 }
 
+.collection.with-header .collection-header {
+    padding: 10px 10px;
+  }
+
 /* Make the same margin to the middle panel h2 */
 .sidebar {
     margin: 2.3733333333rem 0 1.424rem 0;
