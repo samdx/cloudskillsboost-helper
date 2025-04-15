@@ -69,13 +69,13 @@
             </div>
             <ul>
                 {% for topic in topics %}
-                <li class="topic-item"><a href="{{ url_for('topic', topic=topic) }}">{{ topic }}</a></li>
+                <li><a href="{{ url_for('topic', topic=topic) }}">{{ topic }}</a></li>
                 {% endfor %}
             </ul>
         </div>
 
         <!-- The main content container -->
-        <div id="panel-middle" class="col s12 m9 l8">
+        <div id="panel-middle" class="col s12 m12 l8">
             <h2 id="paths">Recent Touches</h2>
             <ul class="collection">
                 {% for path_id, path_name in paths.items() %}
@@ -86,7 +86,7 @@
                             <a href="{{ url_for('path', path_id=path_id) }}">{{ path_name }}</a>
                         </span>
                         <span class="badge right">{{ path_id }}</span>
-                        <span class="badge right">Path</span>
+                        <span class="badge right hide-on-med-and-down">Path</span>
                     </label>
                 </li>
                 {% endfor %}
@@ -94,7 +94,7 @@
         </div>
 
         <!-- The right sidebar -->
-        <div id="panel-right" class="col s0 m3 l2 sidebar">
+        <div id="panel-right" class="col s0 m0 l2 hide-on-med-and-down sidebar">
             <div class="input-field inline">
                 <input id="filter_topic" type="text" class="validate" placeholder=" ">
                 <label for="filter_topic">Filter by Topic</label>
