@@ -4,5 +4,7 @@
     "IDX.aI.enableCodebaseIndexing": true,
     "terminal.integrated.cursorStyle": "line",
     "terminal.integrated.cursorStyleInactive": "line",
-    "terminal.integrated.cursorBlinking": true
+    "terminal.integrated.cursorBlinking": true,
+    "files.autoSave": "onFocusChange",
+    "editor.fontFamily": "Iosevka, Consolas, 'Courier New', monospace"
 }
