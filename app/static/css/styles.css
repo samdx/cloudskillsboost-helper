@@ -24,7 +24,7 @@ nav.fixed {
     border-top: 1px solid var(--md-sys-color-outline-variant);
 }
 
-.main-content {
+#panel-content {
     margin-top: var(--navbar-height);
     /* margin-bottom: 38px; */
     z-index: 999;

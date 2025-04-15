@@ -59,7 +59,7 @@
     </nav>
 
     <!-- The main container -->
-    <div class="row main-content">
+    <div id="panel-content" class="row main-content">
 
         <!-- The left sidebar -->
         <div class="col s12 m4 l2 hide-on-med-and-down sidebar">
@@ -76,7 +76,21 @@
 
         <!-- The main content container -->
         <div class="col s12 m12 l8 container">
-            {% block content %}{% endblock %}
+            <h2 id="paths">Recent Touches</h2>
+            <ul class="collection">
+                {% for path_id, path_name in paths.items() %}
+                <li class="collection-item">
+                    <label>
+                        <input type="checkbox" checked="{% if path_id in completed_paths %}checked{% endif %}" />
+                        <span>
+                            <a href="{{ url_for('path', path_id=path_id) }}">{{ path_name }}</a>
+                        </span>
+                        <span class="badge right">{{ path_id }}</span>
+                        <span class="badge right">Path</span>
+                    </label>
+                </li>
+                {% endfor %}
+            </ul>
         </div>
 
         <!-- The right sidebar -->
