@@ -83,16 +83,18 @@
     </div>
 
     <!-- The right sidebar -->
-    <div class="col s12 m4 l2 hide-on-med-and-down sidebar">
-        <div class="input-field inline">
-            <input id="filter_topic" type="text" class="validate" placeholder=" ">
-            <label for="filter_topic">Filter by Topic</label>
-        </div>
-        <ul>
-            {% for topic in topics %}
-            <li class="topic-item"><a href="{{ url_for('topic', topic=topic) }}">{{ topic }}</a></li>
+    <div class="col s12 m4 l2 hide-on-med-and-down sidebar grey-text lighten-4">
+        <h5 class="center">Table of Contents</h5>
+        {% for module in course.modules %}
+        <ul class="collection with-header">
+            <li class="collection-header"><a href="#{{ module.id }}"><strong>{{ module.title }}</strong></a></li>
+            {% for step in module.steps %}
+            {% for activity in step.activities %}
+            <li class="topic-item"><a href="#{{ activity.id }}">{{ activity.title }}</a></li>
+            {% endfor %}
             {% endfor %}
         </ul>
+        {% endfor %}
     </div>
 
 </div>
