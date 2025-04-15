@@ -60,7 +60,7 @@
         <!-- <h3>Modules</h3> -->
         {% for module in course.modules %}
 
-        <h4>{{ module.title }}</h4>
+        <h4 id="{{ module.id }}">{{ module.title }}</h4>
 
         {% if module.description is not none %}
         <blockquote>
@@ -71,7 +71,7 @@
         <ol class="collection">
             {% for step in module.steps %}
             {% for activity in step.activities %}
-            <li class="collection-item">
+            <li id="{{ activity.id }}" class="collection-item">
                 <!-- <i class="material-icons left waves-effect waves-light">cloud</i> -->
                 <strong>{{ activity.title }}</strong>
                 <span class="badge">{{ activity.type }}</span>
