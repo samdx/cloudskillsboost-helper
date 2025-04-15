@@ -81,6 +81,7 @@ nav.fixed {
 
 .badge.right {
     text-align: right;
+    margin: auto;
 }
 
 :root[theme='dark'] {
