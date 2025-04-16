@@ -90,9 +90,9 @@
                 <input id="filter_topic" type="text" class="validate" placeholder=" ">
                 <label for="filter_topic">Filter by Topic</label>
             </div>
-            <ul>
+            <ul class="collection">
                 {% for topic in topics %}
-                <li class="topic-item"><a href="{{ url_for('topic', topic=topic) }}">{{ topic }}</a></li>
+                <li class="collection-item"><a href="{{ url_for('topic', topic=topic) }}">{{ topic }}</a></li>
                 {% endfor %}
             </ul>
         </div>
