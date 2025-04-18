@@ -1,0 +1,12 @@
+/*Things*/
+
+ul.contains-task-list > li.task-list-item {
+  list-style: none;
+  filter: brightness(0.7);
+}
+
+ul.contains-task-list > li.task-list-item[data-task="x"],
+ul.contains-task-list > li.task-list-item[data-task="X"] {
+  text-decoration: none;
+  filter: brightness(1.0);
+}
