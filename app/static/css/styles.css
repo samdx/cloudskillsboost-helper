@@ -24,6 +24,15 @@ nav.fixed {
     border-top: 1px solid var(--md-sys-color-outline-variant);
 }
 
+#footer-fixed {
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    z-index: 1000;
+    background-color: var(--md-sys-color-surface);
+}
+
 #panel-content {
     margin-top: var(--navbar-height);
     /* margin-bottom: 38px; */
