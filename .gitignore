@@ -5,7 +5,7 @@
 .env
 /.venv
 /node_modules
-/csbmdvault
+csbmdvault/
+csbmdvault/.obsidian/workspace.json
+csbmdvault/.obsidian/graph.json
 !csbmdvault/.obsidian
-/.obsidian/workspace.json
-/.obsidian/graph.json
