@@ -267,6 +267,7 @@ def about():
     return render_template('about.html', breadcrumbs=breadcrumbs)
 
 
+# TODO: save topics to a file, load them from a file next run, and save them to a file after every refresh.
 def extract_topics(courses_collection):
     """
     Gather all unique topics from the downloaded courses in the 'data/courses/' folder.
