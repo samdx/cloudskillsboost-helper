@@ -1,3 +1,4 @@
+.DS_Store
 /.webdriver_profiles
 *.pyc
 /data/
@@ -5,3 +6,6 @@
 /.venv
 /node_modules
 /csbmdvault
+!csbmdvault/.obsidian
+/.obsidian/workspace.json
+/.obsidian/graph.json
