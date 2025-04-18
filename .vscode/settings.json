@@ -6,5 +6,6 @@
     "terminal.integrated.cursorStyleInactive": "line",
     "terminal.integrated.cursorBlinking": true,
     "files.autoSave": "onFocusChange",
-    "editor.fontFamily": "Iosevka, Consolas, 'Courier New', monospace"
+    "editor.fontFamily": "Iosevka, Consolas, 'Courier New', monospace",
+    "python.analysis.autoImportCompletions": true
 }
