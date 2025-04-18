@@ -75,7 +75,7 @@
             <li id="{{ activity.id }}" class="collection-item">
                 <!-- <i class="material-icons left waves-effect waves-light">cloud</i> -->
                 <strong>{{ activity.title }}</strong>
-                <span class="badge">{{ activity.type }}</span>
+                <span class="badge"><a href="{{ BASE_URL }}/{{ activity.href }}" target="_blank" rel="noopener noreferrer">{{ activity.type }}</a></span>
             </li>
             {% endfor %}
             {% endfor %}
