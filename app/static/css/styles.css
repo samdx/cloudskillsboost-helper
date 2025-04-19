@@ -35,7 +35,7 @@ nav.fixed {
 
 #panel-content {
     margin-top: var(--navbar-height);
-    /* margin-bottom: 38px; */
+    margin-bottom: 38px;
     z-index: 999;
 }
 
