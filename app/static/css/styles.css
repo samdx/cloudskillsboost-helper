@@ -1,5 +1,6 @@
 nav .brand-logo {
     color: var(--md-sys-color-primary);
+    font-size: inherit;
 }
 
 .breadcrumb:last-child {
