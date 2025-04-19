@@ -31,8 +31,16 @@
     </div>
 
     <!-- The right sidebar -->
-    <div id="panel-right"
-        class="col s0 m0 l0 xl0 hide-on-med-and-down hide-on-large-only hide-on-extra-large-only sidebar grey-text lighten-4">
+    <div id="panel-right" class="col s0 m0 l2 xl2 offset-xl10 hide-on-med-and-down sidebar grey-text lighten-4">
+        <div class="input-field inline">
+            <input id="filter_topic" type="text" class="autocomplete" placeholder=" ">
+            <label for="filter_topic">Filter by Topic</label>
+        </div>
+        <ul>
+            {% for topic in topics %}
+            <li class="topic-item"><a href="{{ url_for('topic', topic=topic) }}">{{ topic }}</a></li>
+            {% endfor %}
+        </ul>
     </div>
 
 </div>
