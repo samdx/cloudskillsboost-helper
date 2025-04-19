@@ -20,6 +20,9 @@
     <!-- Navigation Bar -->
     <nav role="navigation" class="breadcrumb-wrapper fixed">
         <div class="nav-wrapper container">
+            <a href="#" id="menu-icon" data-target="nav-mobile" class="sidenav-trigger show-on-large">
+                <i class="material-icons menu">menu</i>
+            </a>
             <div class="brand-logo">
                 <a href="/" class="breadcrumb">
                     <i class="material-icons">school</i> CBS Helper
@@ -45,16 +48,15 @@
                 </li>
             </ul>
 
-            <ul id="nav-mobile" class="sidenav">
-                <li><a href="{{ url_for('paths') }}">Paths</a></li>
-                <li><a href="{{ url_for('courses') }}">Courses</a></li>
-                <li><a href="{{ url_for('labs') }}">Labs</a></li>
-                <li><a href="{{ url_for('topics') }}">Topics</a></li>
-                <li><a href="{{ url_for('about') }}">About</a></li>
-            </ul>
-            <a href="#" data-target="nav-mobile" class="sidenav-trigger">
-                <i class="material-icons menu">menu</i>
-            </a>
+            <div id="nav-mobile" class="sidenav">
+                <ul class="collection">
+                    <li class="collection-item"><a href="{{ url_for('paths') }}">Paths</a></li>
+                    <li class="collection-item"><a href="{{ url_for('courses') }}">Courses</a></li>
+                    <li class="collection-item"><a href="{{ url_for('labs') }}">Labs</a></li>
+                    <li class="collection-item"><a href="{{ url_for('topics') }}">Topics</a></li>
+                    <li class="collection-item"><a href="{{ url_for('about') }}">About</a></li>
+                </ul>
+            </div>
         </div>
     </nav>
 

@@ -3,6 +3,10 @@ nav .brand-logo {
     font-size: inherit;
 }
 
+nav #menu-icon {
+    color: var(--md-sys-color-primary);
+}
+
 .breadcrumb:last-child {
     color: var(--md-sys-color-primary);
 }
