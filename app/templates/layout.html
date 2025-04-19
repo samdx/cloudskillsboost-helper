@@ -80,7 +80,11 @@
                         <span>
                             <a href="{{ url_for('path', path_id=path_id) }}">{{ path_name }}</a>
                         </span>
-                        <span class="badge right grey-text lighten-4">{{ path_id }}</span>
+                        <span class="badge right grey-text lighten-4">
+                            <a href="{{ BASE_URL_PATHS }}/{{ path_id }}" target="_blank"
+                                rel="noopener noreferrer"
+                                class="blue-grey-text lighten-2">{{ path_id }}</a>
+                        </span>
                         <span class="badge right hide-on-med-and-down grey-text lighten-4">Path</span>
                     </label>
                 </li>
