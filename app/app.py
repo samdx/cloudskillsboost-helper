@@ -297,6 +297,14 @@ def search_for():
                 "url": url_for('path', path_id=path_id),
                 "type": "Path"
             })
+    for topic in topics:
+        if query_lower in topic.lower():
+            results.append({
+                "id": None,
+                "name": topic,
+                "url": url_for('topic', topic=topic),
+                "type": "Topic"
+            })
 
     # results = search_items(query)
     return jsonify(results)

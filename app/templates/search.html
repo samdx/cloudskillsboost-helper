@@ -80,9 +80,11 @@
                             //Badge to display the item id
                             const badge2 = document.createElement('span');
                             badge2.classList.add('badge', 'right');
-                            badge2.textContent = item.id;
+                            // Display id only if it's not null
+                            if (item.id != null) {
+                                badge2.textContent = item.id;
+                            }
                             listItem.appendChild(badge2);
-                            searchResultList.appendChild(listItem);
 
                             // Badge to display the item type
                             const badge = document.createElement('span');
