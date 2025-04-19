@@ -98,7 +98,8 @@ nav.fixed {
     color: inherit;
 }
 
-.badge.right {
+span.badge.right {
     text-align: right;
     margin: auto;
+    min-width: 4rem;
 }
