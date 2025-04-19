@@ -106,3 +106,21 @@ nav.fixed {
     text-align: right;
     margin: auto;
 }
+
+/* Topics Input Field */
+
+.input-field input, .input-field textarea {
+    box-sizing: border-box; /* https://stackoverflow.com/questions/1377719/padding-within-inputs-breaks-width-100*/
+    padding: 0 16px;
+    padding-top: 20px;
+    background-color: var(--md-sys-color-surface);
+    border: none;
+    border-radius: 4px;
+    /* border-bottom: 1px solid var(--md-sys-color-on-surface-variant); */
+    border-bottom-left-radius: 0;
+    border-bottom-right-radius: 0;
+}
+.input-field input:focus:not([readonly]), .input-field textarea:focus:not([readonly]) {
+    /* border-bottom: 2px solid var(--input-color); */
+    padding-top: 21px;
+}
