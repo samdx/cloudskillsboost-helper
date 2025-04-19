@@ -259,12 +259,44 @@ def search():
     """
     return render_template('search.html')
 
-@app.route('/search/<keyword>')
-def search_for(keyword):
+@app.route('/search_for')
+def search_for():
     """
     Search for a certain keyword.
     """
+    query = request.args.get('q', '')
+    if not query or len(query.strip()) < 2:
+        return jsonify([])
 
+    results = []
+    query_lower = query.lower()
+
+    for course_id, course_name in courses_collection.collection.items():
+        if query_lower in course_name.lower():
+            results.append({
+                "name": course_name,
+                "url": url_for('course', course_id=course_id),
+                "type": "Course"}
+            )
+
+    for lab_id, lab_name in labs_collection.collection.items():
+        if query_lower in lab_name.lower():
+            results.append({
+                "name": lab_name,
+                "url": url_for('lab', lab_id=lab_id),
+                "type": "Lab"}
+            )
+
+    for path_id, path_name in paths_collection.collection.items():
+        if query_lower in path_name.lower():
+            results.append({
+                "name": path_name,
+                "url": url_for('path', path_id=path_id),
+                "type": "Path"}
+            )
+
+    # results = search_items(query)
+    return jsonify(results)
 
 @app.route('/about')
 def about():

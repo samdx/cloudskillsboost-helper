@@ -1,6 +1,6 @@
 {% extends 'base.html' %}
 
-{% block title %}Labs{% endblock %}
+{% block title %}Search{% endblock %}
 
 {% block content %}
 
@@ -22,13 +22,7 @@
             <label for="search_field">Search for</label>
         </div>
         <ul class="collection search-result">
-            <!-- {% for topic in topics %}
-            <li class="collection-item search-result-item">
-                <span>
-                    <a href="{{ url_for('topic', topic=topic) }}">{{ topic }}</a>
-                </span>
-            </li>
-            {% endfor %} -->
+            <!-- Search results will be displayed here -->
         </ul>
     </div>
 
@@ -38,4 +32,52 @@
     </div>
 
 </div>
+
+<script>
+    document.addEventListener('DOMContentLoaded', function () {
+        const searchField = document.getElementById('search_field');
+        const searchResultList = document.querySelector('.search-result');
+
+        searchField.addEventListener('input', function () {
+            const query = this.value.trim();
+            if (query.length < 2) {
+                searchResultList.innerHTML = ''; // Clear results if query is too short
+                return;
+            }
+
+            fetch(`/search_for?q=${encodeURIComponent(query)}`)
+                .then(response => response.json())
+                .then(data => {
+                    searchResultList.innerHTML = ''; // Clear previous results
+
+                    if (data.length === 0) {
+                        const noResult = document.createElement('li');
+                        noResult.classList.add('collection-item');
+                        noResult.textContent = 'No results found.';
+                        searchResultList.appendChild(noResult);
+                    } else {
+                        data.forEach(item => {
+                            // Create a list item for each search result
+                            const listItem = document.createElement('li');
+                            listItem.classList.add('collection-item');
+                            const link = document.createElement('a');
+                            link.href = item.url;
+                            link.textContent = item.name;
+                            listItem.appendChild(link);
+
+                            // Badge to display the item type
+                            const badge = document.createElement('span');
+                            badge.classList.add('badge', 'right');
+                            badge.textContent = item.type;
+                            listItem.appendChild(badge);
+                            searchResultList.appendChild(listItem);
+                        });
+                    }
+                })
+                .catch(error => {
+                    console.error('Error:', error);
+                });
+        });
+    });
+</script>
 {% endblock %}
