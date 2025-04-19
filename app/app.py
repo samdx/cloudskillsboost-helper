@@ -48,7 +48,7 @@ def home():
     """
 
     return render_template(
-        'index.html'
+        'search.html'
     )
 
 @app.route('/courses')
