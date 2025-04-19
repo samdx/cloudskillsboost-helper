@@ -65,12 +65,20 @@
                             link.textContent = item.name;
                             listItem.appendChild(link);
 
+                            //Badge to display the item id
+                            const badge2 = document.createElement('span');
+                            badge2.classList.add('badge', 'right');
+                            badge2.textContent = item.id;
+                            listItem.appendChild(badge2);
+                            searchResultList.appendChild(listItem);
+
                             // Badge to display the item type
                             const badge = document.createElement('span');
                             badge.classList.add('badge', 'right');
                             badge.textContent = item.type;
                             listItem.appendChild(badge);
                             searchResultList.appendChild(listItem);
+
                         });
                     }
                 })

@@ -272,28 +272,31 @@ def search_for():
     query_lower = query.lower()
 
     for course_id, course_name in courses_collection.collection.items():
-        if query_lower in course_name.lower():
+        if query_lower in course_id or query_lower in course_name.lower():
             results.append({
+                "id": course_id,
                 "name": course_name,
                 "url": url_for('course', course_id=course_id),
-                "type": "Course"}
-            )
+                "type": "Course"
+            })
 
     for lab_id, lab_name in labs_collection.collection.items():
-        if query_lower in lab_name.lower():
+        if query_lower in lab_id or query_lower in lab_name.lower():
             results.append({
+                "id": lab_id,
                 "name": lab_name,
                 "url": url_for('lab', lab_id=lab_id),
-                "type": "Lab"}
-            )
+                "type": "Lab"
+            })
 
     for path_id, path_name in paths_collection.collection.items():
-        if query_lower in path_name.lower():
+        if query_lower in path_id or query_lower in path_name.lower():
             results.append({
+                "id": path_id,
                 "name": path_name,
                 "url": url_for('path', path_id=path_id),
-                "type": "Path"}
-            )
+                "type": "Path"
+            })
 
     # results = search_items(query)
     return jsonify(results)
