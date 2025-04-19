@@ -22,7 +22,10 @@
 
     <!-- The main content container -->
     <div id="panel-middle" class="col s12 m10 l8 xl6 offset-m1 offset-l2 offset-xl3">
-        <h2 id="courses">Courses</h2>
+        <h2 id="courses">
+            <span>Courses</span>
+            <span class="id-num right"> {{courses | length}} </span>
+        </h2>
         <ul class="collection">
             {% for course_id, course_name in courses.items() %}
             <li class="collection-item">

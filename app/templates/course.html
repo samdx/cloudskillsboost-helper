@@ -25,10 +25,14 @@
     <div id="panel-middle" class="col s12 m12 l8 xl6 offset-m1 offset-l2 offset-xl3">
         <!-- Main content -->
         <h2>
-            {{ course.name }}
+            <span>{{ course.name }}</span>
             <!-- Display the course ID to the right -->
-            <span class="id-num right"><a href="{{ BASE_URL_COURSES }}/{{ course.id }}" target="_blank"
-                    rel="noopener noreferrer">{{ course.id }}</a></span>
+            <span class="id-num right">
+                <a href="{{ BASE_URL_COURSES }}/{{ course.id }}"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    class="blue-grey-text lighten-2"
+                    >{{ course.id }}</a></span>
         </h2>
         <!-- Display the date published of the item -->
         <!-- <ul>
