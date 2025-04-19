@@ -250,6 +250,21 @@ def topic(topic):
         breadcrumbs=breadcrumbs
     )
 
+@app.route('/search')
+def search():
+    """
+    Search page for the Cloud Skills Boost Helper.
+    This page allows users to search for courses, paths, and
+    any keywords.
+    """
+    return render_template('search.html')
+
+@app.route('/search/<keyword>')
+def search_for(keyword):
+    """
+    Search for a certain keyword.
+    """
+
 
 @app.route('/about')
 def about():
