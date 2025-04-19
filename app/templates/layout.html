@@ -48,17 +48,19 @@
                 </li>
             </ul>
 
-            <div id="nav-mobile" class="sidenav">
-                <ul class="collection">
-                    <li class="collection-item"><a href="{{ url_for('paths') }}">Paths</a></li>
-                    <li class="collection-item"><a href="{{ url_for('courses') }}">Courses</a></li>
-                    <li class="collection-item"><a href="{{ url_for('labs') }}">Labs</a></li>
-                    <li class="collection-item"><a href="{{ url_for('topics') }}">Topics</a></li>
-                    <li class="collection-item"><a href="{{ url_for('about') }}">About</a></li>
-                </ul>
-            </div>
         </div>
     </nav>
+
+    <!-- Mobile Navigation -->
+    <div id="nav-mobile" class="sidenav">
+        <ul>
+            <li><a href="{{ url_for('paths') }}">Paths</a></li>
+            <li><a href="{{ url_for('courses') }}">Courses</a></li>
+            <li><a href="{{ url_for('labs') }}">Labs</a></li>
+            <li><a href="{{ url_for('topics') }}">Topics</a></li>
+            <li><a href="{{ url_for('about') }}">About</a></li>
+        </ul>
+    </div>
 
     <!-- The main container -->
     <div id="panel-content" class="row main-content">
