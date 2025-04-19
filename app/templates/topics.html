@@ -13,7 +13,10 @@
 
     <!-- The main content container -->
     <div id="panel-middle" class="col s12 m10 l8 xl6 offset-m1 offset-l2 offset-xl3">
-        <h2>Topics</h2>
+        <h2>
+            Topics
+            <span class="id-num right"> {{topics | length}} </span>
+        </h2>
         <div class="input-field inline">
             <input id="filter_topic" type="text" class="validate" placeholder=" ">
             <label for="filter_topic">Search for a Topic</label>
@@ -21,14 +24,15 @@
         <ul class="collection">
             {% for topic in topics %}
             <li class="collection-item">
-                <a href="{{ url_for('topic', topic=topic) }}">{{ topic }}</a>
+                <span>
+                    <a href="{{ url_for('topic', topic=topic) }}">{{ topic }}</a>
+                </span>
             </li>
             {% endfor %}
         </ul>
     </div>
 
     <!-- The right sidebar -->
-        <!-- The right sidebar -->
         <div id="panel-right" class="col s0 m0 l0 xl0 hide-on-med-and-down hide-on-large-only hide-on-extra-large-only sidebar grey-text lighten-4">
         </div>
 
